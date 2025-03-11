@@ -150,13 +150,60 @@ URS-13 The system shall support concurrent access by multiple users and handle p
   - The most active contributor is displayed.
 
 ### (b) Filter Contribution Rankings by Time Period
-TODO
-
+* **Actors**: Team Lead
+* **Preconditions**:
+  - The user has access to the GitHub organization that they oversee.
+  - The tool must have API access to retrieve organization data.
+  - The tool must support a filtering option for displaying contribution data by specific time periods
+* **Main Flow**:
+  - The TL logs in to tool using their GitHub Credentials
+  - The system displays overall contributer rankings within the TL's specific team repositories.
+  - The TL selects a predefined time filter (e.g. last week, last month, last year).
+  - The tool filters and sorts contribution data according to the specified time period.
+  - The system displays the filtered contributer rankings.
+* **Alternative Flow (1)**: API rate limit exceeded
+  - The Team Lead is told that they cannot access the repository due to rate limit.
+  **Alternative Flow (2)**: No contribution data for chosen time period
+  - The Team Leas is told that there is no contribution data available for the chosen time period
+* **Post conditions**:
+  - The contribution rankings for the user's team are displayed based on their specified time period.
+  - 
 ### (c) Show My Contribution Ranking over Different Time Periods
-TODO
+* **Actors**: Software Engineer
+* **Preconditions**:
+  - The user has access to the GitHub repositories that they contribute to.
+  - The tool must have API access to retrieve the appropriate repository data.
+  - The tool must support a filtering option for displaying indivdiual contribution data over specific time periods
+* **Main Flow**:
+  - The SE logs in to tool using their GitHub Credentials
+  - The tool fetches and processes the user's contributions based on pre-defined metrics.
+  - The system displays a personal dashboad displaying the user's overall and phase-specific contribution rankings.
+  - The SE selects a predefined time filter (e.g. last week, last month, last year).
+  - The tool filters and sorts the user's contribution data according to the specified time period.
+  - The system displays the filtered SE's contributer rankings along with the metric's used to measure his contributions.
+* **Alternative Flow (1)**: API rate limit exceeded
+  - The Software Engineer is told that they cannot access the repository due to rate limit.
+* **Post conditions**:
+  - The individual contribution rankings for the user is displayed based on their specified time period.
 
 ### (d) Export Contributor Data in JSON format
-TODO
+* **Actors**: IT Administrator
+* **Preconditions**:
+  - The user has access to the GitHub organization.
+  - The tool must have API access to retrieve organization data.
+  - The tool must support an export option in JSON format.
+* **Main Flow**:
+  - The IA logs in to tool using their GitHub Credentials
+  - The IA selects a Github organization by entering a URL
+  - The tool fetches and processes contribution data
+  - The system displays a report of contributor rankings based on predefined metrics.
+  - The IA selects the "Export Report as JSON" option
+  - The tool structures the contribution data into JSON format
+  - The system allows IA to download the JSON-formatted report
+* **Alternative Flow (1)**: API rate limit exceeded
+  - The IT Administrator is told that they cannot access the repository due to rate limit.
+* **Post conditions**:
+  - The user has exported the contributor data as a JSON-formatted report.
 
 ## 7. Use case diagram
 (Skipped)
@@ -205,7 +252,17 @@ The system shall implement proper error handling to prevent unauthorized access 
   - The tool accepts a GitHub repository URL and correctly identifies the most active contributor.
   - The tool accepts a GitHub repository with multiple equally active contributors and displays all of them
 
-TODO
+* Filter Contribution Rankings by Time Periods
+  - The tool allows users to filter contribution rankings according to specific time periods (e.g. last week, last month, last year)
+  - The tool correctly identifies valid time periods (i.e. within the project lifetime) that users can select to filter contribution rankings by.
+  - The system only displays the contribution rankings within the user's chosen time period.
+  - The system displays the filtered results within 5 seconds of the query being made and notifies users of any delay if time exceeds 5 seconds.
+  - The system must display an appropriate message (e.g. "No contribution data for this period") if users select a time period with no contributions.
+  
+  
+* Show My Contribution Rnaking over Different Time Periods
+  
+* Expoert Contributor Date in JSON Format
 
 ## 12. Changelog
 2025-02-24 — Created by (Contract Hub Customer Team)
