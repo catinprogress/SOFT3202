@@ -23,17 +23,52 @@
 // - If a repository API rate limit is exceeded, the system must notify users that they cannot access this repository due to rate limit.
   
 * Show My Contribution Ranking over Different Time Periods
-  - The tool correctly identifies the repositories that the currently logged in software engineer is working on ///edit
-  - The tool must calculate and display the user's contribution ranking according to pre-defined metrics (e.g. commits, lines of code added/removed, pull requests merged).
-  - Upon successful login, the system must display a person dashboard of the user's overall and phase-specific contribution rankings.
-  - The tool allows users to filter their personal contribution ranking over different time periods (e.g. last week, last month, last year)
-  - The tool correctly identifies and displays valid time periods (i.e. within the project lifetime) that users can select to view their ranking in.
-  - Upon selecting a time filter, the system correctly displays the contribution ranking within the specified time period.
+  - Given that I have entered a repository name that I am a contributor to
+  - When the tool successfully authenticates my GitHub credentials
+  - The system must display a personal dashboard of my contribution rankings for the life time and latest phase of the project, along with the metrics used to calculate this ranking (e.g. the impact of my commits, pull requests and code review)
+
+  - Given that the tool provides a filter option to show my contribution ranking over different time periods (e.g. last week, last month, last year)
+  - When I enter a repository name that I am a contributor to
+  - The system must not display any invalid time periods (i.e. outside of the project lifecyle) for me to select
+
+  - Given that I have entered a repository name that I am a contributor to and the system displays valid time filter options
+  - When I select a specific time period to filter my contribution ranking by
+  - The system must recalculate my contribution data and display my personal contribution ranking within that specified time period.
+
+  - Given that I have selected a specific time period to filter my contribution ranking by
+  - When the system displays my contribution ranking for that specified time period
+  - Then it should also clearly show the metrics used to measure and rank my contributions (e.g. my commits, pull requests and code reviews)
+
+  - Given that I have requested my contribution ranking for a phase of the project with no contribution data
+  - When the tool processes the contribution data for this time period
+  - The system must notify me with an appropriate message (e.g. "No contribution data exists for this time period") and allow me to select a different time filter
+
   
 * Export Contributor Data in JSON Format
-  - The tool must clearly provide an option to export contributor data as a JSON-formatted report on the user interface that the user can select.
-  - Upon selecting the Export Report as JSON option, the tool must generate a downloadable report in JSON format containing the contribution rankings.
-  - The tool must accurately convert the contribution rankings that the currently logged in user has access to into JSON-format, and the generated report must include  all relevant contributor data in a clearly identifiable and logical manner.
-  - The tool must generate a complete JSON-formatted report of the organization's contributor rankings that contains enough data for it to be used for integration with other internal analytics tools.
-  - Given that the tool successfully generates the JSON formatted report, the file must be easily accessible on the user interface and the user must be notified that it is ready for download.
-  - If no contributor data is available to export, the system must notify the user with an appropriate message (e.g. "No contributor data ready for export")
+  - Given that I have entered a Github repository or organization name with contributors
+  - When I request contributor rankings
+  - The tool must display contributor rankings along with an option to export contributor data as a JSON-formatted report.
+ 
+  - Given that I have selected the export option,
+  - When the tool generates the contribution ranking report in JSON format
+  - The system must clearly display an option to download the report containing the contributor data, and the file must be saved into my system within 5 seconds of confirming download.
+
+  - Given that I have confirmed the download of the JSON-formatted report
+  - When the tool processes my request
+  - Then the file must be saved and available for me to access on my device within 5 seconds of confirmation.
+  
+  - Given that I have entered a Github repository name with no contributor data
+  - When I request to export contributor data
+  - The system must display an approriate message (e.g. "Cannot proceed with export as no contributor data exists for this repository") and allow me to enter a different repository name.
+  
+  - Given that I request an export for a repository with contributor data
+  - When there is an error in processing my request (e.g. rate limit exceeded for repository)
+  - The system must notify me of the error that occurred with a clear and understandable explanation (e.g. "Cannot proceed with export for this repository due to exceed in rate limit") and prompt me to try again later or enter a different repository.
+
+  - Given that I have successfully downloaded the JSON formatted report containing the contribution rankings,
+  - When I view this report,
+  - The file must contain a complete and JSON-formatted report that accurately includes all contribution rankings and enough contributor data for it to be used for integration with other internal security and analytics tools.
+  
+  - Given that the tool has fetched my requested contributor data from the GitHub API
+  - When it converts the contribution rankings into JSON-format
+  - The tool must generate an accurate conversion of all contribution rankings along with the pre-defined metrics used to calculate the rankings (e.g. number of commits, code reviews, pull requests) in a clearly identifiable and logical manner.
