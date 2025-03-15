@@ -1,6 +1,7 @@
 import contextlib
 import io
 import unittest
+import math
 
 ##Q1
 class Vehicle:
@@ -13,6 +14,9 @@ class Vehicle:
 
     def __str__(self) -> str:
         return f"{self.make} {self.model}"
+    
+    # def __repr__(self):
+    #     return f"{self.make} {self.model}"
     
 car = Vehicle("Toyota", "Prado")
 
@@ -38,7 +42,7 @@ class Passenger:
         self.__name = name ##private attributes
         self.__ticket_id = ticket_id
 
-    @property
+    @property #indicates method is an attribute to user (i.e. getter)
     def name(self):
         return self.__name
 
@@ -80,13 +84,14 @@ from abc import ABC, abstractmethod
 class TransportUser(ABC):
     @abstractmethod
     def travel(self):
-        pass  # TODO: Enforce implementation in subclasses
+        pass
 
 class Commuter(TransportUser):
     def travel(self):
         return "Traveling by bus"
 
-##Q7
+##Q6
+   
 class TransportCompany:
     def __init__(self):
         self.__vehicles: list[Vehicle] = []
@@ -100,6 +105,104 @@ class TransportCompany:
     @property
     def fleet(self):
         return self.__vehicles
+    
+    def list_vehicles(self):
+        return [str(vehicle) for vehicle in self.__vehicles]
+    
+    ## print(unique_instance.list_vehicles()) ##
+
+#Q8 DRY
+class QuadRoots:
+      def __init__(self, a, b, c):
+         self.a, self.b, self.c = a, b, c
+         
+         self.numerator = 2*self.a
+         self.rooted = self.b^2 - 4*self.a*self.c
+         
+      def root(self, is_plus= True):
+        if not is_plus:
+            return (-self.b - math.sqrt(self.rooted))/self.numerator
+        return (-self.b + math.sqrt(self.rooted))/self.numerator
+
+v = QuadRoots(1,1,0)
+
+#Q8 TUT SOLUTION
+class QuadRoots:
+    def __init__(self, a, b, c):
+        self.a, self.b, self.c = a, b, c
+
+    def discriminant(self):
+        return self.b**2 - 4 * self.a * self.c
+
+    def root1(self):
+        d = self.discriminant()
+        return (-self.b + math.sqrt(d)) / (2 * self.a)
+
+    def root2(self):
+        d = self.discriminant()
+        return (-self.b - math.sqrt(d)) / (2 * self.a)
+
+##Q9 SOLID
+class Book: 
+    def __init__(self, title, author, year):
+        self.title = title
+        self.author = author
+        self.year = year
+        self.__id = 0
+    
+    @property
+    def id(self):
+        return self.__id
+    
+    @id.setter
+    def id(self, new_id):
+        self.__id = new_id
+    
+class BookRegistry: 
+    def __init__(self): 
+        self.books = {}
+        self.id_count = 1
+    
+    def add(self, book: Book):
+        self.books[self.id_count] = book
+        book.id(self.id_count)
+        self.id_count += 1
+
+    def remove(self, book: Book):
+        removed = self.books.get(book.id)
+        if removed == book:
+            self.books.pop(book.id, False)
+            return True
+        return False
+
+##Subclasses == books borrowed, books loaned 
+    
+class Library:
+    def __init__(self):
+        self.books = BookRegistry() #Dependency inversion: library handles book storage/access + business logic
+        self.borrowed = BookRegistry()
+
+    def add_book(self, book: Book):
+        self.books.add(book)
+
+    def lend_book(self, title, author, year): #SRP violation
+        loaned = None
+        for i, (t, a, y) in enumerate(self.books):
+            if t == title and a == author and y == year:
+                loaned = i
+        if loaned is not None:
+           self.borrowed.append(self.books[loaned])
+           del self.books[loaned]
+
+    def display_book(self, idx):
+        title, author, year = self.books[idx]
+        return f'Title: {title}, Author: {author}, Year:  {year}'
+
+class PublicReadingLibrary(Library): #Liskov Substitution: subclass is not substituitable for base class
+    def lend_book(self, title, author, year):
+        raise NotImplementedError() #Interface segregation --> library class is too general and not all methods are used in implementing class
+    
+##Bonus
 
 #Verification
 class TestWeek1(unittest.TestCase):
