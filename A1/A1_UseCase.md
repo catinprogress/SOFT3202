@@ -74,10 +74,9 @@ As an IT administrator, I want the tool to generate exportable reports in JSON f
   - The system downloads the JSON file into the IA's device.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The IT Administrator is told that they cannot access the repository due to rate limit.
-* **Alternative Flow (2)**: Unauthorised or Private organization
+* **Alternative Flow (2)**: Private organization
   - The IT Administrator is told that they cannot access the organization due to access restrictions.
   **Alternative Flow (3)**: Empty organisation is selected
   - The IT Administrator is told that there is no contribution data available due to the organisation being empty.
 * **Post conditions**:
   - The user has a JSON-formatted report of the contributor data saved into their device.
-  - 

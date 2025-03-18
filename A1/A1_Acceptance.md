@@ -1,4 +1,4 @@
-* Filter Contribution Rankings by Time Periods
+## (b) Filter Contribution Rankings by Time Periods
   - Given that I have entered a valid GitHub Repository name (i.e. URL) that is related to my product, when I request contributor rankings, the system must initially display a ranking of most active contributors over the project lifetime, along with the pre-defined metrics that the calculations were based on.
   
   - Given that I have requested contributor rankings, when the system displays the most active contributors over the project lifetime, the system must also provide option to filter the rankings by a specific time periods (e.g. last week, last month, last year) 
@@ -20,29 +20,6 @@
   
 
 ### (c) Show My Contribution Ranking over Different Time Periods
-* **Actors**: Software Engineer
-* **Preconditions**:
-  - The user has access to the GitHub repositories that they contribute to.
-  - The tool must have API access to retrieve repository data.
-  - The tool must support a filtering option for displaying individual contribution data over specific time periods
-* **Main Flow**:
-  - The SE logs in to tool using their GitHub Credentials
-  - The SE selects a Github repository by entering a repository name
-  - The tool fetches and processes the user's contribution data based on pre-defined metrics.
-  - The system displays a personal dashboard displaying the user's ranking in both the overall and latest phase contributions for the project.
-  - The SE selects a pre-defined time filter (e.g. last week, last month, last year).
-  - The tool filters and sorts the user's contribution data according to the specified time period.
-  - The system displays the SE's contribution ranking within the selected time period, along with the metric's used to measure their contributions.
-* **Alternative Flow (1)**: API rate limit exceeded
-  - The Software Engineer is told that they cannot access the repository due to rate limit.
-* **Alternative Flow (2)**: Unauthorised or Private repository
-  - The Software Engineer is told that they cannot access the repository due to access restrictions.
-  **Alternative Flow (3)**: Empty repository is selected
-  - The Software Engineer is told that there is no contribution data available due to the repository being empty.
-* **Alternative Flow (4)**: No contribution data for specified time period
-  - The Software Engineer is told that they cannot access the contribution rankings due to no contributions being made during this time period.
-* **Post conditions**:
-  - The user's specific contributor ranking is displayed within their selected time period, along with the metrics used to measure and rank their contributions.
   
 * Show My Contribution Ranking over Different Time Periods
   - Given that I have entered a repository name for a repository that I am a contributor of, when I request my personal contributor ranking, the system must display a personal dashboard of my contribution rankings for the life time and latest phase of the project, along with the metrics used to calculate this ranking (e.g. the impact of my commits, pull requests and code review) 
@@ -56,6 +33,7 @@
   - Given that there exists a repository or specific time period containing no contributions, when I request my personal ranking, the system must notify me with an appropriate message (e.g. "No contribution data exists for the specified time period") and allow me to request a different repository and/or time filter.
 - 
   - Given that there exists a repository that I am a contributor of and have made no contributions to, when I request my personal ranking for that repository, the system must display my rank as last along with all other contributors who have made no contributions.
+- 
   - Given that there exists a repository that I am not a contributor to, when I request my personal ranking for that repository, the system must notify me with appropriate message (e.g. "No contributor data for user exists for this repository") and allow me to enter a different repository name
 
   -  Given that there exists a repository or time period within a repository where I have the same number of commits to one or more contributor/s, when I request my personal contribution ranking, the system must display my rank as equal to all of the other equally active contributors. 
@@ -68,29 +46,6 @@
   
 
   ### (d) Export Contributor Data in JSON format
-* **Actors**: IT Administrator
-* **Preconditions**:
-  - The user has access to the GitHub organization.
-  - The tool must have API access to retrieve organization data.
-  - The tool must support an export option in JSON format.
-* **Main Flow**:
-  - The IA logs in to tool using their GitHub Credentials
-  - The IA selects a Github organization by entering an organization name.
-  - The tool fetches and processes contributor data for repositories within the organization.
-  - The system displays a report of most active contributor rankings along with the pre-defined metrics the calculations were based on.
-  - The system displays an option to export the report by as JSON file.
-  - The IA selects the export option.
-  - The tool converts contribution data into JSON format and generates a downloadable report.
-  - The system downloads the JSON file into the IA's device.
-* **Alternative Flow (1)**: API rate limit exceeded
-  - The IT Administrator is told that they cannot access the repository due to rate limit.
-* **Alternative Flow (2)**: Unauthorised or Private organisation
-  - The IT Administrator is told that they cannot access the organisation due to access restrictions.
-  **Alternative Flow (3)**: Empty organisation  is selected
-  - The IT Administrator is told that there is no contribution data available due to the organisation being empty.
-* **Post conditions**:
-  - The user has a JSON-formatted report of the contributor data saved into their device.
-  - 
 * Export Contributor Data in JSON Format
   - Given that I have entered a Github repository or organization name with contributors, when I request contributor rankings, the tool must provide an option to export contributor data in JSON-format.
  
