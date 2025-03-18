@@ -10,6 +10,7 @@ URS-02 The system shall allow users to input a GitHub repository name and retrie
 
 URS-03 The system shall allow users to input a GitHub organization name and retrieve contributor rankings.
   - The system shall allow users to view contributor rankings for a GitHub organization by specifying an organization name that they are authorised to access on the command line.
+  - If a user request contributor rankings for an organisation that contains private repositories for which they are not permitted access, the system shall produce a report using only the contributor data for which they have access privileges for.
 
 URS-04 The system shall allow users to input a GitHub organization name and retrieve their specific ranking for life time of the project.
   - The system shall allow contributors to view their specific ranking for life time of the project by specifying a repository name that they are a contributor of on the command line.
@@ -38,29 +39,33 @@ URS-10 The system shall provide an export option to download contributor ranking
   
 URS-11 The system shall ensure encrypted communication for all data transmissions over the network.
   - The system shall use TLS encryption to ensure secure communication for all data transmissions over the network.
+
+
   
-What happens when a user is not authenticated correctly?
-  - If the user enters an incorrect credentials file when authenticating via the GitHub API, the system shall prevent access and display "Authentication failed: Incorrect login credentials" and prevent access.
-
-What happens when a repository is empty?
-  - If the user requests contribution data for an empty repository, the system shall display "No contributor data available for this repository" and allow them to enter a different repository name on the command line.
-  
-What happens when an organization is empty?
-  - If the user requests contribution data for an empty organization, the system shall display "No contributor data available for this organization" and allow them to enter a different organization name on the command line.
-  
-What happens if a contributor has no contributions?
-  - If a contributor requests to view their contribution ranking for a repository for which there exists no contributions from them, the system shall display "No contributor data for user exists for this repository" and allow them to enter a different repository name on the command line. 
-
-
-
-
 URS-08 The system shall process API data and provide results within five seconds under normal conditions.
-  - The system shall fetch and process API data and display a response to any query within five seconds under normal conditions.
- /// - If temporary caching is enabled, the system shall be able to accommodate up to 100 concurrent API requests from multiple users and maintain a response time of five seconds
- - If temporary caching is not enabled, the system shall be able to accommodate up to 20 concurrent API requests from multiple uses and maintain a response time of five seconds. 
+  - The system shall have access to the GitHub API and allow users to request contribution data by specifying a GitHub repository or organisation name on the command line. 
+  - The sytem shall process and display results to a user's API data request within 5 seconds of the query being made, given standard operating conditions.
  
 URS-12 The system shall provide error handling mechanisms for API failures, including rate limit handling, access restrictions, and invalid repository names.
+## RBAC
   - The system shall enforce role-based access control to process API requests for data handling within a given repository or organisation.
-
+## Rate Limit
+  - If a user requests contributor data from a repository or organisation where the API rate limit has exceeded, the system shall prevent access and display "Cannot currently access contributor data for this repository due an exceed in rate limit" before allowing them to specify a different repository or organisation on the command line.
+## Private repo/org
+  - If an unauthorised user requests contributor data from a private repository or organisation, the system shall prevent access and display ""Access denied: user is not authorised to access this repository/organisation"  before allowing them to specify a different repository or organisation name on the command line.
+## Invalid repo/org name
+  - If the user requests contribution data by specifying invalid organisation or repository name (i.e. doesn't match any existing organisations/repositories), the system shall display "The requested organisation/repository doesn't exist" and allow them to enter a different repository/organisation name on the command line.
+## What happens when a user is not authenticated correctly?
+  - If the user enters an incorrect credentials file when authenticating via the GitHub API, the system shall prevent access and display "Authentication failed: Incorrect login credentials" before allowing another login attempt.
+## What happens when a repository is empty?
+  - If the user requests contribution data for an empty repository, the system shall display "No contributor data available for this repository" and allow them to enter a different repository name on the command line.
+  
+## What happens when an organization is empty?
+  - If the user requests contribution data for an empty organization, the system shall display "No contributor data available for this organization" and allow them to enter a different organization name on the command line.
+  
+## What happens if a contributor has no contributions?
+  - If a contributor requests to view their contribution ranking for a repository for which there exists no contributions from them, the system shall display "No contributor data for user exists for this repository" and allow them to enter a different repository name on the command line. 
+  
 URS-13 The system shall support concurrent access by multiple users and handle parallel requests efficiently.
-
+  -  If temporary caching is not enabled, the system shall be able to accommodate up to 20 concurrent API requests from multiple users and maintain a response time of five seconds. 
+  -  If temporary caching is enabled, the system shall be able to accommodate up to 100 concurrent API requests from multiple users and maintain a response time of five seconds

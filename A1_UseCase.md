@@ -19,7 +19,7 @@ contributions of engineers over different project phases
   - The system displays the contribution rankings within the selected time period.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The Team Lead is told that they cannot access the repository due to rate limit.
-* **Alternative Flow (2)**: Unauthorised or Private repository
+* **Alternative Flow (2)**: Private repository
   - The Team Lead is told that they cannot access the repository due to access restrictions
   **Alternative Flow (3)**: Empty repository is selected
   - The Team Lead is told that there is no contribution data available due to the repository being empty.
@@ -48,7 +48,7 @@ well as the latest phase of the project
   - The system displays the SE's contribution ranking within the selected time period, along with the metric's used to measure their contributions.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The Software Engineer is told that they cannot access the repository due to rate limit.
-* **Alternative Flow (2)**: Unauthorised or Private repository
+* **Alternative Flow (2)**: Private repository
   - The Software Engineer is told that they cannot access the repository due to access restrictions.
   **Alternative Flow (3)**: Empty repository is selected
   - The Software Engineer is told that there is no contribution data available due to the repository being empty.
@@ -57,9 +57,8 @@ well as the latest phase of the project
 * **Post conditions**:
   - The user's specific contributor ranking is displayed within their selected time period, along with the metrics used to measure and rank their contributions.
 
-As an IT administrator, I want the tool to generate exportable reports in JSON format so
-that I can integrate the data with other internal analytics tools.
-### (d) Export Contributor Data in JSON format
+As an IT administrator, I want the tool to generate exportable reports in JSON format so that I can integrate the data with other internal analytics tools.
+  ### (d) Export Contributor Data in JSON format
 * **Actors**: IT Administrator
 * **Preconditions**:
   - The user has access to the GitHub organization.
@@ -69,12 +68,16 @@ that I can integrate the data with other internal analytics tools.
   - The IA logs in to tool using their GitHub Credentials
   - The IA selects a Github organization by entering an organization name.
   - The tool fetches and processes contributor data for repositories within the organization.
-  - The system displays a report of most active contributor rankings along with the pre-defined metrics the calculations were based on.
-  - The system prompts the IA to export the report by displaying "Export Report as JSON - Y/N".
-  - The IA confirms the download by entering "Y"
+  - The system displays a report of the most active contributor rankings along with the pre-defined metrics the calculations were based on.
+  - The IA selects requests to download the contributor data as a JSON file by specifying an export request 
   - The tool converts contribution data into JSON format and generates a downloadable report.
-  - The system downloads the JSON-formatted report into the IA's device and displays a confirmation message.
+  - The system downloads the JSON file into the IA's device.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The IT Administrator is told that they cannot access the repository due to rate limit.
+* **Alternative Flow (2)**: Unauthorised or Private organization
+  - The IT Administrator is told that they cannot access the organization due to access restrictions.
+  **Alternative Flow (3)**: Empty organisation is selected
+  - The IT Administrator is told that there is no contribution data available due to the organisation being empty.
 * **Post conditions**:
   - The user has a JSON-formatted report of the contributor data saved into their device.
+  - 
