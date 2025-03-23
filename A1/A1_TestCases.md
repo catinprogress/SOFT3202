@@ -14,7 +14,6 @@
 - Expectation: Error message: No contributions found.
 ## T7 Scenario: View specific ranking for project lifetime in valid repository with multiple contributors
 - Expectation: Correct personal contributor ranking for project lifetime displayed
-  
 ## T8 Scenario: View specific ranking for specific project phase in valid repository with multiple contributors
 - Expectation: Correct personal contributor ranking within specified time period displayed 
   
@@ -24,26 +23,27 @@
 - Expectation: Correct equal ranking for equally active contributors displayed.
 ## T11: Scenario: View specific ranking for valid repository with multiple equally active contributors for project lifetime
 - Expectation: Correct same personal contributor ranking displayed to other equally active contributors.
-## T36: Scenario: View specific ranking for specific time period with multiple equally active contributors for valid repository 
+## T12: Scenario: View specific ranking for specific time period with multiple equally active contributors for valid repository 
 - Expectation: Correct same personal contributor ranking with other equally active contributors within specified time period displayed.
-
-
-## T14 Scenario: Filter contributor rankings for valid repository with multiple contributors by specific time period
+## T13 Scenario: Filter contributor rankings for valid repository with multiple contributors by specific time period
 - Expectation: Correct contributor rankings for specified time period displayed
-## T15 Scenario: Filter contributor rankings for valid organisation with multiple contributors by specific time period
+## T14 Scenario: Filter contributor rankings for valid organisation with multiple contributors by specific time period
 - Expectation: Correct contributor rankings for specified time period displayed
-## T16 Scenario: Filter contributor rankings for valid repository with no contributors by specific time period
+## T15 Scenario: Filter contributor rankings for valid repository with no contributors by specific time period
 - Expectation: Error message: No contributions found for the specifed time period
-## T17 Scenario: Filter contributor rankings for valid organisation with no contributors by specific time period
+## T16 Scenario: Filter contributor rankings for valid organisation with no contributors by specific time period
 - Expectation: Error message: No contributions found for the specified time period
-  
-## T18 Scenario: Export contributor rankings for valid repository with multiple contributors in JSON format
+## T17 Scenario: View specific ranking for specific project phase with no contributions in valid, non-empty repository.
+- Expectation: Error message: No contributions found for the specified time period.
+## T18: Scenario: View specific ranking for valid repository with no contributions.
+- Expectation: Error message: No contributions found.
+## T19 Scenario: Export contributor rankings for valid repository with multiple contributors in JSON format
 - Expectation: Correct contributor rankings downloaded in JSON formatted file.
-## T19 Scenario: Export contributor rankings for valid organisation with multiple contributors in JSON format
+## T20 Scenario: Export contributor rankings for valid organisation with multiple contributors in JSON format
 - Expectation: Correct contributor rankings downloaded in JSON formatted file.
-## T20 Scenario: Export contributor rankings for valid repository with no contributors in JSON format
+## T21 Scenario: Export contributor rankings for valid repository with no contributors in JSON format
 - Expectation: Error message: No contributions found
-## T21 Scenario: Export contributor rankings for valid organisation with no contributors in JSON format
+## T22 Scenario: Export contributor rankings for valid organisation with no contributors in JSON format
 - Expectation: Error message: No contributions found
 
 ## T23 Scenario: Attempt to access unauthorised private organisation
@@ -54,30 +54,21 @@
 - Expectation: Error message: Invalid URL: Organisation doesn't exist
 ## T26 Scenario: View specific ranking for valid non-empty repository with no user contributions
 - Expectation: Error message: No user contributions found
-## T35 Scenario: View specific ranking for specific project phase with no user contributions in valid non-empty repository
+## T27 Scenario: View specific ranking for specific project phase with no user contributions in valid non-empty repository
 - Expectation: Error message: No user contributions found
-
-## T27 Scenario: Valid repository containing contributors with no contributions
+## T28 Scenario: Valid repository containing contributors with no contributions
 - Expectation: Correct ranking of only contributors with at least one contribution displayed.
-## T37 Scenario: Valid organisation containing contributors with no contributions
+## T29 Scenario: Valid organisation containing contributors with no contributions
 - Expectation: Correct ranking of only contributors with at least one contribution displayed.
-
-
-## T28: Valid repository with 1 contributor
+## T30: Valid repository with 1 contributor
 - Expectation: Single contributor is displayed with first ranking.
-## T29: Valid organisation with 1 contributor
+## T31: Valid organisation with 1 contributor
 - Expectation: Single contributor is displayed with first ranking.
-
-## T30: View specific ranking for valid repository with no other contributors.
+## T32: View specific ranking for valid repository with no other contributors.
 - Expectation: Personal ranking is displayed as 1st.
-## T32: View specific ranking for specific project phase in valid repository with no other contributors.
+## T33: View specific ranking for specific project phase in valid repository with no other contributors.
 - Expectation: Personal ranking is displayed as 1st.
-## T33: Scenario: View specific ranking for valid repository with no contributions.
-- Expectation: Error message: No contributions found.
-## T34 Scenario: View specific ranking for specific project phase with no contributions in valid, non-empty repository.
-- Expectation: Error message: No contributions found for the specified time period.
-
-## T36 Scenario: Attempt to request GitHub API data when rate limit exceeded
+## T34 Scenario: Attempt to request GitHub API data when rate limit exceeded
 - Expectation: Error message: Cannot access GitHub API data due to an exceed in rate limit, please try again later
 
 
