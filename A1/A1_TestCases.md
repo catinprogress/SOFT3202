@@ -14,6 +14,7 @@
 - Expectation: Error message: No contributions found.
 ## T7 Scenario: View specific ranking for project lifetime in valid repository with multiple contributors
 - Expectation: Correct personal contributor ranking for project lifetime displayed
+  
 ## T8 Scenario: View specific ranking for specific project phase in valid repository with multiple contributors
 - Expectation: Correct personal contributor ranking within specified time period displayed 
   
@@ -21,8 +22,11 @@
 - Expectation: Correct equal ranking for equally active contributors displayed.
 ## T10 Scenario: Valid organisation with multiple equally active contributors
 - Expectation: Correct equal ranking for equally active contributors displayed.
-## T11: Scenario: View specific ranking for valid repository with multiple equally active contributors
+## T11: Scenario: View specific ranking for valid repository with multiple equally active contributors for project lifetime
 - Expectation: Correct same personal contributor ranking displayed to other equally active contributors.
+## T36: Scenario: View specific ranking for specific time period with multiple equally active contributors for valid repository 
+- Expectation: Correct same personal contributor ranking with other equally active contributors within specified time period displayed.
+
 
 ## T14 Scenario: Filter contributor rankings for valid repository with multiple contributors by specific time period
 - Expectation: Correct contributor rankings for specified time period displayed
@@ -31,7 +35,7 @@
 ## T16 Scenario: Filter contributor rankings for valid repository with no contributors by specific time period
 - Expectation: Error message: No contributions found for the specifed time period
 ## T17 Scenario: Filter contributor rankings for valid organisation with no contributors by specific time period
-- Expectation: Error message: No contributions found for the specifed time period
+- Expectation: Error message: No contributions found for the specified time period
   
 ## T18 Scenario: Export contributor rankings for valid repository with multiple contributors in JSON format
 - Expectation: Correct contributor rankings downloaded in JSON formatted file.
@@ -39,7 +43,7 @@
 - Expectation: Correct contributor rankings downloaded in JSON formatted file.
 ## T20 Scenario: Export contributor rankings for valid repository with no contributors in JSON format
 - Expectation: Error message: No contributions found
-## T21 Scenario: Export contributor rankings for valid organisation with multiple contributors in JSON format
+## T21 Scenario: Export contributor rankings for valid organisation with no contributors in JSON format
 - Expectation: Error message: No contributions found
 
 ## T23 Scenario: Attempt to access unauthorised private organisation
@@ -55,12 +59,9 @@
 
 ## T27 Scenario: Valid repository containing contributors with no contributions
 - Expectation: Correct ranking of only contributors with at least one contribution displayed.
+## T37 Scenario: Valid organisation containing contributors with no contributions
+- Expectation: Correct ranking of only contributors with at least one contribution displayed.
 
-
-T... Complete this section by describing a comprehensive set of system tests that cover all functional
-requirements. 
-Please make sure to test for negative scenarios.
-Note that there is no penalty forcovering non-functional requirements – there can be cross-cutting concerns between what is functional versus non-functional.
 
 ## T28: Valid repository with 1 contributor
 - Expectation: Single contributor is displayed with first ranking.
@@ -74,7 +75,19 @@ Note that there is no penalty forcovering non-functional requirements – there 
 ## T33: Scenario: View specific ranking for valid repository with no contributions.
 - Expectation: Error message: No contributions found.
 ## T34 Scenario: View specific ranking for specific project phase with no contributions in valid, non-empty repository.
-- Expectation: Error message: No contributions found for the specified time period
+- Expectation: Error message: No contributions found for the specified time period.
+
+## T36 Scenario: Attempt to request GitHub API data when rate limit exceeded
+- Expectation: Error message: Cannot access GitHub API data due to an exceed in rate limit, please try again later
+
+
+
+
+
+
+
+
+
 
 
 ## T20 Scenario: Query response time test
@@ -83,3 +96,4 @@ Note that there is no penalty forcovering non-functional requirements – there 
 - Expectation: System responds for up to 20 concurrent API requests from multiple users simultaneously with no performance degredation.
 ## T22 Scenario: Concurrent user load test without temporary caching
 - Expectation: System responds for up to 100 concurrent API requests from multiple users simultaneously with no performance degredation
+
