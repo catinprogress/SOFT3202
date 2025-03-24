@@ -92,7 +92,7 @@ class TestCases(unittest.TestCase):
         self.assertEqual(f5(1, 1), 2)
     
     def test_f5_minimal_branch(self):
-        self.assertEqual(f5(1, 1), 2) # a true, b false hello 
+        self.assertEqual(f5(1, 0), 2) # a true, b false hello 
         self.assertEqual(f5(0, 1), 1) # a false, b true world
         
 if __name__ == "__main__":
