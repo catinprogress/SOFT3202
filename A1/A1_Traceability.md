@@ -59,7 +59,7 @@
 
 - URS: URS-10 Allow users to download contributor rankings in JSON format.
   SRS: FR-13 When a user requests to export contributor rankings via the command line, the system shall generate a JSON file and make it available for download
-  verification: System Test (T19, T20)
+  verification: System Test (T19, T20, T38, T39)
 
 - URS: URS-10 Allow users to download contributor rankings in JSON format.
   SRS: FR-14 When a user requests to export contributor rankings for an empty repository or organisation, the system shall display "No contributions available for export" and not proceed with the export. (map: URS-10)
@@ -102,13 +102,17 @@
   verification: System Test (T27)
 
 - URS: URS-10 Allow users to download contributor rankings in JSON format
-  SRS: FR-24 (Medium) When a contributor requests to export their personal ranking for a repository that they have made no contributions to, the system shall display "No contributions available for export" and not proceed with the export. (map: URS-10)
+  SRS: FR-24 When a contributor requests to export their personal ranking for a repository that they have made no contributions to, the system shall display "No contributions available for export" and not proceed with the export.
   verification: System Test (T36)
 
 - URS: URS-10 Allow users to download contributor rankings in JSON format
-  SRS: FR-24 (Medium) When a contributor requests to export their specific ranking via the command line, the system shall generate a JSON file containing only their personal contributor data and make it available for download. (map: URS-10)
+  SRS: FR-25 When a contributor requests to export their specific ranking for project lifetime via the command line, the system shall generate a JSON file containing their contributor data and make it available for download.
   verification: System Test (T37)
+  
+- URS: URS-10 Allow users to download contributor rankings in JSON format
+  SRS: FR-26 When a contributor requests to export their specific ranking for a specific project phase via the command line, the system shall generate a JSON file containing their filtered contributor data and make it available for download. 
+  verification: System Test (T40)
 
-
-
-
+- URS: URS-10 Allow users to download contributor rankings in JSON format
+  SRS: FR-26 When a user requests to export contributor rankings for a specific time period, the system shall generate a JSON file containing the filtered data and make it available for download.
+  verification: System Test (T38, T39)

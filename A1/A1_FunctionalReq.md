@@ -54,4 +54,8 @@ FR-23 (Medium) If a contributor requests to view their personal ranking in a tim
 
 FR-24 (Medium) When a contributor requests to export their personal ranking for a repository that they have made no contributions to, the system shall display "No contributions available for export" and not proceed with the export. (map: URS-10)
 
-FR-25 (Medium) When a contributor requests to export their specific ranking via the command line, the system shall generate a JSON file containing only their personal contributor data and make it available for download. (map: URS-10)
+FR-25 (Medium) When a contributor requests to export their specific ranking for project lifetime via the command line, the system shall generate a JSON file containing their contributor data and make it available for download. (map: URS-10)
+
+FR-26 (Medium) When a contributor requests to export their specific ranking for a specific project phase via the command line, the system shall generate a JSON file containing their filtered contributor data and make it available for download. (map: URS-10)
+
+FR-27 (Medium) When a user requests to export contributor rankings for a specific time period, the system shall generate a JSON file containing the filtered data and make it available for download. (map: URS-10)
