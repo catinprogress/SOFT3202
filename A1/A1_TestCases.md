@@ -16,7 +16,6 @@
 - Expectation: Correct personal contributor ranking for project lifetime displayed
 ## T8 Scenario: View specific ranking for specific project phase in valid repository with multiple contributors
 - Expectation: Correct personal contributor ranking within specified time period displayed 
-  
 ## T9 Scenario: Valid repository with multiple equally active contributors
 - Expectation: Correct equal ranking for equally active contributors displayed.
 ## T10 Scenario: Valid organisation with multiple equally active contributors
@@ -45,8 +44,7 @@
 - Expectation: Error message: No contributions found
 ## T22 Scenario: Export contributor rankings for valid organisation with no contributors in JSON format
 - Expectation: Error message: No contributions found
-
-## T23 Scenario: Attempt to access unauthorised private organisation
+## T23 Scenario: Invalid authentication token provided for private organisation
 - Expectation: Error message: Access denied: user is not authorised to access this organisation.
 ## T24 Scenario: Invalid repository name
 - Expectation: Error message: Invalid URL: Repository doesn't exist
@@ -70,10 +68,9 @@
 - Expectation: Personal ranking is displayed as 1st.
 ## T34 Scenario: Attempt to request GitHub API data when rate limit exceeded
 - Expectation: Error message: Cannot access GitHub API data due to an exceed in rate limit, please try again later
-
-
-
-
+## T35 Scenario: Valid authentication token for private organisation provided 
+- Expectation: Retrieved token matches stored token and requested organisation data is displayed.
+ 
 
 
 

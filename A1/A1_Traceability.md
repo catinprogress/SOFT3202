@@ -10,7 +10,7 @@
   Non-Functional Requirement: Security
   verification: Security Audit
   
-  
+  , 
   TODO
 
 - URS: URS-12 Provide error handling mechanisms for access restrictions.
@@ -34,36 +34,24 @@
   verification: System Test (T8, T33, T12)
 
 - URS: URS-06 Display the most active contributor(s) based on commit count.
-  SRS: FR-07 System shall calculate the most active contributor(s) by measuring each contributor's commit count and display the resulting contributor rankings based on this pre-defined metric.
-  verification: System Test (T1, T3, T7, T8, T9, T10, T11, T12, T13, T14, T28, T30, T32, T31, T33)
+  SRS: FR-07 System shall calculate the most active contributor(s) by measuring each contributor's commit count, and include these metrics and their name when displaying the resulting ranks.
+  verification: System Test (T1, T5, T9, T10, T13, T14, T30, T32, T31, T33)
 
 - URS: URS-06 Display the most active contributor(s) based on commit count.
   SRS: FR-08 If the system calculates a given user is equally active with at least one other contributor, the system shall display all equally active contributors with the same ranking. 
   verification: System Test (T9, T10, T11, T12)
 
 - URS: URS-07 Allow users to filter rankings by specific time periods
-  SRS: FR-09 System shall allow users to filter contributor rankings by specific time periods (i.e. project phase)
+  SRS: FR-09 System shall process and display contributor rankings based on contributions made within the requested time period
   verification: System Test (T8, T12, T13, T14, T33)
 
 - URS: URS-07 Allow users to filter rankings by specific time periods
-  SRS: FR-10 If the user requests to filter contribution rankings, the system shall display the contributor rankings based on contributions made within the specified time period.
-  verification: System Test (T8, T12, T13, T14, T33)
-
-- URS: URS-07 Allow users to filter rankings by specific time periods
-  SRS: FR-11 System shall display "No contributions found for the specified time period" if no contributions found during specified time period.
+  SRS: FR-10 If no contributions are found for a specified time period, the system shall display "No contributions found for the specified time period". 
   verification: System Test (T17, T27, T16, T15)
 
 - URS: URS-10 Allow users to download contributor rankings in JSON format.
-  SRS: FR-12 System shall allow users to download contributor rankings in JSON format by specifying an export request on the command line. 
+  SRS: FR-12 System shall generate a JSON file containing the requested contributor data and make it available for download
   verification: System Test (T19, T20, T21, T22)
-
-- URS: URS-10 Allow users to download contributor rankings in JSON format.
-  SRS: FR-13 If the user requests to download contributor rankings in JSON format, the system shall convert the contribution data into a JSON format and download the generated file into the user's device.
-  verification: System Test (T19, T20)
-
-- URS: URS-12 System shall provide error handling mechanisms for API rate limit.
-  SRS: FR-14 System shall detect API rate limit failures and notify users who request access with "Cannot access GitHub API data due to an exceed in rate limit, please try again later".
-  verification: System Test (Failure Handling, T34)
 
 - URS: URS-12 System shall provide error handling mechanisms for access restrictions
   SRS: FR-15 System shall prevent access to user requests for accessing unauthorised organisations and display "Access denied: user is not authorised to access this organisation".
@@ -86,7 +74,7 @@
   verification: System Test (T22, T6, T16)
 
 - URS: Contributor with no contributions view specific ranking for project lifetime
-  SRS: FR-20 If a contributor with no contributions requests to view their personal ranking, the system shall display "No user contributions found" and allow them to enter a different repository name on the command line.
+  SRS: FR-20 If a contributor requests to view their personal contribution ranking for a repository that they have made no contributions to, the system shall display "No user contributions found"
   verification: System Test (T26)
 
 - URS: Contributor with no contributions in valid repository/organisation
@@ -94,10 +82,24 @@
   verification: System Test (T28, T29)
   
 - URS: Contributor with no contributions view specific ranking for specific time period
-  SRS: FR-22 If a contributor requests to view their personal contribution ranking for a specific time period where they have made no contributions, the system shall display "No user contributions found" and allow them to enter a different repository name on the command line.
+  SRS: FR-22 If a contributor requests to view their personal contribution ranking for a time period where they have made no contributions, the system shall display "No user contributions found"
   verification: System Test (T27)
 
 
-  - URS: URS-09 Store authentication tokens if required for private repositories
-  SRS: FR-23 System shall store user authentication tokens for accessing private organisations as needed, in the database.
-  verification: System Test (T23, T1, T5, T7) ERROR HANDLING DATA REQUIREMENTS
+- URS: URS-08 System shall process API data and provide results
+  SRS: FR-23 System shall process authenticated user requests via GitHub API and provide ranking results to the user on the command line.
+  verification: System Test (T35, T1, T5, T7, T8)
+
+
+
+
+- URS: URS-09 Store authentication tokens if required for private repositories
+  SRS: FR-24 System shall store user authentication tokens when provided in the database to access private Github organisation.
+  verification: System Test (Failure Handling, T23, T35) 
+
+  - URS: URS-12 System shall provide error handling mechanisms for API rate limit. (Failure Handling, T34)
+  - FR-14 (Rate Limit Handling): "The system shall detect API rate limit failures and notify users who request access with 'Cannot access GitHub API data due to an exceed in rate limit, please try again later'."
+
+  
+FR-24 (Medium) The system shall store user authentication tokens when provided by the user in the database, to access private GitHub organisations. (map: URS-09)
+
