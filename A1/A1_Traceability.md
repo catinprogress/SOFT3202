@@ -92,7 +92,6 @@
 
 
 
-
 - URS: URS-09 Store authentication tokens if required for private repositories
   SRS: FR-24 System shall store user authentication tokens when provided in the database to access private Github organisation.
   verification: System Test (Failure Handling, T23, T35) 
@@ -100,6 +99,5 @@
   - URS: URS-12 System shall provide error handling mechanisms for API rate limit. (Failure Handling, T34)
   - FR-14 (Rate Limit Handling): "The system shall detect API rate limit failures and notify users who request access with 'Cannot access GitHub API data due to an exceed in rate limit, please try again later'."
 
-  
-FR-24 (Medium) The system shall store user authentication tokens when provided by the user in the database, to access private GitHub organisations. (map: URS-09)
+
 
