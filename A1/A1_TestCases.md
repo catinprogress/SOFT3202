@@ -15,21 +15,21 @@
 ## T7 Scenario: View specific ranking for project lifetime in valid repository with multiple contributors
 - Expectation: Correct personal contributor ranking for project lifetime displayed
 ## T8 Scenario: View specific ranking for specific project phase in valid repository with multiple contributors
-- Expectation: Correct personal contributor ranking within specified time period displayed 
+- Expectation: Correct personal contributor ranking within specified time period displayed.
 ## T9 Scenario: Valid repository with multiple equally active contributors
 - Expectation: Correct equal ranking for equally active contributors displayed.
 ## T10 Scenario: Valid organisation with multiple equally active contributors
 - Expectation: Correct equal ranking for equally active contributors displayed.
 ## T11: Scenario: View specific ranking for valid repository with multiple equally active contributors for project lifetime
-- Expectation: Correct same personal contributor ranking displayed to other equally active contributors.
-## T12: Scenario: View specific ranking for specific time period with multiple equally active contributors for valid repository 
+- Expectation: Correct same personal contributor ranking with other equally active contributors displayed.
+## T12: Scenario: View specific ranking for specific project phase for valid repository with multiple equally active contributors
 - Expectation: Correct same personal contributor ranking with other equally active contributors within specified time period displayed.
 ## T13 Scenario: Filter contributor rankings for valid repository with multiple contributors by specific time period
 - Expectation: Correct contributor rankings for specified time period displayed
 ## T14 Scenario: Filter contributor rankings for valid organisation with multiple contributors by specific time period
 - Expectation: Correct contributor rankings for specified time period displayed
 ## T15 Scenario: Filter contributor rankings for valid repository with no contributors by specific time period
-- Expectation: Error message: No contributions found for the specifed time period
+- Expectation: Error message: No contributions found for the specified time period
 ## T16 Scenario: Filter contributor rankings for valid organisation with no contributors by specific time period
 - Expectation: Error message: No contributions found for the specified time period
 ## T17 Scenario: View specific ranking for specific project phase with no contributions in valid, non-empty repository.
@@ -41,11 +41,11 @@
 ## T20 Scenario: Export contributor rankings for valid organisation with multiple contributors in JSON format
 - Expectation: Correct contributor rankings downloaded in JSON formatted file.
 ## T21 Scenario: Export contributor rankings for valid repository with no contributors in JSON format
-- Expectation: Error message: No contributions found
+- Expectation: Error message: No contributions available for export
 ## T22 Scenario: Export contributor rankings for valid organisation with no contributors in JSON format
-- Expectation: Error message: No contributions found
+- Expectation: Error message: No contributions available for export
 ## T23 Scenario: Invalid authentication token provided for private organisation
-- Expectation: Error message: Access denied: user is not authorised to access this organisation.
+- Expectation: Error message: Access denied: unauthorised orgnaisation.
 ## T24 Scenario: Invalid repository name
 - Expectation: Error message: Invalid URL: Repository doesn't exist
 ## T25 Scenario: Invalid organisation name
@@ -53,7 +53,7 @@
 ## T26 Scenario: View specific ranking for valid non-empty repository with no user contributions
 - Expectation: Error message: No user contributions found
 ## T27 Scenario: View specific ranking for specific project phase with no user contributions in valid non-empty repository
-- Expectation: Error message: No user contributions found
+- Expectation: Error message: No user contributions found for the specified time period
 ## T28 Scenario: Valid repository containing contributors with no contributions
 - Expectation: Correct ranking of only contributors with at least one contribution displayed.
 ## T29 Scenario: Valid organisation containing contributors with no contributions
@@ -67,10 +67,13 @@
 ## T33: View specific ranking for specific project phase in valid repository with no other contributors.
 - Expectation: Personal ranking is displayed as 1st.
 ## T34 Scenario: Attempt to request GitHub API data when rate limit exceeded
-- Expectation: Error message: Cannot access GitHub API data due to an exceed in rate limit, please try again later
+- Expectation: Error message: GitHub API rate limite exceeded. Please try again later
 ## T35 Scenario: Valid authentication token for private organisation provided 
 - Expectation: Retrieved token matches stored token and requested organisation data is displayed.
- 
+## T36 Scenario: Export specific ranking for valid repository with no user contributions.
+- Expectation: Error message: No contributions available for export
+## T37 Scenario: Export specific ranking for valid repository with multiple contributors
+- Expectation: Correct specific contributor ranking downloaded in JSON formatted file
 
 
 
