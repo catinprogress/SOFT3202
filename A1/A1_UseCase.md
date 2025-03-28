@@ -31,12 +31,12 @@
   - The Team Lead is told that they cannot access the repository due to rate limit.
 * **Alternative Flow (2)**: Private organization
   - The Team Lead is told that they cannot access the organization due to access restrictions
-  **Alternative Flow (3)**: Empty repository is selected
+* **Alternative Flow (3)**: Empty repository is selected
   - The Team Lead is told that there is no contribution data available.
 * **Alternative Flow (4)**: No contribution data for specified time period
   - The Team Lead is told that there is no contribution data available for the specified time period.
-  **Alternative Flow (5)**: TL selects a repository that they don't oversee
-  - The Team Lead is told that they cannot access the repository due to access restrictions.
+* **Alternative Flow (5)**: Invalid GitHub URL is entered
+  - The Team Lead is told that the GitHub URL they have provided doesn't exist.
 * **Post conditions**:
   - The filtered contributor rankings for the specified time period are displayed.
  
@@ -56,14 +56,16 @@
   - The Software Engineer is told that they cannot access the repository due to rate limit.
 * **Alternative Flow (2)**: Private organization
   - The Software Engineer is told that they cannot access the organization due to access restrictions.
-  **Alternative Flow (3)**: Empty repository is selected
+* **Alternative Flow (3)**: Empty repository is selected
   - The Software Engineer is told that there is no contribution data available.
 * **Alternative Flow (4)**: No contribution data for specified time period
   - The Software Engineer is told that there is no contribution data available for the specified time period.
-  **Alternative Flow (5)**: No user contributions found for selected repository
+* **Alternative Flow (5)**: No user contributions found for selected repository
   - The Software Engineer is told that there is no user contribution data available.
-  **Alternative Flow (6)**: No user contributions found for selected time period
+* **Alternative Flow (6)**: No user contributions found for selected time period
   - The Software Engineer is told that there is no user contribution data available for the specified time period.
+* **Alternative Flow (7)**: Invalid GitHub URL is entered
+  - The Software Engineer is told that the GitHub URL they have provided doesn't exist.
 * **Post conditions**:
   - The Software Engineer's specific contributor ranking for the specified time period is displayed.
 
@@ -83,9 +85,11 @@
   - The IT Administrator is told that they cannot access the repository due to rate limit.
 * **Alternative Flow (2)**: Private organization
   - The IT Administrator is told that they cannot access the organization due to access restrictions.
-  **Alternative Flow (3)**: Empty organisation is selected
+* **Alternative Flow (3)**: Empty organisation is selected
   - The IT Administrator is told that there is no contribution data available to export.
-  **Alternative Flow (4)**: GitHub Repository is selected for export
+* **Alternative Flow (4)**: GitHub Repository is selected for export
   - System generates a JSON file of repository-level contributor rankings and makes it available for download. 
+* **Alternative Flow (5)**: Invalid GitHub URL is entered
+  - The IT Administrator is told that the GitHub URL they have provided doesn't exist.
 * **Post conditions**:
   - A JSON file containing the requested contributor ranking data is downloaded into the IT Administrator's device.

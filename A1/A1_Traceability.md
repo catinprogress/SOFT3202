@@ -67,7 +67,7 @@
 
 - URS: URS-12 System shall provide error handling mechanisms for API rate limit. 
   SRS: FR-15 If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
-  verification: System Test (Failure Handling, T34)
+  verification: System Test (T34)
 
 - URS: URS-12 System shall provide error handling mechanisms for access restrictions
   SRS: FR-16 If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
@@ -75,11 +75,11 @@
 
 - URS: URS-12 System shall provide error handling mechanisms for invalid repository names
   SRS: FR-17 If a user specifies a non-existing organisation name on the command line, the system shall display "Invalid URL: Organisation doesn't exist"
-  verification: System Test (Failure handling, T25)
+  verification: System Test (T25)
 
 - URS: URS-12 System shall provide error handling mechanisms for invalid repository names
   SRS: FR-18 If a user specifies a non-existing repository name on the command line, the system shall display "Invalid URL: Repository doesn't exist".(map: URS-12)
-  verification: System Test (Failure handling, T24)
+  verification: System Test (T24)
 
 - URS: Empty repository URS-02
   SRS: FR-19 If a user specifies an empty repository name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found"

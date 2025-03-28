@@ -80,13 +80,3 @@
 - Expectation: Correct contributor rankings for specifeed time period downloaded in JSON formatted file
 ## T40 Scenario: Export personal ranking for specific project phase in valid non-empty reposistory in JSON format
 - Expectation: Correct personal ranking for specified time period downloaded in JSON formatted file
-
-
-
-## T20 Scenario: Query response time test
-- Expectation: Query results displayed within 5 seconds.
-## T21 Scenario: Concurrent user load test with temporary caching
-- Expectation: System responds for up to 20 concurrent API requests from multiple users simultaneously with no performance degredation.
-## T22 Scenario: Concurrent user load test without temporary caching
-- Expectation: System responds for up to 100 concurrent API requests from multiple users simultaneously with no performance degredation
-

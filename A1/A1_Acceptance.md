@@ -29,8 +29,6 @@
   - Given that there exists a private organisation that I am not authorised to access, when I request contributor rankings, the system must prevent access and notify me with an appropriate message (e.g. "Access denied: unauthorised organisation") before allowing me to enter a different repository name.
   
   - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials")
-  
-  - Given that I have entered the URL for a repository that I don't oversee, when I request contributor rankings, the system must deny access and notify me with an appropriate message (e.g. "Access denied: unauthorized user") and allow me to enter a different URL.
 
   - Give that I have entered an invalid GitHub repository name (i.e. URL), when I request contributor rankings, the system must notify me with an appropriate message (e.g. "Invalid URL: Repository doesn't exist") and allow me to enter a different repository name. 
 
@@ -84,4 +82,4 @@
   
   - Given that I have entered an invalid GitHub organisation name (i.e. URL), when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "Invalid URL: Organisation doesn't exist") and allow me to enter a different organisation name.
 
-  - Given that I have entered an invalid GitHub repository name (i.e. URL), when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "Invalid URL: Organisation doesn't exist") and allow me to enter a different organisation name.
+  - Given that I have entered an invalid GitHub repository name (i.e. URL), when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "Invalid URL: Repository doesn't exist") and allow me to enter a different organisation name.
