@@ -45,7 +45,7 @@
 ## T22 Scenario: Export contributor rankings for valid organisation with no contributors in JSON format
 - Expectation: Error message: No contributions available for export
 ## T23 Scenario: Invalid authentication token provided for private organisation
-- Expectation: Error message: Access denied: unauthorised orgnaisation.
+- Expectation: Error message: Access denied: unauthorised organisation.
 ## T24 Scenario: Invalid repository name
 - Expectation: Error message: Invalid URL: Repository doesn't exist
 ## T25 Scenario: Invalid organisation name
@@ -67,7 +67,7 @@
 ## T33: View specific ranking for specific project phase in valid repository with no other contributors.
 - Expectation: Personal ranking is displayed as 1st.
 ## T34 Scenario: Attempt to request GitHub API data when rate limit exceeded
-- Expectation: Error message: GitHub API rate limite exceeded. Please try again later
+- Expectation: Error message: GitHub API rate limit exceeded. Please try again later
 ## T35 Scenario: Valid authentication token for private organisation provided 
 - Expectation: Retrieved token matches stored token and requested organisation data is displayed.
 ## T36 Scenario: Export specific ranking for valid repository with no user contributions.

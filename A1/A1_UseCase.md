@@ -1,3 +1,19 @@
+### (a) Identify the most active contributor.
+- **Actors:** Engineering Manager
+- **Preconditions:**
+  - The user has access to the GitHub organization
+  - The tool must have API access to retrieve organization data.
+- **Main Flow:**
+  - The EM logs in to tool using their GitHub Credentials
+  - The EM selects a Github repository by entering a URL
+  - The tool fetches and processes contribution data
+  - The system displays the most active contributor based on predefined metrics.
+- **Alternative Flow (1):** Private organization
+  - The Manager is told that they cannot access the organization due to access restrictions.
+- **Alternative Flow (2):** API rate limit exceeded
+  - The Manager is told that they cannot access the repository due to rate limit.
+- **Post conditions:**
+  - The most active contributor is displayed.
 
 ### (b) Filter Contribution Rankings by Time Period
 * **Actors**: Team Lead
