@@ -77,7 +77,7 @@
   - The IA logs in to tool using their GitHub Credentials
   - The IA selects a Github organization by entering a URL along with an export request.
   - The tool fetches and processes contributor data for repositories within the organization.
-  - The tool converts the processed contributor rankings into JSON format and generates a downloadable report.
+  - The tool generates a JSON file of the contributor rankings calculated based on predefined metrics.
   - The system downloads the JSON file into the IA's device.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The IT Administrator is told that they cannot access the repository due to rate limit.
