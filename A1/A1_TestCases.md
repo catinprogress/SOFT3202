@@ -41,15 +41,15 @@
 ## T20 Scenario: Export contributor rankings for valid organisation with multiple contributors in JSON format
 - Expectation: Correct contributor rankings downloaded in JSON formatted file.
 ## T21 Scenario: Export contributor rankings for valid repository with no contributors in JSON format
-- Expectation: Error message: No contributions available for export
+- Expectation: Error message: No contributions found
 ## T22 Scenario: Export contributor rankings for valid organisation with no contributors in JSON format
-- Expectation: Error message: No contributions available for export
+- Expectation: Error message: No contributions found
 ## T23 Scenario: Invalid authentication token provided for private organisation
 - Expectation: Error message: Access denied: unauthorised organisation.
 ## T24 Scenario: Invalid repository name
-- Expectation: Error message: Invalid URL: Repository doesn't exist
+- Expectation: Error message: Invalid URL provided
 ## T25 Scenario: Invalid organisation name
-- Expectation: Error message: Invalid URL: Organisation doesn't exist
+- Expectation: Error message: Invalid URL provided
 ## T26 Scenario: View specific ranking for valid non-empty repository with no user contributions
 - Expectation: Error message: No user contributions found
 ## T27 Scenario: View specific ranking for specific project phase with no user contributions in valid non-empty repository
@@ -71,12 +71,12 @@
 ## T35 Scenario: Valid authentication token for private organisation provided 
 - Expectation: Retrieved token matches stored token and requested organisation data is displayed.
 ## T36 Scenario: Export specific ranking for valid repository with no user contributions.
-- Expectation: Error message: No contributions available for export
+- Expectation: Error message: No user contributions found
 ## T37 Scenario: Export specific ranking for valid repository with multiple contributors
 - Expectation: Correct specific contributor ranking downloaded in JSON formatted file
 ## T38 Scenario: Export contributor rankings for specific time period in valid non-empty organisation in JSON format
 - Expectation: Correct contributor rankings for specified time period downloaded in JSON formatted file
 ## T39 Scenario: Export contributor rankings for specific time period in valid non-empty reposistory in JSON format
 - Expectation: Correct contributor rankings for specifeed time period downloaded in JSON formatted file
-## T40 Scenario: Export personal ranking for specific project phase in valid non-empty reposistory in JSON format
+## T40 Scenario: Export specific ranking for specific project phase in valid non-empty reposistory in JSON format
 - Expectation: Correct personal ranking for specified time period downloaded in JSON formatted file

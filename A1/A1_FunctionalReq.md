@@ -24,38 +24,28 @@ FR-11 (Medium) The system shall process authenticated user requests for contribu
 
 FR-12 (Medium) If an authentication token is specified by the user via the command line, the system shall store it in the database to access private GitHub organisations. (map: URS-09)
 
-FR-13 (Medium) When a user requests to export contributor rankings via the command line, the system shall generate a JSON file and make it available for download. (map: URS-10)
+FR-13 (Medium) When a user requests to export contributor rankings for a valid repository/organisation via the command line, the system shall generate a JSON file and make it available for download. (map: URS-10)
 
-FR-14 (Medium) When a user requests to export contributor rankings for an empty repository or organisation, the system shall display "No contributions available for export" and not proceed with the export. (map: URS-10)
+FR-14 (Medium) When a contributor requests to export their specific ranking for a repository that they have contributed to, the system shall generate a JSON file containing their individual contributor data and make it available for download. (map: URS-10)
+
+FR-15 (Medium) If a user specifies a valid time-based filter with their export request, the system shall generate a JSON file containing the filtered contribution data and make it available for download. (map: URS-10)
 
 ## Rate limit handling
-FR-15 (Medium): If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets. (map: URS-12)
+FR-16 (Medium): If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets. (map: URS-12)
 
 ## Private Organisation
-FR-16 (Medium) If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".(map: URS-12)
+FR-17 (Medium) If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".(map: URS-12)
 
-## Invalid org/repo name
-FR-17 (Medium) If a user specifies a non-existing organisation name on the command line, the system shall display "Invalid URL: Organisation doesn't exist". (map: URS-12)
+FR-18 (Medium) If a user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided". (map: URS-12)
 
-FR-18 (Medium) If a user specifies a non-existing repository name on the command line, the system shall display "Invalid URL: Repository doesn't exist".(map: URS-12)
-
-## Empty repo
-FR-19 (Medium) If a user specifies an empty repository name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found". (map: URS-03)
-
-## Empty org
-FR-20 (Medium) If the user specifies an empty organization name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found".(map: URS-04)
+FR-19 (Medium) If the user specifies an empty organization or repository name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found". (map: URS-12)
 
 ## No contributor contributions
-FR-21 (Medium) If a contributor requests to view their personal ranking for a repository that they have made no contributions to, the system shall display "No user contributions found".(map: URS-04)
+FR-20 (Medium) If a contributor requests to view their personal ranking for a repository that they have made no contributions to, the system shall display "No user contributions found".(map: URS-04)
 
-FR-22 (Medium) The system shall only include contributors with at least one commit when processing and displaying contributor rankings within a given organisation or repository. (map: URS-06)
+FR-21 (Medium) The system shall only include contributors with at least one commit when processing and displaying contributor rankings within a given organisation or repository. (map: URS-06)
 
-FR-23 (Medium) If a contributor requests to view their personal ranking in a time period for which they have made no contributions, the system shall display "No user contributions found for the specified time period". (map: URS-05)
+FR-22 (Medium) If a contributor requests to view their personal ranking in a time period for which they have made no contributions, the system shall display "No user contributions found for the specified time period". (map: URS-05)
 
-FR-24 (Medium) When a contributor requests to export their personal ranking for a repository that they have made no contributions to, the system shall display "No contributions available for export" and not proceed with the export. (map: URS-10)
 
-FR-25 (Medium) When a contributor requests to export their specific ranking for project lifetime via the command line, the system shall generate a JSON file containing their contributor data and make it available for download. (map: URS-10)
 
-FR-26 (Medium) When a contributor requests to export their specific ranking for a specific project phase via the command line, the system shall generate a JSON file containing their filtered contributor data and make it available for download. (map: URS-10)
-
-FR-27 (Medium) When a user requests to export contributor rankings for a specific time period, the system shall generate a JSON file containing the filtered data and make it available for download. (map: URS-10)

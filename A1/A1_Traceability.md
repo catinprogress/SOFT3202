@@ -10,7 +10,6 @@
   Non-Functional Requirement: Security
   verification: Security Audit
   
-  , 
   TODO
 
 - URS: URS-12 Provide error handling mechanisms for access restrictions.
@@ -61,58 +60,38 @@
   SRS: FR-13 When a user requests to export contributor rankings via the command line, the system shall generate a JSON file and make it available for download
   verification: System Test (T19, T20, T38, T39)
 
-- URS: URS-10 Allow users to download contributor rankings in JSON format.
-  SRS: FR-14 When a user requests to export contributor rankings for an empty repository or organisation, the system shall display "No contributions available for export" and not proceed with the export. (map: URS-10)
-  verification: System Test (T21, T22, T36)
+- URS: URS-10 Allow users to download contributor rankings in JSON format
+  SRS: FR-14 When a contributor requests to export their specific ranking for a repository that they have contributed to, the system shall generate a JSON file containing their individual contributor data and make it available for download.
+  verification: System Test (T37, T40)
+
+- URS: URS-10 Allow users to download contributor rankings in JSON format
+  SRS: FR-15 If a user specifies a valid time-based filter with their export request, the system shall generate a JSON file containing the filtered contribution data and make it available for download.
+  verification: System Test (T38, T39, T40)
 
 - URS: URS-12 System shall provide error handling mechanisms for API rate limit. 
-  SRS: FR-15 If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
+  SRS: FR-16 If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
   verification: System Test (T34)
 
 - URS: URS-12 System shall provide error handling mechanisms for access restrictions
-  SRS: FR-16 If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
+  SRS: FR-17 If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
   verification: System Test (T23)
 
 - URS: URS-12 System shall provide error handling mechanisms for invalid repository names
-  SRS: FR-17 If a user specifies a non-existing organisation name on the command line, the system shall display "Invalid URL: Organisation doesn't exist"
-  verification: System Test (T25)
+  SRS: FR-18 If a user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided".
+  verification: System Test (T25, T24)
 
 - URS: URS-12 System shall provide error handling mechanisms for invalid repository names
-  SRS: FR-18 If a user specifies a non-existing repository name on the command line, the system shall display "Invalid URL: Repository doesn't exist".(map: URS-12)
-  verification: System Test (T24)
+  SRS: FR-19 If a user specifies an empty repository or organisatin name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found"
+  verification: System Test (T2, T6, T18, T21, T22, T36)
 
-- URS: Empty repository URS-02
-  SRS: FR-19 If a user specifies an empty repository name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found"
-  verification: System Test (T2, T18)
-
-- URS: Empty organisation URS-03
-  SRS: FR-20 If a user specifies an empty organization name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found".
-  verification: System Test (T6)
-
-- URS: URS-04 Contributor with no contributions view specific ranking for project lifetime
-  SRS: FR-21 If a contributor requests to view their personal ranking for a repository that they have made no contributions to, the system shall display "No user contributions found"
-  verification: System Test (T26)
+- URS: URS-04 Contributor with no contributions requests specific ranking
+  SRS: FR-20 If a contributor requests access to their personal ranking for a repository that they have made no contributions to, the system shall display "No user contributions found"
+  verification: System Test (T26, T36)
 
 - URS: URS-06 Contributor with no contributions in valid repository/organisation
-  SRS: FR-22 the system shall only include contributors with at least one commit when processing and displaying contributor rankings within a given organisation or repository. 
+  SRS: FR-21 the system shall only include contributors with at least one commit when processing and displaying contributor rankings within a given organisation or repository. 
   verification: System Test (T28, T29)
   
 - URS: URS-05 Contributor with no contributions view specific ranking for specific time period
-  SRS: FR-23 If a contributor requests to view their personal ranking in a time period for which they have made no contributions, the system shall display "No user contributions found for the specified time period".
+  SRS: FR-22 If a contributor requests to view their personal ranking in a time period for which they have made no contributions, the system shall display "No user contributions found for the specified time period".
   verification: System Test (T27)
-
-- URS: URS-10 Allow users to download contributor rankings in JSON format
-  SRS: FR-24 When a contributor requests to export their personal ranking for a repository that they have made no contributions to, the system shall display "No contributions available for export" and not proceed with the export.
-  verification: System Test (T36)
-
-- URS: URS-10 Allow users to download contributor rankings in JSON format
-  SRS: FR-25 When a contributor requests to export their specific ranking for project lifetime via the command line, the system shall generate a JSON file containing their contributor data and make it available for download.
-  verification: System Test (T37)
-  
-- URS: URS-10 Allow users to download contributor rankings in JSON format
-  SRS: FR-26 When a contributor requests to export their specific ranking for a specific project phase via the command line, the system shall generate a JSON file containing their filtered contributor data and make it available for download. 
-  verification: System Test (T40)
-
-- URS: URS-10 Allow users to download contributor rankings in JSON format
-  SRS: FR-26 When a user requests to export contributor rankings for a specific time period, the system shall generate a JSON file containing the filtered data and make it available for download.
-  verification: System Test (T38, T39)

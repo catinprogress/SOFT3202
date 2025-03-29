@@ -8,7 +8,7 @@
   - Given that the GitHub API rate limit has exceeded, when I request contributor rankings, the system must notify me with an appropriate message (e.g. "GitHub API rate limit exceeded. Please try again later") and allow me to access the repository data when the rate limit resets.
   
   - Given that there exists a private organisation that I am not authorised to access, when I request contributor rankings, the system must prevent access and notify me with an appropriate message (e.g. "Access denied: unauthorised organisation") before allowing me to enter a different repository name.
-- 
+  
   - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials")
   
   - Give that I have entered an invalid GitHub repository name (i.e. URL), when I request contributor rankings, the system must notify me with an appropriate message (e.g. "Invalid URL: Repository doesn't exist") and allow me to enter a different repository name. 
