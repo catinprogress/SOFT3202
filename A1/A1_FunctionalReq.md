@@ -41,11 +41,11 @@ FR-18 (Medium) If a user specifies a non-existing organisation or repository nam
 FR-19 (Medium) If the user specifies an empty organization or repository name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found". (map: URS-12)
 
 ## No contributor contributions
-FR-20 (Medium) If a contributor requests to view their personal ranking for a repository that they have made no contributions to, the system shall display "No user contributions found".(map: URS-04)
+FR-20 (Medium) If a contributor requests to view their specific ranking for a repository that they have made no contributions to, the system shall display "No user contributions found".(map: URS-04)
 
 FR-21 (Medium) The system shall only include contributors with at least one commit when processing and displaying contributor rankings within a given organisation or repository. (map: URS-06)
 
-FR-22 (Medium) If a contributor requests to view their personal ranking in a time period for which they have made no contributions, the system shall display "No user contributions found for the specified time period". (map: URS-05)
+FR-22 (Medium) If a contributor requests to view their specific ranking in a time period for which they have made no contributions, the system shall display "No user contributions found for the specified time period". (map: URS-05)
 
 
 

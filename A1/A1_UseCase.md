@@ -86,7 +86,7 @@
 * **Alternative Flow (2)**: Private organization
   - The IT Administrator is told that they cannot access the organization due to access restrictions.
 * **Alternative Flow (3)**: Empty organisation is selected
-  - The IT Administrator is told that there is no contribution data available to export.
+  - The IT Administrator is told that there is no contribution data available.
 * **Alternative Flow (4)**: GitHub Repository is selected for export
   - System generates a JSON file of repository-level contributor rankings and makes it available for download. 
 * **Alternative Flow (5)**: Invalid GitHub URL is entered

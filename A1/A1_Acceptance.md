@@ -4,14 +4,14 @@
   - Given that a repository has multiple contributors with the exact same number of commits, when I request contributor rankings, the system must display all equally active contributors.
 
   - Given that there exists a repository with no contributions, when I request contributor rankings, the system must notify me with an appropriate message (e.g. "No contributions found") and allow me to enter a different repository name.
-  
+   
   - Given that the GitHub API rate limit has exceeded, when I request contributor rankings, the system must notify me with an appropriate message (e.g. "GitHub API rate limit exceeded. Please try again later") and allow me to access the repository data when the rate limit resets.
   
   - Given that there exists a private organisation that I am not authorised to access, when I request contributor rankings, the system must prevent access and notify me with an appropriate message (e.g. "Access denied: unauthorised organisation") before allowing me to enter a different repository name.
   
   - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials")
   
-  - Give that I have entered an invalid GitHub repository name (i.e. URL), when I request contributor rankings, the system must notify me with an appropriate message (e.g. "Invalid URL: Repository doesn't exist") and allow me to enter a different repository name. 
+  - Give that I have entered an invalid GitHub repository name (i.e. URL), when I request contributor rankings, the system must notify me with an appropriate message (e.g. "Invalid URL provided") and allow me to enter a different repository name. 
 
   - Given that I have entered a valid GitHub repository name (i.e. URL), when I request contributor rankings, the system must display results within 5 seconds under normal conditions.
 
@@ -30,7 +30,7 @@
   
   - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials")
 
-  - Give that I have entered an invalid GitHub repository name (i.e. URL), when I request contributor rankings, the system must notify me with an appropriate message (e.g. "Invalid URL: Repository doesn't exist") and allow me to enter a different repository name. 
+  - Give that I have entered an invalid GitHub repository name (i.e. URL), when I request contributor rankings, the system must notify me with an appropriate message (e.g. "Invalid URL provided") and allow me to enter a different repository name. 
 
   - Given that I have entered a valid GitHub repository name (i.e. URL) for the project I oversee, when I request contributor rankings, the system must display results within 5 seconds under normal conditions.
   
@@ -56,7 +56,7 @@
   
   - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials")
   
-  - Give that I have entered an invalid GitHub repository name (i.e. URL), when I request my personal contributor ranking, the system must notify me with an appropriate message (e.g. "Invalid URL: Repository doesn't exist") and allow me to enter a different repository name. 
+  - Give that I have entered an invalid GitHub repository name (i.e. URL), when I request my personal contributor ranking, the system must notify me with an appropriate message (e.g. "Invalid URL provided") and allow me to enter a different repository name. 
 
   - Given that I have entered a valid GitHub repository name (i.e. URL) for my product, when I request my personal contributor ranking, the system must display results within 5 seconds under normal conditions.
 
@@ -76,10 +76,8 @@
   
   - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials").
   
-  - Given that there exists an organisation or repository with no contributions, when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "No contributions available for export") and allow me to enter a different GitHub URL.
+  - Given that there exists an organisation or repository with no contributions, when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "No contributions found") and allow me to enter a different GitHub URL.
 
   - Given that I requested to export contributor data for a repository or organisation containing multiple contributors with the exact same number of commits, when the system generates the JSON file, the exported contributor rankings must include all equally active contributors with the same ranking.
   
-  - Given that I have entered an invalid GitHub organisation name (i.e. URL), when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "Invalid URL: Organisation doesn't exist") and allow me to enter a different organisation name.
-
-  - Given that I have entered an invalid GitHub repository name (i.e. URL), when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "Invalid URL: Repository doesn't exist") and allow me to enter a different organisation name.
+  - Given that I have entered an invalid GitHub organisation or repository name (i.e. URL), when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "Invalid URL provided") and allow me to enter a different organisation name.

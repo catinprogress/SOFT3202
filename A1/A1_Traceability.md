@@ -81,7 +81,7 @@
   verification: System Test (T25, T24)
 
 - URS: URS-12 System shall provide error handling mechanisms for invalid repository names
-  SRS: FR-19 If a user specifies an empty repository or organisatin name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found"
+  SRS: FR-19 If a user specifies an empty repository or organisation name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found"
   verification: System Test (T2, T6, T18, T21, T22, T36)
 
 - URS: URS-04 Contributor with no contributions requests specific ranking
