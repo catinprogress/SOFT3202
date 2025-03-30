@@ -12,7 +12,7 @@
   
   TODO
 
-- URS: URS-12 Provide error handling mechanisms for access restrictions.
+- URS: URS-12 Provide error handling mechanisms for access restrictions. (negative)
   SRS: FR-02 If the user enters an incorrect credentials file, the system shall prevent access and display "Authentication failed: Invalid login credentials". 
   verification: System Test (T4)
 
@@ -44,7 +44,7 @@
   SRS: FR-09 If a user specifies a time-based filter for a valid repository or organisation on the command line, the system shall process and display a ranking of the most active contributor(s) within the requested time period.
   verification: System Test (T8, T12, T13, T14, T33)
 
-- URS: URS-07 Allow users to filter rankings by specific time periods
+- URS: URS-07 Allow users to filter rankings by specific time periods (negative)
   SRS: FR-10 If no contributions are found for the specified time period, the system shall display "No contributions found for the specified time period". 
   verification: System Test (T15, T16, T17)
 
@@ -68,23 +68,23 @@
   SRS: FR-15 If a user specifies a valid time-based filter with their export request, the system shall generate a JSON file containing the filtered contribution data and make it available for download.
   verification: System Test (T38, T39, T40)
 
-- URS: URS-12 System shall provide error handling mechanisms for API rate limit. 
+- URS: URS-12 System shall provide error handling mechanisms for API rate limit. (negative) 
   SRS: FR-16 If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
   verification: System Test (T34)
 
-- URS: URS-12 System shall provide error handling mechanisms for access restrictions
+- URS: URS-12 System shall provide error handling mechanisms for access restrictions (negative)
   SRS: FR-17 If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
   verification: System Test (T23)
 
-- URS: URS-12 System shall provide error handling mechanisms for invalid repository names
+- URS: URS-12 System shall provide error handling mechanisms for invalid repository names (negative)
   SRS: FR-18 If a user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided".
   verification: System Test (T25, T24)
 
-- URS: URS-12 System shall provide error handling mechanisms for invalid repository names
-  SRS: FR-19 If a user specifies an empty repository or organisation name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found"
+- URS: URS-12 System shall provide error handling mechanisms for invalid repository names (negative)
+  SRS: FR-19 If a user specifies an empty repository or organisation name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found" 
   verification: System Test (T2, T6, T18, T21, T22, T36)
 
-- URS: URS-04 Contributor with no contributions requests specific ranking
+- URS: URS-04 Contributor with no contributions requests specific ranking (negative)
   SRS: FR-20 If a contributor requests access to their personal ranking for a repository that they have made no contributions to, the system shall display "No user contributions found"
   verification: System Test (T26, T36)
 
@@ -92,6 +92,10 @@
   SRS: FR-21 the system shall only include contributors with at least one commit when processing and displaying contributor rankings within a given organisation or repository. 
   verification: System Test (T28, T29)
   
-- URS: URS-05 Contributor with no contributions view specific ranking for specific time period
+- URS: URS-05 Contributor with no contributions view specific ranking for specific time period (negative)
   SRS: FR-22 If a contributor requests to view their personal ranking in a time period for which they have made no contributions, the system shall display "No user contributions found for the specified time period".
   verification: System Test (T27)
+
+- URS: URS-12 The system shall provide error handling mechanisms for API failures
+  Non-functional requirement: Usability
+  verification: System Test (T41, T42)

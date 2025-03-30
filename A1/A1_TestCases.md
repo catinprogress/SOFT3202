@@ -80,3 +80,7 @@
 - Expectation: Correct contributor rankings for specifeed time period downloaded in JSON formatted file
 ## T40 Scenario: Export specific ranking for specific project phase in valid non-empty reposistory in JSON format
 - Expectation: Correct personal ranking for specified time period downloaded in JSON formatted file
+## T41 Scenario: System Timeout/Delay while processing contributor ranking
+- Expectation: Error message: Request timeout experienced. Please check GitHub API status or try again later.
+## T42 Scenario: Formatting error occurs for JSON export request
+- Expectation: Error message: Export failed: unexpected format received. Please check GitHub API status or try again later.
