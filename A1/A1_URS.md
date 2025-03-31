@@ -369,4 +369,4 @@ when I request contributor rankings, the system must display all equally active 
 ## 12. Changelog
 
 2025-02-24 — Created by (Contract Hub Customer Team)
-2025-02-25 — Signed off by (AMD Team lead
+2025-02-25 — Signed off by (AMD Team lead)
