@@ -49,7 +49,7 @@
   - The tool must support time-based filtering for displaying a personal contribution ranking over a specific project phase.
 * **Main Flow**:
   - The SE logs in to tool using their GitHub Credentials
-  - The SE selects a Github repository by entering a URL and specific time period to filter results by (e.g last week, last month, last year)
+  - The SE selects a Github repository by entering a URL, their name and specific time period to filter results by (e.g last week, last month, last year)
   - The tool fetches and processes the contribution data.
   - The system displays a personal dashboard displaying the SE's contributor ranking for the selected time period, based on their commit count.
 * **Alternative Flow (1)**: API rate limit exceeded
