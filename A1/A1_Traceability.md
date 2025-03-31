@@ -68,7 +68,7 @@
   SRS: FR-15 If a user specifies a valid time-based filter with their export request, the system shall generate a JSON file containing the filtered contribution data and make it available for download.
   verification: System Test (T38, T39, T40)
 
-- URS: URS-12 System shall provide error handling mechanisms for API rate limit. (negative) 
+- URS: URS-12 System shall provide error handling mechanisms for API rate limit. 
   SRS: FR-16 If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
   verification: System Test (T34)
 
@@ -80,7 +80,7 @@
   SRS: FR-18 If a user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided".
   verification: System Test (T25, T24)
 
-- URS: URS-12 System shall provide error handling mechanisms for invalid repository names (negative)
+- URS: URS-12 Empty repository/organisation (negative)
   SRS: FR-19 If a user specifies an empty repository or organisation name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found" 
   verification: System Test (T2, T6, T18, T21, T22, T36)
 

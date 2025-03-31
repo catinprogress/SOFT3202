@@ -3,7 +3,10 @@
 ## 1. Introduction
 
 ### (a) Purpose
-The purpose of this document is to define the user requirements for a tool that identifies the most active contributor in a given GitHub repository (the "what"). This tool will be used by Advanced Medical Devices to recognize and reward software engineers based on their contributions.
+The purpose of this document is to define the user requirements for a tool that identifies
+the most active contributor in a given GitHub repository (the "what"). This tool will be
+used by Advanced Medical Devices to recognize and reward software engineers based on
+their contributions.
 
 ### (b) Scope
 The system will:
@@ -24,88 +27,117 @@ i. GitHub – A cloud-based platform for version control and collaboration.
 ii. Contributor – A user who makes commits, pull requests, or other changes to a repository.
 iii. Commit – A change recorded in a GitHub repository.
 iv. Pull Request (PR) – A proposed change submitted for review before merging.
+v. Repository - The source code for a single product. An example is https://github.com/microsoft/autogen
+vi. Team - The developers in charge of a single product
+vii. Organization - A group of repositories. An example is https://github.com/microsoft
 
 ## 2. System Overview
-The tool will connect to GitHub repositories, fetch contribution data, and determine the most active contributor based on metrics such as the number of commits, lines of code added or removed, and pull requests merged. It will generate reports and provide a ranking of contributors.
+The tool will connect to GitHub repositories, fetch contribution data, and determine the most
+active contributor based on metrics such as the number of commits, lines of code added or removed, and pull requests merged. It will generate reports and provide a ranking of contributors.
 
 ## 3. Personas
 
 ### (a) Name: Sarah Thompson
-**Role**: Engineering Manager
-**Background**: Sarah is responsible for overseeing multiple software development teams across different products. She ensures that engineers are contributing effectively and wants to recognize top-performing developers to boost team motivation and engagement.
-**Goals**: Identify the most active contributor across all company projects.
-View top contributors for individual repositories to track team-level contributions.
-Use this information to reward high-performing engineers and improve team morale.
-**Pain Points**:
-Lack of visibility into developer contributions across multiple projects.
-Manually tracking activity across repositories is time-consuming.
-Recognition of engineers is inconsistent due to difficulty in measuring contributions.
-**System Expectations**:
+**Role:** Engineering Manager
+
+**Background:** Sarah is responsible for overseeing multiple software development teams
+across different products. She ensures that engineers are contributing effectively and wants
+to recognize top-performing developers to boost team motivation and engagement.
+
+**Goals:** 
+- Identify the most active contributor across all company projects.
+- View top contributors for individual repositories to track team-level contributions.
+- Use this information to reward high-performing engineers and improve team morale.
+
+**Pain Points:**
+- Lack of visibility into developer contributions across multiple projects.
+- Manually tracking activity across repositories is time-consuming.
+- Recognition of engineers is inconsistent due to difficulty in measuring contributions.
+
+**System Expectations:**
 - A report summarizing top contributors across all products.
 - The ability to drill down into specific repositories for per-project rankings.
 - Accurate data on commit activity.
 - The ability to export contributor rankings for internal reporting and performance reviews.
 
 ### (b) Name: Jane Walker
-**Role**: Team lead
-**Background**: Jane oversees a team of software engineers working on multiple repositories. She is responsible for ensuring that engineers contribute effectively and for monitoring their engagement in the development process. She collaborates with engineering managers to align team efforts with project goals.
-**Goals**: Track team-level contributions within specific repositories.
-Identify top contributors within her team to provide recognition and feedback.
-Ensure team members are fairly assessed based on their contributions.
-**Pain Points**: Difficulty in manually tracking individual contributions across multiple repositories.
-Lack of clear visibility into team member activity over different project phases.
-Inconsistent and subjective methods of evaluating developer performance.
-**System Expectations**:
-The ability to view contributor rankings within her specific team's repositories.
-Filtering options to evaluate contributions over different project phases.
-Access to detailed breakdowns of commit activity for individual team members.
-Exportable reports for team performance reviews and internal discussions.
+**Role:** Team lead
+
+**Background:** Jane oversees a team of software engineers working on multiple repositories. She is responsible for ensuring that engineers contribute effectively and for monitoring their engagement in the development process. She collaborates with engineering
+managers to align team efforts with project goals.
+
+**Goals:** 
+- Track team-level contributions within specific repositories.
+- Identify top contributors within her team to provide recognition and feedback.
+- Ensure team members are fairly assessed based on their contributions.
+
+**Pain Points:** 
+- Difficulty in manually tracking individual contributions across multiple repositories.
+- Lack of clear visibility into team member activity over different project phases.
+- Inconsistent and subjective methods of evaluating developer performance.
+
+**System Expectations:**
+- The ability to view contributor rankings within her specific team's repositories.
+- Filtering options to evaluate contributions over different project phases.
+- Access to detailed breakdowns of commit activity for individual team members.
+- Exportable reports for team performance reviews and internal discussions.
 
 ### (c) Name: Samuel Davidson
-**Role**: Software Engineer
-**Background**: Samuel is a software engineer who actively contributes to multiple repositories. He primarily works on implementing new features, fixing bugs, and submitting pull requests. He is eager to understand how his contributions compare to those of his peers and seeks recognition for his work.
-**Goals**:
-Monitor his contribution ranking within different repositories.
-Gain insights into his coding activity and areas for improvement.
-Ensure that his contributions are recognized in performance evaluations.
-**Pain Points**:
-Limited visibility into how his contributions are measured and ranked.
-Difficulty in tracking his progress across different phases of a project.
-Lack of a standardized system for assessing individual developer contributions.
-**System Expectations**:
-A personal dashboard displaying his ranking in both lifetime and phase-specific contributions.
-Ability to filter and analyze his contributions over different time periods.
-Clear metrics showing the impact of his commits, pull requests, and code reviews.
-Exportable data for personal records and performance reviews.
+**Role:** Software Engineer
+
+**Background:** Samuel is a software engineer who actively contributes to multiple repositories. He primarily works on implementing new features, fixing bugs, and submitting
+pull requests. He is eager to understand how his contributions compare to those of his
+peers and seeks recognition for his work.
+
+**Goals:**
+- Monitor his contribution ranking within different repositories.
+- Gain insights into his coding activity and areas for improvement.
+- Ensure that his contributions are recognized in performance evaluations.
+
+**Pain Points:**
+- Limited visibility into how his contributions are measured and ranked.
+- Difficulty in tracking his progress across different phases of a project.
+- Lack of a standardized system for assessing individual developer contributions.
+
+**System Expectations:**
+- A personal dashboard displaying his ranking in both lifetime and phase-specific contributions.
+- Ability to filter and analyze his contributions over different time periods.
+- Clear metrics showing the impact of his commits, pull requests, and code reviews.
+- Exportable data for personal records and performance reviews.
 
 ### (d) Name: Sandy Hong
-**Role**: IT Administrator
-**Background**: Sandy is responsible for managing authentication, security, and access control for various tools used by the engineering teams. She ensures that systems comply with security policies and that only authorized users can access sensitive data. She also oversees API integrations and system performance.
-**Goals**:
-Ensure secure authentication and authorization for all users accessing the tool.
-Maintain compliance with company security policies and encryption standards.
-Support seamless integration of the tool with internal analytics and reporting systems.
-**Pain Points**:
-Managing authentication for a large number of users across different access levels.
-Ensuring secure data storage and encrypted communication while maintaining performance.
-Handling API rate limits and potential system failures in a scalable manner.
-**System Expectations**:
-Robust authentication and authorization mechanisms integrated with GitHub API.
-Secure storage of authentication tokens using industry-standard encryption.
-Encrypted network communication for all data transmissions.
-Exportable reports in JSON format for integration with internal security and analytics tools.
+**Role:** IT Administrator
 
-## 4. User Requirements
+**Background:** Sandy is responsible for managing authentication, security, and access control for various tools used by the engineering teams. She ensures that systems comply with
+security policies and that only authorized users can access sensitive data. She also oversees API integrations and system performance.
+
+**Goals:**
+- Ensure secure authentication and authorization for all users accessing the tool.
+- Maintain compliance with company security policies and encryption standards.
+- Support seamless integration of the tool with internal analytics and reporting systems.
+
+**Pain Points:**
+- Managing authentication for a large number of users across different access levels.
+- Ensuring secure data storage and encrypted communication while maintaining performance.
+- Handling API rate limits and potential system failures in a scalable manner.
+
+**System Expectations:**
+- Robust authentication and authorization mechanisms integrated with GitHub API.
+- Secure storage of authentication tokens using industry-standard encryption.
+- Encrypted network communication for all data transmissions.
+- Exportable reports in JSON format for integration with internal security and analytics tools.
+
+## 4. User Requirements (Note that user requirements can capture non-functional requirements as well.)
 
 URS-01 The system shall support authentication and authorization via GitHub API.
 
-URS-02 The system shall allow users to input a GitHub repository name and retrieve contributor rankings.
+URS-02 The system shall allow users to input a GitHub repository name (i.e., URL) and retrieve contributor rankings.
 
-URS-03 The system shall allow users to input a GitHub organization name and retrieve contributor rankings.
+URS-03 The system shall allow users to input a GitHub organization name (i.e., URL) and retrieve contributor rankings.
 
-URS-04 The system shall allow users to input a GitHub organization name and retrieve their specific ranking for life time of the project.
+URS-04 The system shall allow users to input a GitHub repository name (i.e., URL) and retrieve their specific ranking for life time of the project.
 
-URS-05 The system shall allow users to input a GitHub organization name and retrieve their specific ranking for the specific phase of the project.
+URS-05 The system shall allow users to input a GitHub repository name (i.e., URL) and retrieve their specific ranking for the specific phase of the project.
 
 URS-06 The system shall display the most active contributor(s) based on commit count.
 
@@ -123,168 +155,218 @@ URS-12 The system shall provide error handling mechanisms for API failures, incl
 
 URS-13 The system shall support concurrent access by multiple users and handle parallel requests efficiently.
 
-## 5. User Stories
+## 5. User Stories (Not comprehensive. The user stories may not capture all requirements.)
 
-* As a team lead, I want to see the ranking of contributors in my product. I also want to filter contributor rankings by specific time periods in my product so that I can evaluate contributions of engineers over different project phases.
-* As a software engineer, I want to know my ranking in both the life time of the project as well as the latest phase of the project.
-* As an IT administrator, I want the tool to generate exportable reports in JSON format so that I can integrate the data with other internal analytics tools.
-* As an engineering manager, I want to view the most active contributor in all our products, as well as individual active contributors in each project, so that I can recognize and reward top-performing engineers.
+- As a team lead, I want to see the ranking of contributors in my product. I also want to filter contributor rankings by specific time periods in my product so that I can evaluate contributions of engineers over different project phases.
+- As a software engineer, I want to know my ranking in both the life time of the project as well as the latest phase of the project.
+- As an IT administrator, I want the tool to generate exportable reports in JSON format so that I can integrate the data with other internal analytics tools.
+- As an engineering manager, I want to view the most active contributor in all our products, as well as individual active contributors in each project, so that I can recognize and reward top-performing engineers.
 
 ## 6. Use Cases
 
-### (a) Identify the most active contributor overall.
-* **Actors**: Engineering Manager
-* **Preconditions**:
+### (a) Identify the most active contributor.
+- **Actors:** Engineering Manager
+- **Preconditions:**
   - The user has access to the GitHub organization
   - The tool must have API access to retrieve organization data.
-* **Main Flow**:
+- **Main Flow:**
   - The EM logs in to tool using their GitHub Credentials
-  - The EM selects a Github organization by entering a URL
+  - The EM selects a Github repository by entering a URL
   - The tool fetches and processes contribution data
   - The system displays the most active contributor based on predefined metrics.
-* **Alternative Flow (1)**: Private organization
+- **Alternative Flow (1):** Private organization
   - The Manager is told that they cannot access the organization due to access restrictions.
-* **Alternative Flow (2)**: API rate limit exceeded
+- **Alternative Flow (2):** API rate limit exceeded
   - The Manager is told that they cannot access the repository due to rate limit.
-* **Post conditions**:
+- **Post conditions:**
   - The most active contributor is displayed.
 
 ### (b) Filter Contribution Rankings by Time Period
 * **Actors**: Team Lead
 * **Preconditions**:
-  - The user has access to the GitHub repositories that they oversee.
-  - The tool must have API access to retrieve repository data.
-  - The tool must support a filtering option for displaying contribution data by specific time periods
+  - The user has access to the GitHub organization.
+  - The tool must have API access to retrieve organization data.
+  - The user has access to the GitHub repository for the product they oversee.
+  - The tool must support time-based filtering for displaying contribution rankings over a specific project phase.
 * **Main Flow**:
-  - The TL logs in to tool using their GitHub Credentials     
-  - The TL selects a Github repository by entering a URL     
-  - The tool fetches and processes contribution data.
-  - The system displays contribution rankings over the lifetime of the project.
-  - The TL selects a predefined time filter (e.g. last week, last month, last year).
-  - The tool filters and sorts contribution data according to the specified time period.
-  - The system displays the contribution rankings within the selected time period.
+  - The TL logs in to tool using their GitHub Credentials. 
+  - The TL selects a Github repository by entering a URL and specific time period to filter results by (e.g. last week, last month, last year).  
+  - The tool fetches and processes contribution data that exists for the specified time period.
+  - The system displays filtered contribution rankings for the most active contributors, based only on the commits made within the selected time period.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The Team Lead is told that they cannot access the repository due to rate limit.
-* **Alternative Flow (2)**: Unauthorised repository
-  - The Team Lead is told that they cannot access the repository due to access restrictions
-* **Alternative Flow (3)**: No contribution data for specified time period
-  - The Team Lead is told that they cannot access the contribution rankings due to no contributions being made during this time period.
+* **Alternative Flow (2)**: Private organization
+  - The Team Lead is told that they cannot access the organization due to access restrictions
+* **Alternative Flow (3)**: Empty repository is selected
+  - The Team Lead is told that there is no contribution data available.
+* **Alternative Flow (4)**: No contribution data for specified time period
+  - The Team Lead is told that there is no contribution data available for the specified time period.
+* **Alternative Flow (5)**: Invalid GitHub URL is entered
+  - The Team Lead is told that the GitHub URL they have provided doesn't exist.
 * **Post conditions**:
-  - The individual contribution rankings within the user's specified time period are displayed.
- 
+  - The filtered contributor rankings for the specified time period are displayed.
+
 ### (c) Show My Contribution Ranking over Different Time Periods
 * **Actors**: Software Engineer
 * **Preconditions**:
-  - The user has access to the GitHub repositories that they contribute to.
-  - The tool must have API access to retrieve the appropriate repository data.
-  - The tool must support a filtering option for displaying indivdiual contribution data over specific time periods
+  - The user has access to the GitHub organization.
+  - The user has access to the GitHub repository that they contribute to.
+  - The tool must have API access to retrieve organization data.
+  - The tool must support time-based filtering for displaying a personal contribution ranking over a specific project phase.
 * **Main Flow**:
   - The SE logs in to tool using their GitHub Credentials
-  - The SE selects a Github organization by entering a URL
-  - The tool fetches and processes the user's contribution data based on pre-defined metrics.
-  - The system displays a personal dashboard displaying the user's ranking in both the overall and latest phase contributions for the()
-  - The SE selects a pre-defined time filter (e.g. last week, last month, last year).
-  - The tool filters and sorts the user's contribution data according to the specified time period.
-  - The system displays the SE's contribution ranking within the selected time period, along with the metric's used to measure their contributions.
+  - The SE selects a Github repository by entering a URL and specific time period to filter results by (e.g last week, last month, last year)
+  - The tool fetches and processes the contribution data.
+  - The system displays a personal dashboard displaying the SE's contributor ranking for the selected time period, based on their commit count.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The Software Engineer is told that they cannot access the repository due to rate limit.
-* **Alternative Flow (2)**: Unauthorised organization
+* **Alternative Flow (2)**: Private organization
   - The Software Engineer is told that they cannot access the organization due to access restrictions.
-* **Alternative Flow (3)**: No contribution data for specified time period
-  - The Software Engineer is told that they cannot access the contribution rankings due to no contributions being made during this time period.
+* **Alternative Flow (3)**: Empty repository is selected
+  - The Software Engineer is told that there is no contribution data available.
+* **Alternative Flow (4)**: No contribution data for specified time period
+  - The Software Engineer is told that there is no contribution data available for the specified time period.
+* **Alternative Flow (5)**: No user contributions found for selected repository
+  - The Software Engineer is told that there is no user contribution data available.
+* **Alternative Flow (6)**: No user contributions found for selected time period
+  - The Software Engineer is told that there is no user contribution data available for the specified time period.
+* **Alternative Flow (7)**: Invalid GitHub URL is entered
+  - The Software Engineer is told that the GitHub URL they have provided doesn't exist.
 * **Post conditions**:
-  - The individual contribution ranking for the user is displayed within their selected time period.
+  - The Software Engineer's specific contributor ranking for the specified time period is displayed.
 
 ### (d) Export Contributor Data in JSON format
 * **Actors**: IT Administrator
 * **Preconditions**:
   - The user has access to the GitHub organization.
   - The tool must have API access to retrieve organization data.
-  - The tool must support an export option in JSON format.
+  - The tool must support an export option to generate downloadable reports in JSON format.
 * **Main Flow**:
   - The IA logs in to tool using their GitHub Credentials
-  - The IA selects a Github organization by entering a URL
-  - The tool fetches and processes contribution data
-  - The system displays a report of contributor rankings based on predefined metrics.
-  - The IA selects the "Export Report as JSON" option
-  - The tool structures the contribution data into JSON format
-  - The system allows IA to download the JSON-formatted report
+  - The IA selects a Github organization by entering a URL along with an export request.
+  - The tool fetches and processes contributor data for repositories within the organization.
+  - The tool generates a JSON file of the contributor rankings calculated based on predefined metrics.
+  - The system downloads the JSON file into the IA's device.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The IT Administrator is told that they cannot access the repository due to rate limit.
+* **Alternative Flow (2)**: Private organization
+  - The IT Administrator is told that they cannot access the organization due to access restrictions.
+* **Alternative Flow (3)**: Empty organisation is selected
+  - The IT Administrator is told that there is no contribution data available.
+* **Alternative Flow (4)**: GitHub Repository is selected for export
+  - System generates a JSON file of repository-level contributor rankings and makes it available for download. 
+* **Alternative Flow (5)**: Invalid GitHub URL is entered
+  - The IT Administrator is told that the GitHub URL they have provided doesn't exist.
 * **Post conditions**:
-  - The user has exported the contributor data as a JSON-formatted report.
+  - A JSON file containing the requested contributor ranking data is downloaded into the IT Administrator's device.
 
 ## 7. Use case diagram
-(Skipped)
+
+(skipped)
+
 ## 8. Non-Functional Requirements
 
 ### (a) Scalability Requirements:
 The system should support simultaneous access by thousands of engineers.
 
 ### (b) Performance Requirements:
-The system shall process API data and return results within five seconds under normal operating conditions.
+The system shall process API data and return results within five seconds under normal
+operating conditions.
 The system shall efficiently manage API requests to prevent excessive delays or timeouts.
 
 ### (c) Usability Requirements:
-The system shall provide a clear and intuitive interface for users to input repository details and retrieve rankings.
+The system shall provide a clear and intuitive interface for users to input repository details
+and retrieve rankings.
 The system shall allow users to filter rankings by specific time periods to analyze contributions over different project phases.
-The system shall present error messages in a user-friendly manner, ensuring that users understand any issues and possible resolutions.
-The system shall allow exporting contributor rankings in a structured format for further analysis and reporting.
+The system shall present error messages in a user-friendly manner, ensuring that users
+understand any issues and possible resolutions.
+The system shall allow exporting contributor rankings in a structured format for further
+analysis and reporting.
 
 ### (d) Security Requirements:
-The system shall enforce authentication and authorization mechanisms to restrict access to authorized users only.
-The system shall securely store authentication credentials and access tokens using industry-standard security practices.
+The system shall enforce authentication and authorization mechanisms to restrict access
+to authorized users only.
+The system shall securely store authentication credentials and access tokens using industrystandard security practices.
 The system shall ensure all data transmissions occur over an encrypted channel.
 The system shall log authentication attempts and access activities for auditing and compliance purposes.
 The system shall implement proper error handling to prevent unauthorized access to repository data.
 
 ## 9. Risks & Mitigation Strategies
 
-* **Technical Risk**: The tool may hit Github rate limits
-  **Mitigation**: Implement caching and request optimization through batch processing.
-* **Security Risk**: Risk: Unauthorized access to contributor data.
-  **Mitigation**: Implement strict authentication and authorization mechanisms to ensure that only authorized users can access the system. Enforce role-based access controls (RBAC) to limit data exposure.
-  **Risk**: Exposure of sensitive authentication credentials.
-  **Mitigation**: Store authentication tokens securely using industry-standard encryption techniques. Ensure that credentials are never stored in plain text and implement secure token management policies.
-  **Risk**: Data interception during transmission.
-  **Mitigation**: Enforce encrypted communication (e.g., TLS/SSL) for all data transmitted over the network to prevent man-in-the-middle attacks.
+- **Technical Risk:** The tool may hit Github rate limits
+  **Mitigation:** Implement caching and request optimization through batch processing.
+- **Security Risk:** Risk: Unauthorized access to contributor data.
+  **Mitigation:** Implement strict authentication and authorization mechanisms to ensure that
+  only authorized users can access the system. Enforce role-based access controls (RBAC)
+  to limit data exposure.
+  **Risk:** Exposure of sensitive authentication credentials.
+  **Mitigation:** Store authentication tokens securely using industry-standard encryption techniques. Ensure that credentials are never stored in plain text and implement secure token
+  management policies.
+  **Risk:** Data interception during transmission.
+  **Mitigation:** Enforce encrypted communication (e.g., TLS/SSL) for all data transmitted
+  over the network to prevent man-in-the-middle attacks.
 
 ## 10. Constraints:
-**Technology**:
+
+**Technology:**
 - The company uses GitHub for its project.
 - The company standardizes on Python, and expects Python to be the language of choice.
-**Regulatory and Compliance**:
+
+**Regulatory and Compliance:**
 - The company expects you to follow industry practice in any data handling
 
 ## 11. Acceptance Criteria
-* Identify the most active contributor overall.
-  - The tool accepts a GitHub repository URL and correctly identifies the most active contributor.
-  - The tool accepts a GitHub repository with multiple equally active contributors and displays all of them
 
-* Filter Contribution Rankings by Time Periods
-  - The tool allows users to filter contribution rankings according to specific time periods (e.g. last week, last month, last year)
-  - The tool correctly identifies and displays valid time periods (i.e. within the project lifetime) that users can select to filter contribution rankings by.
-  - When a user applies a time period filter, the system correctly displays only the contribution rankings within the specified time period.
-//  - The system displays the filtered results within 5 seconds of the query being made and notifies users of any delay if time exceeds 5 seconds.
-  - The system must display an appropriate message (e.g. "No contribution data for this period") if users select a time period with no contributions.
-// - If a repository API rate limit is exceeded, the system must notify users that they cannot access this repository due to rate limit.
-  
-* Show My Contribution Ranking over Different Time Periods
-  - The tool correctly identifies the repositories that the currently logged in software engineer is working on ///edit
-  - The tool must calculate and display the user's contribution ranking according to pre-defined metrics (e.g. commits, lines of code added/removed, pull requests merged).
-  - Upon successful login, the system must display a person dashboard of the user's overall and phase-specific contribution rankings.
-  - The tool allows users to filter their personal contribution ranking over different time periods (e.g. last week, last month, last year)
-  - The tool correctly identifies and displays valid time periods (i.e. within the project lifetime) that users can select to view their ranking in.
-  - Upon selecting a time filter, the system correctly displays the contribution ranking within the specified time period.
-  
-* Export Contributor Data in JSON Format
-  - The tool must clearly provide an option to export contributor data as a JSON-formatted report on the user interface that the user can select.
-  - Upon selecting the Export Report as JSON option, the tool must generate a downloadable report in JSON format containing the contribution rankings.
-  - The tool must accurately convert the contribution rankings that the currently logged in user has access to into JSON-format, and the generated report must include  all relevant contributor data in a clearly identifiable and logical manner.
-  - The tool must generate a complete JSON-formatted report of the organization's contributor rankings that contains enough data for it to be used for integration with other internal analytics tools.
-  - Given that the tool successfully generates the JSON formatted report, the file must be easily accessible on the user interface and the user must be notified that it is ready for download.
-  - If no contributor data is available to export, the system must notify the user with an appropriate message (e.g. "No contributor data ready for export")
-  
+### (a) Identify the most active contributor.
+- Given that I have entered a valid GitHub repository name (i.e., URL), when I request
+contributor rankings, the system must display the name of the most active contributor
+based on commit count.
+- Given that a repository has multiple contributors with the exact same number of commits,
+when I request contributor rankings, the system must display all equally active contributors.
+- Given that there exists a repository with no contributions, when I request contributor rankings, the system must notify me with an appropriate message (e.g. "No contributions found") and allow me to enter a different repository name. 
+- Given that the GitHub API rate limit has exceeded, when I request contributor rankings, the system must notify me with an appropriate message (e.g. "GitHub API rate limit exceeded. Please try again later") and allow me to access the repository data when the rate limit resets.
+- Given that there exists a private organisation that I am not authorised to access, when I request contributor rankings, the system must prevent access and notify me with an appropriate message (e.g. "Access denied: unauthorised organisation") before allowing me to enter a different repository name.
+- Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials")
+- Give that I have entered an invalid GitHub repository name (i.e. URL), when I request contributor rankings, the system must notify me with an appropriate message (e.g. "Invalid URL provided") and allow me to enter a different repository name. 
+- Given that I have entered a valid GitHub repository name (i.e. URL), when I request contributor rankings, the system must display results within 5 seconds under normal conditions.
+
+### (b) Filter Contribution Rankings by Time Periods
+- Given that I have entered a valid GitHub Repository name (i.e. URL) for my product and specific time period to filter results by, when I request contributor rankings, the system must display contributor rankings based only on contributions made to the repository during the selected time period.
+- Given that there exists a time period where no contributions were made to the repository I oversee, when I request contribution rankings for that time period, the system must notify me with an appropriate message (e.g. "No contributions found for the specified time period") and allow me to enter a different time-based filter.
+- Given that there exists a time period where multiple contributors made the exact same number of commits to the repository I oversee, when I request contributor rankings, the system must display all equally active contributors with the same ranking.
+- Given that there exists a repository with no contributions, when I request contributor rankings, the system must notify me with an appropriate message (e.g. "No contributions found") and allow me to enter a different repository name.
+- Given that the GitHub API rate limit has exceeded, when I request contributor rankings, the system must notify me with an appropriate message (e.g. "GitHub API rate limit exceeded. Please try again later") and allow me to access the repository data when the rate limit resets.
+- Given that there exists a private organisation that I am not authorised to access, when I request contributor rankings, the system must prevent access and notify me with an appropriate message (e.g. "Access denied: unauthorised organisation") before allowing me to enter a different repository name.
+- Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials")
+- Give that I have entered an invalid GitHub repository name (i.e. URL), when I request contributor rankings, the system must notify me with an appropriate message (e.g. "Invalid URL provided") and allow me to enter a different repository name. 
+- Given that I have entered a valid GitHub repository name (i.e. URL) for the project I oversee, when I request contributor rankings, the system must display results within 5 seconds under normal conditions. 
+
+### (c) Show My Contribution Ranking over Different Time Periods
+- Given that I have entered a valid GitHub repository name (i.e. URL) for my product and specific time period to filter results by, when I request my personal contributor ranking, the system must display my personal ranking based only on contributions made to the repository during the selected time period.
+- Given that there exists a specific project phase where I have made the same number of commits to the repository as one or more other contributor/s, when I request my personal contribution ranking for that time period, the system must display me with the same ranking with all the other equally active contributors. 
+- Given that no contributions have been made to the repository I am a contributor of, when I request my personal ranking, the system must notify me with an appropriate message (e.g. "No contributions found").
+- Given that there exists a specific project phase where no commits were made to the repository, when I request my personal ranking for that time peiord, the system must notify me with an appropriate message (e.g. "No contributions found for the specified time period") and allow me to enter a different time-based filter.
+- Given that I have entered a URL for a repository that I have made no contributions to, when I request my personal contributor ranking, the system must notify me with an appropriate message (e.g. "No user contributions found") and allow me to enter a different repository name.
+- Given that there exists a specific project phase where I have made no commits to the repository, when I request my personal contributor ranking for that specific time period, the system must notify me with appropriate message (e.g. "No user contributions found for the specified time period") and allow me to enter a different time-based filter.
+- Given that the GitHub API rate limit has exceeded, when I request my personal contributor ranking, the system must notify me with an appropriate message (e.g. "GitHub API rate limit exceeded. Please try again later") and allow me to access my ranking when the rate limit resets.
+- Given that there exists a private organisation that I am not authorised to access, when I request my personal contributor ranking, the system must prevent access and notify me with an appropriate message (e.g. "Access denied: unauthorised organisation") before allowing me to enter a different repository name.
+- Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials")
+- Give that I have entered an invalid GitHub repository name (i.e. URL), when I request my personal contributor ranking, the system must notify me with an appropriate message (e.g. "Invalid URL provided") and allow me to enter a different repository name. 
+- Given that I have entered a valid GitHub repository name (i.e. URL) for my product, when I request my personal contributor ranking, the system must display results within 5 seconds under normal conditions.
+
+### (d) Export Contributor Data in JSON format
+- Given that I have entered a valid, non-empty Github organization name (i.e. URL), when I request to export the contributor data, the system must generate and download a JSON file of the organization-level contributor rankings into my device within 5 seconds.
+- Given that I have entered a valid, non-empty GitHub repository name (i.e. URL), when I request to export the contributor data, the system must generate and download a JSON file of the repository-level contributor rankings into my device within 5 seconds.
+- Given that the tool successfully generates and downloads a JSON file into my device, when I view this report, the file must contain a complete and accurate calculation of all the requested contributor rankings based on commit count into a JSON-format.
+- Given that my downloaded JSON file contains accurately converted contributor rankings, when I view this report, the file must also contain enough relevant contributor data (e.g. name, commit activity, time period) in a clearly identifiable and logical manner so that I can integrate it with other internal analytics tools.
+- Given that the GitHub API rate limit has exceeded, when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "GitHub API rate limit exceeded. Please try again later") and allow me to access the organisation data when the rate limit resets.
+- Given that there exists a private organisation that I am not authorised to access, when I request to export contributor data, the system must prevent access and notify me with an appropriate message (e.g. "Access denied: unauthorised user") before allowing me to enter a different organisation name.
+- Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials").
+- Given that there exists an organisation or repository with no contributions, when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "No contributions found") and allow me to enter a different GitHub URL.
+- Given that I requested to export contributor data for a repository or organisation containing multiple contributors with the exact same number of commits, when the system generates the JSON file, the exported contributor rankings must include all equally active contributors with the same ranking.
+- Given that I have entered an invalid GitHub organisation or repository name (i.e. URL), when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "Invalid URL provided") and allow me to enter a different organisation name.
+
 ## 12. Changelog
+
 2025-02-24 — Created by (Contract Hub Customer Team)
-2025-02-25 — Signed off by (AMD Team lead)
+2025-02-25 — Signed off by (AMD Team lead
