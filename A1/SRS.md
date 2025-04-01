@@ -367,7 +367,7 @@ data relevant to their role.
   SRS: FR-05 The system shall allow contributors to view their specific ranking for the project lifetime by specifying their name with a GitHub repository name on the command line. 
   verification: System Test (T7, T11, T32)
 - URS: URS-05 Allow users to input a GitHub repository name (i.e., URL) and retrieve their specific ranking for the specific phase of the project.
-  SRS: FR-06 SThe system shall allow contributors to view their specific ranking for a given project phase by specifying a time-based filter with their name and GitHub repository name on the command line.
+  SRS: FR-06 The system shall allow contributors to view their specific ranking for a given project phase by specifying a time-based filter with their name and GitHub repository name on the command line.
   verification: System Test (T8, T33, T12)
 - URS: URS-06 Display the most active contributor(s) based on commit count.
   SRS: FR-07 The system shall calculate and display a ranking of the most active contributor(s) within the requested organisation or repository based on the commit count of contributor's who have made at least one commit.
