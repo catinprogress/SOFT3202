@@ -38,6 +38,6 @@ FR-18 (Medium) If a user specifies a non-existing organisation or repository nam
 
 FR-19 (Medium) If a user specifies an existing organization or repository name for which no contributor data/initial commit is found, the system shall display "No contributions found". (map: URS-12; negative)
 
-FR-20 (Medium) If no personal contributions are found for the specified contributor name in a non-empty repository, the system shall display "No user contributions found".(map: URS-04; negative) 
+FR-20 (Medium) If no personal contributions are found to match to the specified  contributor name for a non-empty repository, the system shall display "No user contributions found". (map: URS-04; negative) 
 
-FR-21 (Medium) If no personal contributions are found to match the specified contributor name and time period in a non-empty repository, the system shall display "No user contributions found for the specified time period". (map: URS-05; negative)
+FR-21 (Medium) If no personal contributions are found to match to the specified contributor name and time period for a non-empty repository, the system shall display "No user contributions found for the specified time period". (map: URS-05; negative)

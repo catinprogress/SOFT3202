@@ -88,7 +88,7 @@ FR-15 (Medium) If a user specifies a valid time-based filter with their export r
 
 FR-16 (Medium): If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets. (map: URS-12)
 
-FR-17 (Medium) If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation". (map: URS-12; negative)
+FR-17 (Medium) If a user specifies an unauthorised or missing authentication token for a private GitHub organization on the command line, the system shall prevent access and display "Access denied: unauthorised organisation". (map: URS-12; negative)
 
 FR-18 (Medium) If a user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided". (map: URS-12; negative)
 
@@ -297,6 +297,9 @@ Expectation: Error message: No contributions found for specified time period.
 T46 Scenario: Export specific ranking for specific time period with no contributions in valid, non-empty repository
 Expectation: Error message: No contributions found for specified time period.
 
+T47 Scenario: Missing authentication token for accessing private organisation
+Expectation: Error message: Access denied: unauthorised organisation.
+
 
 ## 10. Non-Functional Requirements
 
@@ -397,8 +400,8 @@ data relevant to their role.
   SRS: FR-16 If a user requests contributor data when the GitHub API rate limit has been exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
   verification: System Test (T34)
 - URS: URS-12 System shall provide error handling mechanisms for access restrictions (negative)
-  SRS: FR-17 If a user specifies an invalid authentication token for an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
-  verification: System Test (T23)
+  SRS: FR-17 If a user specifies an unauthorised or missing authentication token for a private GitHub organization on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
+  verification: System Test (T23, T47)
 - URS: URS-12 System shall provide error handling mechanisms for invalid repository names (negative)
   SRS: FR-18 If a user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided".
   verification: System Test (T25, T24)
@@ -406,10 +409,10 @@ data relevant to their role.
   SRS: FR-19  If a user specifies an existing organization or repository name for which no contributor data/initial commit is found, the system shall display "No contributions found". 
   verification: System Test (T2, T6, T18, T21, T22, T36)
 - URS: URS-04 Contributor with no contributions requests specific ranking (negative)
-  SRS: FR-20 If no personal contributions are found to match to the specified  contributor name in a non-empty repository, the system shall display "No user contributions found".
+  SRS: FR-20 If no personal contributions are found to match to the specified  contributor name for a non-empty repository, the system shall display "No user contributions found".
   verification: System Test (T26, T29)
 - URS: URS-05 Contributor with no contributions view specific ranking for specific time period (negative)
-  SRS: FR-21 If no personal contributions are found to match to the specified contributor name and time period in a non-empty repository, the system shall display "No user contributions found for the specified time period".
+  SRS: FR-21 If no personal contributions are found to match to the specified contributor name and time period for a non-empty repository, the system shall display "No user contributions found for the specified time period".
   verification: System Test (T27, T28)
 - URS: URS-12 The system shall provide error handling mechanisms for API failures
   Non-functional requirement: Usability
