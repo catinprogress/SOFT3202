@@ -277,7 +277,7 @@ T38 Scenario: Export contributor rankings for specific time period in valid, non
 Expectation: Correct contributor rankings for specified time period downloaded in JSON formatted file
 
 T39 Scenario: Export contributor rankings for specific time period in valid, non-empty reposistory in JSON format
-Expectation: Correct contributor rankings for specifeed time period downloaded in JSON formatted file
+Expectation: Correct contributor rankings for specified time period downloaded in JSON formatted file
 
 T40 Scenario: Export specific ranking for specific project phase in valid, non-empty reposistory in JSON format
 Expectation: Correct personal ranking for specified time period downloaded in JSON formatted file
