@@ -184,9 +184,8 @@ URS-13 The system shall support concurrent access by multiple users and handle p
 ### (b) Filter Contribution Rankings by Time Period
 * **Actors**: Team Lead
 * **Preconditions**:
-  - The user has access to the GitHub organization.
+  - The user has access to the GitHub repository.
   - The tool must have API access to retrieve organization data.
-  - The user has access to the GitHub repository for the product they oversee.
   - The tool must support time-based filtering for displaying contribution rankings over a specific project phase.
 * **Main Flow**:
   - The TL logs in to tool using their GitHub Credentials. 
@@ -205,14 +204,15 @@ URS-13 The system shall support concurrent access by multiple users and handle p
 ### (c) Show My Contribution Ranking over Different Time Periods
 * **Actors**: Software Engineer
 * **Preconditions**:
-  - The user has access to the GitHub organization.
-  - The user has access to the GitHub repository that they contribute to.
+  - The user has access to the GitHub repository.
+  - The user has made contributions (i.e. commits) to the GitHub repository.
   - The tool must have API access to retrieve organization data.
-  - The tool must support time-based filtering for displaying a personal contribution ranking over a specific project phase.
+  - The tool must support the option to display a specific contributor's ranking within the GitHub repository.
+  - The tool must support time-based filtering for displaying a specific contribution ranking over a specific project phase.
 * **Main Flow**:
   - The SE logs in to tool using their GitHub Credentials
   - The SE selects a Github repository by entering a URL, their name and specific time period to filter results by (e.g last week, last month, last year)
-  - The tool fetches and processes contribution data.
+  - The tool fetches and processes contribution data that exists for the specified time period.
   - The system displays a personal dashboard displaying the SE's contributor ranking for the selected time period, based on their commit count.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The Software Engineer is told that they cannot access the repository due to rate limit.
@@ -233,7 +233,7 @@ URS-13 The system shall support concurrent access by multiple users and handle p
   - The tool must support an export option to generate downloadable reports in JSON format.
 * **Main Flow**:
   - The IA logs in to tool using their GitHub Credentials
-  - The IA selects a Github organization by entering a URL along with an export request.
+  - The IA selects a Github organization by entering a URL and an export request.
   - The tool fetches and processes contributor data.
   - The tool formats processed data into JSON format.
   - The tool generates a JSON file of the contributor rankings calculated based on predefined metrics.
@@ -307,7 +307,7 @@ The system shall implement proper error handling to prevent unauthorized access 
 ### (a) Identify the most active contributor.
 - Given that I have entered a valid GitHub repository name (i.e., URL), when I request contributor rankings, the system must display the name of the most active contributor based on commit count.
 - Given that a repository has multiple contributors with the exact same number of commits, when I request contributor rankings, the system must display all equally active contributors.
-- Given that there exists a repository with no contributions, when I request contributor rankings, the system must notify me with an appropriate message  and allow me to enter a different repository name. 
+- Given that there exists a repository with no contributions, when I request contributor rankings, the system must notify me with an appropriate message and allow me to enter a different repository name. 
 - Given that the GitHub API rate limit has been exceeded, when I request contributor rankings, the system must notify me with an appropriate message and allow me to access the repository data when the rate limit resets.
 - Given that there exists a private organisation that I am not authorised to access, when I request contributor rankings, the system must prevent access and notify me with an appropriate message before allowing me to enter a different URL/authentication token.
 - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message.
@@ -315,12 +315,12 @@ The system shall implement proper error handling to prevent unauthorized access 
 - Given that I have entered a valid GitHub repository name (i.e. URL), when I request contributor rankings, the system must display results within 5 seconds under normal conditions.
 
 ### (b) Filter Contribution Rankings by Time Periods
-- Given that I have entered a valid GitHub Repository name (i.e. URL) and specific time period to filter results by, when I request contributor rankings, the system must display contributor rankings based only on contributions made to the repository during the selected time period.
+- Given that I have entered a valid GitHub repository name (i.e. URL) and specific time period to filter results by, when I request contributor rankings, the system must display contributor rankings based only on contributions made to the repository during the selected time period.
 - Given that there exists a time period where no contributions were made to the repository, when I request contribution rankings for that time period, the system must notify me with an appropriate message and allow me to enter a different time-based filter.
-- Given that there exists a time period where multiple contributors made the exact same number of commits to the repository, when I request contributor rankings, the system must display all equally active contributors with the same ranking.
+- Given that there exists a time period where multiple contributors made the exact same number of commits to the repository, when I request contributor rankings for that time period, the system must display all equally active contributors with the same ranking.
 - Given that there exists a repository with no contributions, when I request contributor rankings, the system must notify me with an appropriate message and allow me to enter a different repository name.
-- Given that the GitHub API rate limit has been exceeded, when I request contributor rankings, the system must notify me with an appropriate message  and allow me to access the repository data when the rate limit resets.
-- Given that there exists a private organisation that I am not authorised to access, when I request contributor rankings, the system must prevent access and notify me with an appropriate message before allowing me to enter a different URL/authentication token.
+- Given that the GitHub API rate limit has been exceeded, when I request contributor rankings, the system must notify me with an appropriate message and allow me to access the repository data when the rate limit resets.
+- Given that there exists a private organisation that I am not authorised to access, when I request contributor rankings, the system must prevent access and notify me with an appropriate message before allowing me to enter a diferent URL/authentication token.
 - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message.
 - Give that I have entered a non-existing GitHub repository name (i.e. URL), when I request contributor rankings, the system must notify me with an appropriate message and allow me to enter a different repository name. 
 - Given that I have entered a valid GitHub repository name (i.e. URL) and time period to filter results by, when I request contributor rankings, the system must display results within 5 seconds under normal conditions. 
@@ -328,7 +328,7 @@ The system shall implement proper error handling to prevent unauthorized access 
 ### (c) Show My Contribution Ranking over Different Time Periods
 - Given that I have entered a valid GitHub repository name (i.e. URL), contributor name and specific time period to filter results by, when I request my personal contributor ranking, the system must display my ranking based only on contributions made to the repository during the selected time period.
 - Given that there exists a specific project phase where I have made the same number of commits to the repository as one or more other contributor/s, when I request my personal contribution ranking for that time period, the system must display me with the same ranking as all other equally active contributors. 
-- Given that there exists a repository with no contributions, when I request my personal ranking, the system must notify me with an appropriate message (e.g. "No contributions found").
+- Given that there exists a repository with no contributions, when I request my personal ranking, the system must notify me with an appropriate message and allow me to enter a different repository name. 
 - Given that there exists a specific project phase where no contributions were made to the repository, when I request my personal ranking for that time period, the system must notify me with an appropriate message and allow me to enter a different time-based filter.
 - Given that the contributor name I have entered doesn't match any existing contributions in the repository, when I request my personal ranking, the system must notify me with an appropriate message and allow me to enter a different name.
 - Given that there exists a specific project phase where I have made no contributions to the repository, when I request my personal contributor ranking for that specific time period, the system must notify me with an appropriate message and allow me to enter a different time-based filter.
@@ -342,11 +342,11 @@ The system shall implement proper error handling to prevent unauthorized access 
 - Given that I have entered a valid, non-empty Github organization name (i.e. URL), when I request to export the contributor data, the system must generate and download a JSON file of the contributor rankings into my device within 5 seconds.
 - Given that the tool successfully generates and downloads a JSON file into my device, when I view this report, the file must contain a complete and accurate calculation of the contributor rankings based on commit count structured in a JSON-format.
 - Given that my downloaded JSON file contains the correctly formatted contributor rankings, when I view this report, the file must also contain enough relevant contributor data (e.g. name, commit activity, time period) in a clearly identifiable and logical manner so that it is integrable with other internal analytics tools.
-- Given that the GitHub API rate limit has been exceeded, when I request to export the contributor data, the system must notify me with an appropriate message (e.g. "GitHub API rate limit exceeded. Please try again later") and allow me to access the organisation data when the rate limit resets.
+- Given that the GitHub API rate limit has been exceeded, when I request to export the contributor data, the system notify me with an appropriate message and allow me to access and export the organisation data when the rate limit resets.
 - Given that there exists a private organisation that I am not authorised to access, when I request to export contributor data, the system must prevent access and notify me with an appropriate message before allowing me to enter a different URL/authentication token.
 - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message.
 - Given that there exists an organisation with no contributions, when I request to export contributor data, the system must not proceed with the download and notify me with an appropriate message.
-- Given that I requested to export contributor data for an organisation containing multiple contributors with the exact same number of commits, when the system generates the JSON file, the exported contributor rankings must include all equally active contributors with the same ranking.
+- Given that I have requested to export contributor data for an organisation containing multiple contributors with the exact same number of commits, when the system generates the JSON file, the exported contributor rankings must include all equally active contributors with the same ranking.
 - Given that I have entered an invalid GitHub organisation or repository name (i.e. URL), when I request to export the contributor data, the system must notify me with an appropriate message and allow me to enter a different organisation name.
 - Given that the system experiences a JSON-formatting error, when I request to export contributor data, the system must not proceed with the download and notify me with an appropriate message.
 
