@@ -88,7 +88,7 @@ FR-15 (Medium) If the user specifies a valid time-based filter with their export
 
 FR-16 (Medium): If the user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets. (map: URS-12)
 
-FR-17 (Medium) If a user specifies an unauthorised or missing authentication token for a private GitHub organization on the command line, the system shall prevent access and display "Access denied: unauthorised organisation". (map: URS-12; negative)
+FR-17 (Medium) If the user specifies an unauthorised or missing authentication token for a private GitHub organization on the command line, the system shall prevent access and display "Access denied: unauthorised organisation". (map: URS-12; negative)
 
 FR-18 (Medium) If the user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided". (map: URS-12; negative)
 
@@ -358,61 +358,61 @@ data relevant to their role.
   SRS: FR-02 If the user enters an incorrect credentials file, the system shall prevent access and display "Authentication failed: Invalid login credentials". 
   verification: System Test (T4)
 - URS: URS-02 Allow users to input a GitHub repository name (i.e., URL) and retrieve contributor rankings.
-  SRS: FR-03 System shall allow users to view contributor rankings for a GitHub repository by specifying a GitHub repository name on the command line.
+  SRS: FR-03 The system shall allow users to view contributor rankings for a GitHub repository by specifying a GitHub repository name for an organization they have authorised access to on the command line.
   verification: System Test (T1, T9, T30)
 - URS: URS-03 Allow users to input a GitHub organization name (i.e., URL) and retrieve contributor rankings.
-  SRS: FR-04 System shall allow users to view contributor rankings for a GitHub organization by specifying a GitHub organisation name on the command line.
+  SRS: FR-04 The system shall allow users to view contributor rankings for a GitHub organization by specifying an organization name that they have authorised access to on the command line.
   verification: System Test (T5, T1O, T31)
 - URS: URS-04 Allow users to input a GitHub repository name (i.e., URL) and retrieve their specific ranking for life time of the project.
-  SRS: FR-05 System shall allow contributors to view their specific ranking for the project lifetime by specifying their name with a GitHub repository name on the command line.
+  SRS: FR-05 The system shall allow contributors to view their specific ranking for the project lifetime by specifying their name with a GitHub repository name on the command line. 
   verification: System Test (T7, T11, T32)
 - URS: URS-05 Allow users to input a GitHub repository name (i.e., URL) and retrieve their specific ranking for the specific phase of the project.
-  SRS: FR-06 System shall allow contributors to view their specific ranking for a given project phase by specifying a time-based filter with their name and GitHub repository name on the command line.
+  SRS: FR-06 SThe system shall allow contributors to view their specific ranking for a given project phase by specifying a time-based filter with their name and GitHub repository name on the command line.
   verification: System Test (T8, T33, T12)
 - URS: URS-06 Display the most active contributor(s) based on commit count.
-  SRS: FR-07 System shall calculate and display a ranking of the most active contributor(s) within the requested organisation or repository based on the commit count of contributor's who have made at least one commit
+  SRS: FR-07 The system shall calculate and display a ranking of the most active contributor(s) within the requested organisation or repository based on the commit count of contributor's who have made at least one commit.
   verification: System Test (T1, T5, T30, T31)
 - URS: URS-06 Display the most active contributor(s) based on commit count.
   SRS: FR-08 If the system calculates a given user is equally active with at least one other contributor, the system shall display all equally active contributors with the same ranking. 
   verification: System Test (T9, T10, T11, T12)
 - URS: URS-07 Allow users to filter rankings by specific time periods
-  SRS: FR-09 If a user specifies a time-based filter for a valid repository or organisation on the command line, the system shall process and display a ranking of the most active contributor(s) within the requested time period.
+  SRS: FR-09 If the user specifies a time-based filter for a valid repository or organisation on the command line, the system shall process and display a ranking of the most active contributor(s) within the requested time period.
   verification: System Test (T13, T14)
 - URS: URS-07 Allow users to filter rankings by specific time periods (negative)
   SRS: FR-10 If no contributions are found for the specified time period, the system shall display "No contributions found for the specified time period". 
   verification: System Test (T15, T16, T17, T43, T44, T45)
 - URS: URS-08 System shall process API data and provide results
-  SRS: FR-11 System shall process authenticated user requests via GitHub API and provide the retrieved results on the command line.
+  SRS: FR-11 The system shall process authenticated user requests for contributor data via GitHub API and provide the retrieved results on the command line.
   verification: System Test (T35, T1, T5, T7, T8)
 - URS: URS-09 System shall securely store authentication tokens if required for private repositories
   SRS: FR-12 If an authentication token is specified by the user via the command line, the system shall store it in the database to access private GitHub organisations. (map: URS-09)
   verification: System Test (T35) 
 - URS: URS-10 Allow users to download contributor rankings in JSON format.
-  SRS: FR-13 When a user requests to export contributor rankings via the command line, the system shall generate a JSON file and make it available for download
+  SRS: FR-13 If the user requests to export contributor rankings for a valid repository or organisation via the command line, the system shall generate a JSON file and make it available for download.
   verification: System Test (T19, T20, T38, T39)
 - URS: URS-10 Allow users to download contributor rankings in JSON format
-  SRS: FR-14 When a contributor requests to export their specific ranking for a repository that they have contributed to, the system shall generate a JSON file containing their individual contributor data and make it available for download.
+  SRS: FR-14 If a contributor requests to export their specific ranking for a repository that they have contributed to, the system shall generate a JSON file containing their individual contributor data and make it available for download.
   verification: System Test (T37, T40)
 - URS: URS-10 Allow users to download contributor rankings in JSON format
-  SRS: FR-15 If a user specifies a valid time-based filter with their export request, the system shall generate a JSON file containing the filtered contribution data and make it available for download.
+  SRS: FR-15 If the user specifies a valid time-based filter with their export request, the system shall generate a JSON file containing the filtered contribution data and make it available for download.
   verification: System Test (T38, T39, T40)
 - URS: URS-12 System shall provide error handling mechanisms for API rate limit. 
-  SRS: FR-16 If a user requests contributor data when the GitHub API rate limit has been exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
+  SRS: FR-16 If the user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
   verification: System Test (T34)
-- URS: URS-12 System shall provide error handling mechanisms for access restrictions (negative)
-  SRS: FR-17 If a user specifies an unauthorised or missing authentication token for a private GitHub organization on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
+- URS: URS-12 Incorrect user authentication (negative)
+  SRS: FR-17 If the user specifies an unauthorised or missing authentication token for a private GitHub organization on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
   verification: System Test (T23, T46)
 - URS: URS-12 System shall provide error handling mechanisms for invalid repository names (negative)
-  SRS: FR-18 If a user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided".
+  SRS: FR-18 If the user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided".
   verification: System Test (T25, T24)
 - URS: URS-12 Empty repository/organisation (negative)
-  SRS: FR-19  If a user specifies an existing organization or repository name for which no contributor data/initial commit is found, the system shall display "No contributions found". 
+  SRS: FR-19 If the user specifies an existing organisation or repository name for which no contributor data/initial commit is found, the system shall display "No contributions found".
   verification: System Test (T2, T6, T18, T21, T22, T36)
 - URS: URS-04 Contributor with no contributions requests specific ranking (negative)
-  SRS: FR-20 If no personal contributions are found to match to the specified  contributor name for a non-empty repository, the system shall display "No user contributions found".
+  SRS: FR-20 If no personal contributions are found for the specified contributor name in a non-empty repository, the system shall display "No user contributions found".
   verification: System Test (T26, T29)
 - URS: URS-05 Contributor with no contributions view specific ranking for specific time period (negative)
-  SRS: FR-21 If no personal contributions are found to match to the specified contributor name and time period for a non-empty repository, the system shall display "No user contributions found for the specified time period".
+  SRS: FR-21 If no personal contributions are found for the specified contributor name and time period in a non-empty repository, the system shall display "No user contributions found for the specified time period". 
   verification: System Test (T27, T28)
 - URS: URS-12 The system shall provide error handling mechanisms for API failures
   Non-functional requirement: Usability
