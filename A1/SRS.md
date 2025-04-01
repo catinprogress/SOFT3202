@@ -64,12 +64,12 @@ FR-03 (Medium) The system shall allow users to view contributor rankings for a G
 
 FR-04 (Medium) The system shall allow users to view contributor rankings for a GitHub organization by specifying an organization name that they have authorised access to on the command line. (map: URS-03)
 
-FR-05 (Medium) The system shall allow contributors to view their specific ranking for the project lifetime by specifying a repository name that they are a contributor of on the command line. (map: URS-04)
+FR-05 (Medium) The system shall allow contributors to view their specific ranking for the project lifetime by specifying their name with a GitHub repository name the command line. (map: URS-04)
 
-FR-06 (Medium) The system shall allow contributors to view their specific ranking for a given project phase by specifying a valid repository name and time-based filter on the command line. (map: URS-05)
+FR-06 (Medium) The system shall allow contributors to view their specific ranking for a given project phase by specifying a time-based filter with their name and GitHub repository name on the command line. (map: URS-05)
 
-FR-07 (Medium) The system shall calculate and display a ranking of the most active contributor(s) within the requested organisation or repository based on each contributor's commit count. (map: URS-06)
-  
+FR-07 (Medium) The system shall calculate and display a ranking of the most active contributor(s) within the requested organisation or repository based on the commit count of contributor's who have made at least one commit. (map: URS-06)
+
 FR-08 (Medium) If the system calculates a given user is equally active with at least one other contributor, the system shall display all equally active contributors with the same ranking. (map: URS-06)
 
 FR-09 (Medium) If a user specifies a time-based filter for a valid repository or organisation on the command line, the system shall process and display a ranking of the most active contributor(s) within the requested time period. (map: URS-07)
@@ -88,17 +88,15 @@ FR-15 (Medium) If a user specifies a valid time-based filter with their export r
 
 FR-16 (Medium): If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets. (map: URS-12)
 
-FR-17 (Medium) If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".(map: URS-12; negative)
+FR-17 (Medium) If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation". (map: URS-12; negative)
 
 FR-18 (Medium) If a user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided". (map: URS-12; negative)
 
-FR-19 (Medium) If the user specifies an empty organization or repository name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found". (map: URS-12; negative)
+FR-19 (Medium) If a user specifies an existing organization or repository name for which no contributor data/initial commit is found, the system shall display "No contributions found". (map: URS-12; negative)
 
-FR-20 (Medium) If a contributor requests to view their specific ranking for a repository that they have made no contributions to, the system shall display "No user contributions found".(map: URS-04; negative)
+FR-20 (Medium) If no personal contributions are found for the specified contributor name in a non-empty repository, the system shall display "No user contributions found".(map: URS-04; negative) 
 
-FR-21 (Medium) The system shall only include contributors with at least one commit when processing and displaying contributor rankings within a given organisation or repository. (map: URS-06)
-
-FR-22 (Medium) If a contributor requests to view their specific ranking in a time period for which they have made no contributions, the system shall display "No user contributions found for the specified time period". (map: URS-05; negative)
+FR-21 (Medium) If no personal contributions are found for the specified contributor name and time period in a non-empty repository, the system shall display "No user contributions found for the specified time period". (map: URS-05; negative)
 
 ## 4. Interfaces
 
@@ -194,10 +192,10 @@ Expectation: Correct equal ranking for equally active contributors displayed.
 T10 Scenario: Valid organisation with multiple equally active contributors
 Expectation: Correct equal ranking for equally active contributors displayed.
 
-T11: Scenario: View specific ranking for valid repository with multiple equally active contributors for project lifetime
+T11: Scenario: View specific ranking for project lifetime in valid repository with multiple equally active contributors
 Expectation: Correct same personal contributor ranking with other equally active contributors displayed.
 
-T12: Scenario: View specific ranking for specific project phase for valid repository with multiple equally active contributors
+T12: Scenario: View specific ranking for specific project phase in valid repository with multiple equally active contributors
 Expectation: Correct same personal contributor ranking with other equally active contributors within specified time period displayed.
 
 T13 Scenario: Filter contributor rankings for valid repository with multiple contributors by specific time period
@@ -206,10 +204,10 @@ Expectation: Correct contributor rankings for specified time period displayed
 T14 Scenario: Filter contributor rankings for valid organisation with multiple contributors by specific time period
 Expectation: Correct contributor rankings for specified time period displayed
 
-T15 Scenario: Filter contributor rankings for valid repository with no contributors by specific time period
+T15 Scenario: Filter contributor rankings for valid, non-empty organisation by specific time period with no contributions
 Expectation: Error message: No contributions found for the specified time period
 
-T16 Scenario: Filter contributor rankings for valid organisation with no contributors by specific time period
+T16 Scenario: Filter contributor rankings for valid, non-empty repository by specific time period with no contributions
 Expectation: Error message: No contributions found for the specified time period
 
 T17 Scenario: View specific ranking for specific project phase with no contributions in valid, non-empty repository.
@@ -239,17 +237,17 @@ Expectation: Error message: Invalid URL provided
 T25 Scenario: Invalid organisation name
 Expectation: Error message: Invalid URL provided
 
-T26 Scenario: View specific ranking for valid non-empty repository with no user contributions
+T26 Scenario: View specific ranking for valid, non-empty repository with no user contributions
 Expectation: Error message: No user contributions found
 
-T27 Scenario: View specific ranking for specific project phase with no user contributions in valid non-empty repository
+T27 Scenario: View specific ranking for specific project phase with no user contributions in valid, non-empty repository
 Expectation: Error message: No user contributions found for the specified time period
 
-T28 Scenario: Valid repository containing contributors with no contributions
-Expectation: Correct ranking of only contributors with at least one contribution displayed.
+T28 Scenario: Export specific ranking for specific project phase with no user contributions in valid, non-empty repository
+Expectation: Error message: No user contributions found for specified time period.
 
-T29 Scenario: Valid organisation containing contributors with no contributions
-Expectation: Correct ranking of only contributors with at least one contribution displayed.
+T29 Scenario: Export specific ranking for valid, nom-empty repository with no user contributions in JSON format
+Expectation: Error message: No user contributions found
 
 T30: Valid repository with 1 contributor
 Expectation: Single contributor is displayed with first ranking.
@@ -257,7 +255,7 @@ Expectation: Single contributor is displayed with first ranking.
 T31: Valid organisation with 1 contributor
 Expectation: Single contributor is displayed with first ranking.
 
-T32: View specific ranking for valid repository with no other contributors.
+T32: View specific ranking for project lifetime in valid repository with no other contributors.
 Expectation: Personal ranking is displayed as 1st.
 
 T33: View specific ranking for specific project phase in valid repository with no other contributors.
@@ -269,19 +267,19 @@ Expectation: Error message: GitHub API rate limit exceeded. Please try again lat
 T35 Scenario: Valid authentication token for private organisation provided 
 Expectation: Retrieved token matches stored token and requested organisation data is displayed.
 
-T36 Scenario: Export specific ranking for valid repository with no user contributions.
-Expectation: Error message: No user contributions found
+T36 Scenario: Export specific ranking for valid repository with no contributors in JSON format
+Expectation: Error message: No contributions found
 
-T37 Scenario: Export specific ranking for valid repository with multiple contributors
-Expectation: Correct specific contributor ranking downloaded in JSON formatted file
+T37 Scenario: Export specific ranking for project lifetime in valid, non-empty repository in JSON format
+Expectation: Correct specific contributor ranking for project lifetime downloaded in JSON formatted file
 
-T38 Scenario: Export contributor rankings for specific time period in valid non-empty organisation in JSON format
+T38 Scenario: Export contributor rankings for specific time period in valid, non-empty organisation in JSON format
 Expectation: Correct contributor rankings for specified time period downloaded in JSON formatted file
 
-T39 Scenario: Export contributor rankings for specific time period in valid non-empty reposistory in JSON format
+T39 Scenario: Export contributor rankings for specific time period in valid, non-empty reposistory in JSON format
 Expectation: Correct contributor rankings for specifeed time period downloaded in JSON formatted file
 
-T40 Scenario: Export specific ranking for specific project phase in valid non-empty reposistory in JSON format
+T40 Scenario: Export specific ranking for specific project phase in valid, non-empty reposistory in JSON format
 Expectation: Correct personal ranking for specified time period downloaded in JSON formatted file
 
 T41 Scenario: System Timeout/Delay while processing contributor ranking
@@ -289,6 +287,16 @@ Expectation: Error message: Request timeout experienced. Please check GitHub API
 
 T42 Scenario: Formatting error occurs for JSON export request
 Expectation: Error message: Export failed: unexpected format received. Please check GitHub API status or try again later.
+
+T43 Scenario: Export contributor rankings for specific time period with no contributions in valid, non-empty organisation
+Expectation: Error message: No contributions found for specified time period.
+
+T44 Scenario: Export contributor rankings for specific time period with no contributions in valid, non-empty repository
+Expectation: Error message: No contributions found for specified time period.
+
+T46 Scenario: Export specific ranking for specific time period with no contributions in valid, non-empty repository
+Expectation: Error message: No contributions found for specified time period.
+
 
 ## 10. Non-Functional Requirements
 
@@ -348,18 +356,18 @@ data relevant to their role.
   verification: System Test (T4)
 - URS: URS-02 Allow users to input a GitHub repository name (i.e., URL) and retrieve contributor rankings.
   SRS: FR-03 System shall allow users to view contributor rankings for a GitHub repository by specifying a GitHub repository name on the command line.
-  verification: System Test (T1, T2,  T9, T28, T24, T30)
+  verification: System Test (T1, T2,  T9, T24, T30)
 - URS: URS-03 Allow users to input a GitHub organization name (i.e., URL) and retrieve contributor rankings.
   SRS: FR-04 System shall allow users to view contributor rankings for a GitHub organization by specifying a GitHub organisation name on the command line.
-  verification: System Test (T5, T6, T1O, T31, T25, T29)
+  verification: System Test (T5, T6, T1O, T31, T25)
 - URS: URS-04 Allow users to input a GitHub repository name (i.e., URL) and retrieve their specific ranking for life time of the project.
-  SRS: FR-05 System shall allow contributors to view their specific ranking for the project lifetime by specifying a repository name on the command line.
+  SRS: FR-05 System shall allow contributors to view their specific ranking for the project lifetime by specifying their name with a GitHub repository name on the command line.
   verification: System Test (T7, T11, T26, T32, T18)
 - URS: URS-05 Allow users to input a GitHub repository name (i.e., URL) and retrieve their specific ranking for the specific phase of the project.
-  SRS: FR-06 System shall allow contributors to view their specific ranking for a given project phase by specifying a valid repository name and time-based filter on the command line.
+  SRS: FR-06 System shall allow contributors to view their specific ranking for a given project phase by specifying a time-based filter with their name and GitHub repository name on the command line.
   verification: System Test (T8, T33, T12)
 - URS: URS-06 Display the most active contributor(s) based on commit count.
-  SRS: FR-07 System shall calculate and display a ranking of the most active contributor(s) within the requested organisation or repository based on each contributor's commit count.
+  SRS: FR-07 System shall calculate and display a ranking of the most active contributor(s) within the requested organisation or repository based on the commit count of contributor's who have made at least one commit
   verification: System Test (T1, T5, T30, T31)
 - URS: URS-06 Display the most active contributor(s) based on commit count.
   SRS: FR-08 If the system calculates a given user is equally active with at least one other contributor, the system shall display all equally active contributors with the same ranking. 
@@ -369,7 +377,7 @@ data relevant to their role.
   verification: System Test (T8, T12, T13, T14, T33)
 - URS: URS-07 Allow users to filter rankings by specific time periods (negative)
   SRS: FR-10 If no contributions are found for the specified time period, the system shall display "No contributions found for the specified time period". 
-  verification: System Test (T15, T16, T17)
+  verification: System Test (T15, T16, T17, T43, T44, T46)
 - URS: URS-08 System shall process API data and provide results
   SRS: FR-11 System shall process authenticated user requests via GitHub API and provide the retrieved results on the command line.
   verification: System Test (T35, T1, T5, T7, T8)
@@ -386,26 +394,23 @@ data relevant to their role.
   SRS: FR-15 If a user specifies a valid time-based filter with their export request, the system shall generate a JSON file containing the filtered contribution data and make it available for download.
   verification: System Test (T38, T39, T40)
 - URS: URS-12 System shall provide error handling mechanisms for API rate limit. 
-  SRS: FR-16 If a user requests contributor data when the GitHub API rate limit has exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
+  SRS: FR-16 If a user requests contributor data when the GitHub API rate limit has been exceeded, the system shall display "GitHub API rate limit exceeded. Please try again later" and resume processing requests when the rate limit resets.
   verification: System Test (T34)
 - URS: URS-12 System shall provide error handling mechanisms for access restrictions (negative)
-  SRS: FR-17 If a user specifies an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
+  SRS: FR-17 If a user specifies an invalid authentication token for an unauthorized organization name on the command line, the system shall prevent access and display "Access denied: unauthorised organisation".
   verification: System Test (T23)
 - URS: URS-12 System shall provide error handling mechanisms for invalid repository names (negative)
   SRS: FR-18 If a user specifies a non-existing organisation or repository name on the command line, the system shall display "Invalid URL provided".
   verification: System Test (T25, T24)
 - URS: URS-12 Empty repository/organisation (negative)
-  SRS: FR-19 If a user specifies an empty repository or organisation name (i.e. no content/initial commit exists) on the command line, the system shall display "No contributions found" 
+  SRS: FR-19  If a user specifies an existing organization or repository name for which no contributor data/initial commit is found, the system shall display "No contributions found". 
   verification: System Test (T2, T6, T18, T21, T22, T36)
 - URS: URS-04 Contributor with no contributions requests specific ranking (negative)
-  SRS: FR-20 If a contributor requests access to their personal ranking for a repository that they have made no contributions to, the system shall display "No user contributions found"
-  verification: System Test (T26, T36)
-- URS: URS-06 Contributor with no contributions in valid repository/organisation
-  SRS: FR-21 the system shall only include contributors with at least one commit when processing and displaying contributor rankings within a given organisation or repository. 
-  verification: System Test (T28, T29)
+  SRS: FR-20 If no personal contributions are found to match to the specified  contributor name in a non-empty repository, the system shall display "No user contributions found".
+  verification: System Test (T26, T29)
 - URS: URS-05 Contributor with no contributions view specific ranking for specific time period (negative)
-  SRS: FR-22 If a contributor requests to view their personal ranking in a time period for which they have made no contributions, the system shall display "No user contributions found for the specified time period".
-  verification: System Test (T27)
+  SRS: FR-21 If no personal contributions are found to match to the specified contributor name and time period in a non-empty repository, the system shall display "No user contributions found for the specified time period".
+  verification: System Test (T27, T28)
 - URS: URS-12 The system shall provide error handling mechanisms for API failures
   Non-functional requirement: Usability
   verification: System Test (T41, T42)

@@ -212,7 +212,7 @@ URS-13 The system shall support concurrent access by multiple users and handle p
 * **Main Flow**:
   - The SE logs in to tool using their GitHub Credentials
   - The SE selects a Github repository by entering a URL, their name and specific time period to filter results by (e.g last week, last month, last year)
-  - The tool fetches and processes the contribution data.
+  - The tool fetches and processes contribution data.
   - The system displays a personal dashboard displaying the SE's contributor ranking for the selected time period, based on their commit count.
 * **Alternative Flow (1)**: API rate limit exceeded
   - The Software Engineer is told that they cannot access the repository due to rate limit.
@@ -326,17 +326,17 @@ The system shall implement proper error handling to prevent unauthorized access 
 - Given that I have entered a valid GitHub repository name (i.e. URL) and time period to filter results by, when I request contributor rankings, the system must display results within 5 seconds under normal conditions. 
 
 ### (c) Show My Contribution Ranking over Different Time Periods
-- Given that I have entered a GitHub repository name (i.e. URL) that I am a contributor of and specific time period to filter results by, when I request my personal contributor ranking, the system must display my ranking based only on contributions made to the repository during the selected time period.
+- Given that I have entered a valid GitHub repository name (i.e. URL), contributor name and specific time period to filter results by, when I request my personal contributor ranking, the system must display my ranking based only on contributions made to the repository during the selected time period.
 - Given that there exists a specific project phase where I have made the same number of commits to the repository as one or more other contributor/s, when I request my personal contribution ranking for that time period, the system must display me with the same ranking as all other equally active contributors. 
 - Given that there exists a repository with no contributions, when I request my personal ranking, the system must notify me with an appropriate message (e.g. "No contributions found").
 - Given that there exists a specific project phase where no contributions were made to the repository, when I request my personal ranking for that time period, the system must notify me with an appropriate message (e.g. "No contributions found for the specified time period") and allow me to enter a different time-based filter.
-- Given that I have entered a repository name that I have made no contributions to, when I request my personal contributor ranking, the system must notify me with an appropriate message (e.g. "No user contributions found") and allow me to enter a different repository name.
+- Given that the contributor name I have entered doesn't match any existing contributor data in the repository, when I request my personal ranking, the system must notify me with an appropriate message (e.g. "No user contributions found") and allow me to enter a different name.
 - Given that there exists a specific project phase where I have made no commits to the repository, when I request my personal contributor ranking for that specific time period, the system must notify me with appropriate message (e.g. "No user contributions found for the specified time period") and allow me to enter a different time-based filter.
 - Given that the GitHub API rate limit has been exceeded, when I request my personal contributor ranking, the system must notify me with an appropriate message (e.g. "GitHub API rate limit exceeded. Please try again later") and allow me to access my ranking when the rate limit resets.
 - Given that there exists a private organisation that I am not authorised to access, when I request my personal contributor ranking, the system must prevent access and notify me with an appropriate message (e.g. "Access denied: unauthorised organisation") before allowing me to enter a different repository name.
 - Given that I have attempted to log into the tool using incorrect GitHub credentials, when the system authenticates my username and password, the system must prevent access and notify me with an appropriate message (e.g. "Authentication failed: Invalid login credentials")
 - Give that I have entered a non-existing GitHub repository name (i.e. URL), when I request my personal contributor ranking, the system must notify me with an appropriate message (e.g. "Invalid URL provided") and allow me to enter a different repository name. 
-- Given that I have entered a valid GitHub repository name (i.e. URL) and time period to filter results by, when I request my personal contributor ranking, the system must display results within 5 seconds under normal conditions.
+- Given that I have entered a valid GitHub repository name (i.e. URL), contributor name and time period to filter results by, when I request my personal contributor ranking, the system must display results within 5 seconds under normal conditions.
 
 ### (d) Export Contributor Data in JSON format
 - Given that I have entered a valid, non-empty Github organization name (i.e. URL), when I request to export the contributor data, the system must generate and download a JSON file of the contributor rankings into my device within 5 seconds.
