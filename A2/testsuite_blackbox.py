@@ -250,24 +250,28 @@ class TestScoreContributors(unittest.TestCase):
     def test_stats_available(self):
         # Question 4: For the function `are_stats_available`, write a decision table. 
         # Question 4a. Write out the table in markdown
-        #  ??? TODO
-        # | Conditions                     | R1 | R2 | R3 | R4 | 
-        # |--------------------------------|----|----|----|----|
-        # | repo is empty                  | F  | F  | F  |  T | #ASSUME THAT FUNCTION WILL ALWAYS RETURN FALSE FOR EMPTY REPO R4
-        # | repo is public                 | T  | F  | F  |  - | 
-        # | user is member                 | -  | F  | T  |  - |
-
-        # | accessible repository          | T  | F  | T  |  - |
-        # | NotAccessibleException         | F  | T  | F  | F  |
-        # | stats available                | T  | F  | F  |  F |
-	
+     
 	    # Question 4b. Then, write the test cases 
         # Note: in the test cases, give names to the repos/users to indicate if they are private, public, empty, etc.
         # If you notice any ambiguity, add a comment documenting your assumptions. 
         # After each test case, add a comment to indicate which column of the decision table
-        # Example: 
-        are_stats_available("public_org/nonempty_repo1", "public_org_developer") # R1
-        # ??? TODO 
+        # 
+        # Assumption 1: The check for whether a user is a member of a given private organziation is only executed AFTER the function has validated the organization access type. 
+        #             ie. The function will check whether a user is a member of the provided private organization name, GIVEN that it has already verified that the specified organization is not public.         
+        # Assumption 2: If a user is verified to not be a member of the specified private organization, the function will raise an exception causing the program to terminate; 
+        #               thus, the check for whether the repository is empty will never be executed in this case.        
+
+        are_stats_available("public_org/nonempty_repo1", "public_org_developer") # True R1
+        are_stats_available("public_org/empty_repo1", "public_org_developer") # False R6
+
+        are_stats_available("public_org/nonempty_repo1", "private_org_developer")   #True R2
+        are_stats_available("public_org/empty_repo1", "private_org_developer") #False R7
+
+        are_stats_available("private_org/nonempty_repo1", "private_org_non_member")   #Exception R4
+        are_stats_available("private_org/empty_repo1", "private_org_non_member") #Exception R5
+
+        are_stats_available("private_org/nonempty_repo1", "private_org_member") #True R3
+        are_stats_available("private_org/empty_repo1", "private_org_member") #False R8
 
 # for this assignment, you do not have to execute the test cases in this file
 # as such, you will not be penalized for test cases that do not compile, as long as the intent of each test case is clear.
