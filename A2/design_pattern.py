@@ -56,11 +56,11 @@ class RankContributors:
             raise ValueError("expected a non-empty dev_metrics")
 
         scored = [
-            (dev_id, self.scoring_method.compute_score(metrics))
-            for dev_id, metrics in dev_metrics.items()
+            (dev_id, self.scoring_method.compute_score(metrics)) #for each dev, compute the score of their metric values by using a specific scoring algorithm/strategy
+            for dev_id, metrics in dev_metrics.items() #items = the scores of each metric for a given developer
         ]
 
-        return sorted(scored, key=lambda x: x[1], reverse=True)
+        return sorted(scored, key=lambda x: x[1], reverse=True) #sort in descending order by score (x[1])
 
         
 dev_metrics = {
