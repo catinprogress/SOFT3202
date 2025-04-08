@@ -2,6 +2,7 @@ import datetime
 import unittest
 from typing import Tuple, List, Dict, Union
 from collections import defaultdict
+import statistics
 
 from enum import Enum
 
@@ -199,11 +200,13 @@ def count_active_contributors(org, minimum_value_for_metrics):
 
         if dev_contributions['commits'] > minimum_value_for_metrics['commits']:
             is_developer_active = True
-        if dev_contributions['pull_requests'] > minimum_value_for_metrics['pull_requests']:
+            print(f"{developer} commits: {dev_contributions['commits']}")
+        elif dev_contributions['pull_requests'] > minimum_value_for_metrics['pull_requests']:
             is_developer_active = True
-        if dev_contributions['issues'] > minimum_value_for_metrics['issues']:
-            is_developer_active = True            
+        elif dev_contributions['issues'] > minimum_value_for_metrics['issues']:
+            is_developer_active = True          
         else:
+            # developer is not active
             is_developer_active = False
 
         if is_developer_active:
@@ -227,7 +230,6 @@ class TestScoreContributors(unittest.TestCase):
             "dev4": {} 
         }
 
-       
         expected = {
             "dev1": 15.0,
             "dev2": 19.0,
@@ -238,35 +240,66 @@ class TestScoreContributors(unittest.TestCase):
         self.assertEqual(result, expected)
         # Please write your answer to the following question as code comments prefixed with Answer:.
         # Question 1a: What is the statement coverage achieved by `test_composite_score` in testing `compute_composite_score`?  
+        # 42%
         #       
         # Are these tests adequate (is there a bug that results in a TypeError missed by the test suite)? 
         # Which coverage criteria would be useful for writing a test case allowing a developer to observe the bug?
         #
-        # Answer: ??? TODO
+        # Answer: 
+        # Statement coverage = 42%, branch coverage = 1/6 = 16.67%
+        # The tests are not adequate, as they do not cover all branches (conditions) in the function.
+        # The test suite misses the bug in the else block: score = sum(metrics.keys()), where the .keys() method should be replaced with .values() in order to correctly extract the numeric metric values that need to be summed.
+        # A more useful coverage criteria to reveal this bug would be 100% branch coverage, in order to test all possible decision outcomes of the function.
+        # Note that because all non-nested branches are predicate conditions that check the value of the same string literal, branch coverage is sufficient to reveal the bug that occurs in the default case.
 
         # Question 1b: Complete the test test suite to achieve 100% coverage
         # For this assignment, you do not have to fix the bug in `compute_composite_score`
         # When you write a test case that reveals the buggy behavior, ignore the exception
         # by using a try-except, or using self.assertRaises
-       # ??? TODO
-    
+
+        #Answer
+        result1 = compute_composite_score(dev_metrics1, "sum")
+        self.assertEqual(result1, expected)
+        
+        result2 = compute_composite_score(dev_metrics1, "average")
+        expected2 = {
+            "dev1": statistics.mean([10, 5]),
+            "dev2": statistics.mean([7, 12]),
+            "dev3": statistics.mean([15, 3]),
+            "dev4": 0.0  # empty list, should return 0.0
+        }
+        self.assertEqual(result2, expected2)
+
+        result3 = compute_composite_score(dev_metrics1, "weighted")
+        expected3 = {
+            "dev1": 10*0.5 + 5*0.3,
+            "dev2": 7*0.5 + 12*0.3,
+            "dev3": 15*0.5 + 3*0.3,
+            "dev4": 0.0  
+        }
+        self.assertEqual(result3, expected3)    
+
+        with self.assertRaises(TypeError):
+            compute_composite_score(dev_metrics1, "unknown")
 
 
     def test_count_contributions_by_repos(self):
         # Question 2:
         # Look at the following test suite for count_contributions_by_repos
         count_contributions_by_repo("ourorg", [], "Alice")
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValueError): #developer not in org
             count_contributions_by_repo("emptyorg", [Metric.COMMITS, Metric.ISSUES], "Alice")
-        with self.assertRaises(ValueError):
+   
+        with self.assertRaises(ValueError): 
             count_contributions_by_repo("emptyorg", [Metric.COMMITS, Metric.ISSUES], None)
+            
 
-        actual = count_contributions_by_repo("ourorg", [Metric.COMMITS], "Alice")
+        actual = count_contributions_by_repo("ourorg", [Metric.COMMITS], "Alice") #commits in metrics true, issues in metrics false
         self.assertEqual(actual['ourorg/repo1']['commits'], 3)
         self.assertEqual(actual['ourorg/repo2']['commits'], 3)
         self.assertEqual(actual['ourorg/repo3']['commits'], 3)
 
-        actual = count_contributions_by_repo("ourorg", [Metric.ISSUES], "Alice")
+        actual = count_contributions_by_repo("ourorg", [Metric.ISSUES], "Alice") #commits in metrics false, issues in metrics true
         self.assertEqual(actual['ourorg/repo1']['issues'], 2)
         self.assertEqual(actual['ourorg/repo2']['issues'], 2)
         self.assertEqual(actual['ourorg/repo3']['issues'], 2)
@@ -277,8 +310,12 @@ class TestScoreContributors(unittest.TestCase):
         # 
         #   Are these tests adequate (Is there a bug that results in incorrect return values)? 
         #   Which additional coverage criteria would be useful for writing a test case allowing a developer to observe the bug?
-        # Answer: ??? TODO
-        # 
+        # Answer: 
+        # Statement coverage = 100% , branch coverage = 100%
+        # This test case is not adequate as it does not reveal the bug contributions_count[repo] = {'issues' : issues}, which would overwrite any existing commit counts that are calculated in the previous decision block.
+        # It does not cover the case where the user has both COMMITS and ISSUES in metrics, as each branch outcome is tested independently from another. 
+        # A more useful coverage criteria to reveal this bug would be 100% Intraprocedural Acyclic Path coverage, as this would ensure the interactions of different combinations of branch outcomes are tested.
+
         # Question 2b:
         # Your task is to complete the test suite
         # For this assignment, you do not have to fix the bug in `count_contributions_by_repos`
@@ -286,10 +323,46 @@ class TestScoreContributors(unittest.TestCase):
         # by using a try-except, or using self.assertRaises
    
 
-      ##  ??? TODO
+      ##  Answer:
+        #Paths to cover = 5
+        #Path 1: raise Value Error
+        with self.assertRaises(ValueError): #developer not in org
+            count_contributions_by_repo("emptyorg", [Metric.COMMITS, Metric.ISSUES], "Alice")
 
+        #Path 2: COMMITS false, ISSUES false
+        path2 = count_contributions_by_repo("ourorg", [], "Alice") #commits in metrics true, issues in metrics false
+        self.assertEqual(path2['ourorg/repo1'], {})
+        self.assertEqual(path2['ourorg/repo2'], {})
+        self.assertEqual(path2['ourorg/repo3'], {})
 
+        #Path 3: COMMITS true, ISSUES false
+        path3 = count_contributions_by_repo("ourorg", [Metric.COMMITS], "Alice")
+        self.assertEqual(path3['ourorg/repo1']['commits'], 3)
+        self.assertEqual(path3['ourorg/repo2']['commits'], 3)
+        self.assertEqual(path3['ourorg/repo3']['commits'], 3)
 
+        #Path 4: COMMITS false, ISSUES true
+        path4 = count_contributions_by_repo("ourorg", [Metric.ISSUES], "Alice") #commits in metrics false, issues in metrics true
+        self.assertEqual(path4['ourorg/repo1']['issues'], 2)
+        self.assertEqual(path4['ourorg/repo2']['issues'], 2)
+        self.assertEqual(path4['ourorg/repo3']['issues'], 2)
+
+        #Path 5: COMMITS true, ISSUES true -> reveal bug (KeyError)
+        path5 = count_contributions_by_repo("ourorg", [Metric.COMMITS, Metric.ISSUES], "Alice")
+        self.assertEqual(path5['ourorg/repo1']['issues'], 2)
+        self.assertEqual(path5['ourorg/repo2']['issues'], 2)
+        self.assertEqual(path5['ourorg/repo3']['issues'], 2)
+
+        with self.assertRaises(KeyError):
+            self.assertNotEqual(path5['ourorg/repo1']['commits'], 3)
+
+        with self.assertRaises(KeyError):
+            self.assertNotEqual(path5['ourorg/repo2']['commits'], 3)
+
+        with self.assertRaises(KeyError):
+            self.assertNotEqual(path5['ourorg/repo2']['commits'], 3)
+          
+        
     def test_bug1_in_count_active_contributors(self):
         # Question 3:
         # You have received the following bug report:
@@ -307,21 +380,30 @@ class TestScoreContributors(unittest.TestCase):
         #
         # In this assignment, your task is write a test case that reveals the bug:
         # here are the existing test cases
-        self.assertEqual(count_active_contributors("ourorg", {"commits": 1, "pull_requests": 1, "issues":1}), 5)
-        self.assertEqual(count_active_contributors("ourorg", {"commits": 50, "pull_requests": 50, "issues":50}), 0)
+        # self.assertEqual(count_active_contributors("ourorg", {"commits": 1, "pull_requests": 1, "issues":1}), 5)
+        # self.assertEqual(count_active_contributors("ourorg", {"commits": 50, "pull_requests": 50, "issues":50}), 0)
 
         # Question 3a
-      
-      #  ???: TODO write a test case that reproduces the bug 
+        # Answer:
+
+        #All developers have at least 10 commits and 1 issue, so they are all active contributors
+        self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":1}), 5)
+        
+        #Reveal the bug: since all developers have at least 10 commits, then the result should be still be 5
+        self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":50}), 5, "Expected 5, but got a different number of active contributors")
+
         # Question 3b: fix the bug in count_active_contributors
 
         # After the test cases, please write the answer to the following question as code comments prefixed with "Answer:"
         # Question 3c: What is one coverage criteria that would have guaranteed that the buggy behavior was observed during testing
-        # Answer: ??? TODO answer this question
+        # Answer: 
+        # MC/DC (Multiple Condition Decision Coverage) would have guaranteed that the buggy behavior was observed during testing.
+        
         
 
 if __name__ == '__main__':
     unittest.main()
+
 
 # for this assignment, assertions are optional
 
