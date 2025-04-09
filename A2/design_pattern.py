@@ -4,7 +4,14 @@ from enum import Enum
 
 ### Part 3 of the assignment ###
 # Question 1: What is the design pattern implemented by the RankContributors and ScoringMethod class?
-# Answer: ??? TODO
+# Answer: strategy
+# Pattern structure:
+    # Strategy: ScoringMetho (abstract class)
+    # ConcreteStrategy: SumScoringMethod, AverageScoringMethod, WeightedScoringMethod
+    # Context: RankContributors -> references a concrete strategy with the scoring_method variable
+# This design pattern provides the functionality of allowing the user to dynamically choose which scoring algorithm they would like to use to rank contributors at runtime.
+# By encapsulting the responsibility of implementing a specific scoring methods withing the ScoringMethod family, the client can interchange between different algorithm implementations easily without having to worry about the internal details of each algorithm.
+# The context acts as a middle man to receive ranking requests from the client, and it delegates the responsibility of implementing the ranking behaviour to a concrete strategy class.
 
 class Metric(Enum):
     COMMITS = "commits"

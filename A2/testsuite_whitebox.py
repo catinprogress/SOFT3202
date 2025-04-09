@@ -389,16 +389,22 @@ class TestScoreContributors(unittest.TestCase):
         #All developers have at least 10 commits and 1 issue, so they are all active contributors
         self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":1}), 5)
         
-        #Reveal the bug: since all developers have at least 10 commits, then the result should be still be 5
-        self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":50}), 5, "Expected 5, but got a different number of active contributors")
+        #Reveal the bug: since all developers have at least 10 commits, then the result should be still be 5, i.e. equal to the previous testcase.
+        self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":50}), count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":1}), "Expected 5, but got a different number of active contributors")
 
         # Question 3b: fix the bug in count_active_contributors
+        # Answer: by changing the separate if statements for each branch into one if/elif/else block, this ensures that the method returns the correct count value,
+        # as it removes the hidden dependency/logic error between the first and last condition branches in the original code, which could lead to some contributors being missed in the final calculation.
+        # This change means that a developer only needs to fulfil one of conditions (as specified in the documented requirements) in order to be considered as an active contributor.
 
         # After the test cases, please write the answer to the following question as code comments prefixed with "Answer:"
         # Question 3c: What is one coverage criteria that would have guaranteed that the buggy behavior was observed during testing
         # Answer: 
-        # MC/DC (Multiple Condition Decision Coverage) would have guaranteed that the buggy behavior was observed during testing.
-        
+        # Intraprocedural Acyclic Path coverage would have guaranteed that the buggy behaviou was observed during testing as it 
+        # requires the tester to test every single path that the function can take from start to end. 
+        # This involves evaluating the interactions between different decision branches in the functions, which is important in this situation
+        # as the bug is a logic error that depends on the interacting outcomes of 2 different branch conditions in the for loop.
+        # That is, in order to reveal the bug, the tester must test the path where the developer has a high number of commits but no issues, which would require the first branch in the for loop to result to True, and the if/else branch to result to False.
         
 
 if __name__ == '__main__':
