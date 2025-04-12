@@ -200,7 +200,7 @@ def count_active_contributors(org, minimum_value_for_metrics):
 
         if dev_contributions['commits'] > minimum_value_for_metrics['commits']:
             is_developer_active = True
-            print(f"{developer} commits: {dev_contributions['commits']}")
+           # print(f"{developer} commits: {dev_contributions['commits']}")
         elif dev_contributions['pull_requests'] > minimum_value_for_metrics['pull_requests']:
             is_developer_active = True
         elif dev_contributions['issues'] > minimum_value_for_metrics['issues']:
@@ -240,13 +240,12 @@ class TestScoreContributors(unittest.TestCase):
         self.assertEqual(result, expected)
         # Please write your answer to the following question as code comments prefixed with Answer:.
         # Question 1a: What is the statement coverage achieved by `test_composite_score` in testing `compute_composite_score`?  
-        # 42%
         #       
         # Are these tests adequate (is there a bug that results in a TypeError missed by the test suite)? 
         # Which coverage criteria would be useful for writing a test case allowing a developer to observe the bug?
         #
         # Answer: 
-        # Statement coverage = 42%, branch coverage = 1/6 = 16.67%
+        # Statement coverage 9/20 = 45%, branch coverage = 5/14 = 35.71%
         # The tests are not adequate, as they do not cover all branches (conditions) in the function.
         # The test suite misses the bug in the else block: score = sum(metrics.keys()), where the .keys() method should be replaced with .values() in order to correctly extract the numeric metric values that need to be summed.
         # A more useful coverage criteria to reveal this bug would be 100% branch coverage, in order to test all possible decision outcomes of the function.
@@ -282,6 +281,9 @@ class TestScoreContributors(unittest.TestCase):
         with self.assertRaises(TypeError):
             compute_composite_score(dev_metrics1, "unknown")
 
+        with self.assertRaises(ValueError):
+            compute_composite_score({}, "sum")
+
 
     def test_count_contributions_by_repos(self):
         # Question 2:
@@ -313,15 +315,14 @@ class TestScoreContributors(unittest.TestCase):
         # Answer: 
         # Statement coverage = 100% , branch coverage = 100%
         # This test case is not adequate as it does not reveal the bug contributions_count[repo] = {'issues' : issues}, which would overwrite any existing commit counts that are calculated in the previous decision block.
-        # It does not cover the case where the user has both COMMITS and ISSUES in metrics, as each branch outcome is tested independently from another. 
-        # A more useful coverage criteria to reveal this bug would be 100% Intraprocedural Acyclic Path coverage, as this would ensure the interactions of different combinations of branch outcomes are tested.
+        # Thus, these tests do not cover the case where the user has both COMMITS and ISSUES in metrics, as each distinct branch has been tested independently from another. 
+        # A more useful coverage criteria to reveal this bug would be 100% Intraprocedural Acyclic Path coverage, as this would ensure the interactions between different branches are tested.
 
         # Question 2b:
         # Your task is to complete the test suite
         # For this assignment, you do not have to fix the bug in `count_contributions_by_repos`
         # When you write a test case that reveals the buggy behavior, ignore the exception
         # by using a try-except, or using self.assertRaises
-   
 
       ##  Answer:
         #Paths to cover = 5
@@ -330,7 +331,7 @@ class TestScoreContributors(unittest.TestCase):
             count_contributions_by_repo("emptyorg", [Metric.COMMITS, Metric.ISSUES], "Alice")
 
         #Path 2: COMMITS false, ISSUES false
-        path2 = count_contributions_by_repo("ourorg", [], "Alice") #commits in metrics true, issues in metrics false
+        path2 = count_contributions_by_repo("ourorg", [], "Alice") 
         self.assertEqual(path2['ourorg/repo1'], {})
         self.assertEqual(path2['ourorg/repo2'], {})
         self.assertEqual(path2['ourorg/repo3'], {})
@@ -342,7 +343,7 @@ class TestScoreContributors(unittest.TestCase):
         self.assertEqual(path3['ourorg/repo3']['commits'], 3)
 
         #Path 4: COMMITS false, ISSUES true
-        path4 = count_contributions_by_repo("ourorg", [Metric.ISSUES], "Alice") #commits in metrics false, issues in metrics true
+        path4 = count_contributions_by_repo("ourorg", [Metric.ISSUES], "Alice") 
         self.assertEqual(path4['ourorg/repo1']['issues'], 2)
         self.assertEqual(path4['ourorg/repo2']['issues'], 2)
         self.assertEqual(path4['ourorg/repo3']['issues'], 2)
@@ -385,11 +386,10 @@ class TestScoreContributors(unittest.TestCase):
 
         # Question 3a
         # Answer:
-
-        #All developers have at least 10 commits and 1 issue, so they are all active contributors
+        # All developers have at least 10 commits and 1 issue, so they are all active contributors
         self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":1}), 5)
-        
-        #Reveal the bug: since all developers have at least 10 commits, then the result should be still be 5, i.e. equal to the previous testcase.
+
+        # Reveal the bug: since all developers have at least 10 commits, then the result should be still be 5, i.e. equal to the previous testcase.
         self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":50}), count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":1}), "Expected 5, but got a different number of active contributors")
 
         # Question 3b: fix the bug in count_active_contributors
@@ -400,7 +400,7 @@ class TestScoreContributors(unittest.TestCase):
         # After the test cases, please write the answer to the following question as code comments prefixed with "Answer:"
         # Question 3c: What is one coverage criteria that would have guaranteed that the buggy behavior was observed during testing
         # Answer: 
-        # Intraprocedural Acyclic Path coverage would have guaranteed that the buggy behaviou was observed during testing as it 
+        # 100% Intraprocedural Acyclic Path coverage would have guaranteed that the buggy behaviou was observed during testing as it 
         # requires the tester to test every single path that the function can take from start to end. 
         # This involves evaluating the interactions between different decision branches in the functions, which is important in this situation
         # as the bug is a logic error that depends on the interacting outcomes of 2 different branch conditions in the for loop.

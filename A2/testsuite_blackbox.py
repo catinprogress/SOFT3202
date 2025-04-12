@@ -108,8 +108,15 @@ class TestScoreContributors(unittest.TestCase):
         # 
         # e.g., each test case should be a call to the function:
       #  count_active_contributors(1, 1)
-        #Nominal: (50,500)
+
+        # Answer:
+        # Weak normal criteria: test all valid inputs at the boundary values of the input domains.
+
+        # Test values: number_of_repos = x, number_of_commits = y
+        #Nominal: 50, 500
         #Min: 1, 1
+        #Min+ : 2, 2 
+        #Max- : 99, 998
         #Max: 100, 999
 
         #vary x, keep y nominal:
@@ -125,7 +132,7 @@ class TestScoreContributors(unittest.TestCase):
         count_active_contributors(50, 1)
         count_active_contributors(50, 2)
         count_active_contributors(50, 998)
-        count_active_contributors(50,999)
+        count_active_contributors(50, 999)
     
         
 
@@ -134,13 +141,17 @@ class TestScoreContributors(unittest.TestCase):
         # Refer to the docstring of the `compute_ranking` function, which can be found above.
         # In this assignment, we are less interested in the assertions, and more interested in the selection of input values.
     #    compute_ranking(1, 2)
-        #Nominal: (12, 51)
+
+        #Answer:
+        #Strong robust criteria: test every combination of valid and invalid inputs at the boundary values of the input domains.
+        #Test values: number_of_months = x, num_contributors = y
+        #Nominal: 12, 51
         #Min: 1, 2
         #Max: 24, 100
-        #invalid min: 0, 1
-        #invalid max: 25, 100
+        #invalid min (min-): 0, 1
+        #invalid max (max+): 25, 100
 
-        #invalid x, vary y
+        #invalid x (min-), vary y
         compute_ranking(0, 1) 
         compute_ranking(0, 2)
         compute_ranking(0, 51)
@@ -148,27 +159,27 @@ class TestScoreContributors(unittest.TestCase):
         compute_ranking(0, 101)
 
         #x = 1, vary y
-        compute_ranking(1, 1) #invalid
+        compute_ranking(1, 1) #invalid (y = min-)
         compute_ranking(1, 2) 
         compute_ranking(1, 51)
         compute_ranking(1, 100)
-        compute_ranking(1, 101) #invalid
+        compute_ranking(1, 101) #invalid (y = max+)
         
         #x = nominal
-        compute_ranking(12, 9) #invalid
+        compute_ranking(12, 1) #invalid (y = min-)
         compute_ranking(12, 2)
         compute_ranking(12, 51) #nominal
         compute_ranking(12, 100)
-        compute_ranking(12, 101) #invalid
+        compute_ranking(12, 101) #invalid (y = max+)
 
-        #x= 24, vary y
-        compute_ranking(24, 1) #invalid
+        #x = 24, vary y
+        compute_ranking(24, 1) #invalid (y = min-)
         compute_ranking(24, 2)
         compute_ranking(24, 51)
         compute_ranking(24, 100)
-        compute_ranking(24, 101) #invalid
+        compute_ranking(24, 101) #invalid (y = max+)
 
-        #invalid x, vary y
+        #invalid x (max+), vary y
         compute_ranking(25, 1) 
         compute_ranking(25, 2)
         compute_ranking(25, 51)
@@ -181,6 +192,7 @@ class TestScoreContributors(unittest.TestCase):
         # Refer to the docstring of the `score_contributors` function, which can be found above
         # In this assignment, we are less interested in the assertions, and more interested in the selection of input values.
 
+        # Answer:
         # Test 1: Scope=repository, Metric =commits, TimeGranularity=day          
         # Test 2: Scope=organization, Metric =pull_requests, TimeGranularity=day  
 
@@ -213,8 +225,8 @@ class TestScoreContributors(unittest.TestCase):
 
         #scope - metric : T1 - T8
         #scope - time : T1 - T10
-        #metric -time : T1 - T20
-        # Total needed: 20
+        #metric - time : T1 - T20
+        # Total needed: 20 -> allpairs module was used to calculate 2-way combinations; each test case contains at most 3 distinct pairs
 
         score_contributors(TimeGranularity.DAY, Scope.REPOSITORY, Metric.COMMITS) #1
         score_contributors(TimeGranularity.DAY, Scope.ORGANIZATION, Metric.PULL_REQUESTS) #2
@@ -250,28 +262,47 @@ class TestScoreContributors(unittest.TestCase):
     def test_stats_available(self):
         # Question 4: For the function `are_stats_available`, write a decision table. 
         # Question 4a. Write out the table in markdown
+        # | Conditions                     | R1 | R2 | R3 | R4 | R5 | R6 | R7 | R8 | R9 |
+        # |--------------------------------|----|----|----|----|----|----|----|----|----|
+        # | c1: repository exists          | T  | T  | T  |  T |  T | T  | T  | T  | F  |
+        # | c1: organization is public     | T  | T  | F  |  F |  F | T  | T  | F  | -  |
+        # | c2: user is member of org      | T  | F  | T  |  F |  F | F  | T  | T  | -  |
+        # | c3: repository is not empty    | T  | T  | T  |  T |  F | F  | F  | F  | -  |
+        # |--------------------------------|----|----|----|----|----|----|----|----|----|
+        # | Outcomes                       |    |    |    |    |    |    |    |    |    |
+        # |--------------------------------|----|----|----|----|----|----|----|----|----|
+        # | o1: return True                | T  | T  | T  |    |    |    |    |    |    | 
+        # | o2: NotAccessibleException     |    |    |    | T  | T  |    |    |    | T  |
+        # | o3: return False               |    |    |    |    |    | T  | T  | T  |    |
      
 	    # Question 4b. Then, write the test cases 
         # Note: in the test cases, give names to the repos/users to indicate if they are private, public, empty, etc.
         # If you notice any ambiguity, add a comment documenting your assumptions. 
         # After each test case, add a comment to indicate which column of the decision table
         # 
-        # Assumption 1: The check for whether a user is a member of a given private organziation is only executed AFTER the function has validated the organization access type. 
-        #             ie. The function will check whether a user is a member of the provided private organization name, GIVEN that it has already verified that the specified organization is not public.         
-        # Assumption 2: If a user is verified to not be a member of the specified private organization, the function will raise an exception causing the program to terminate; 
-        #               thus, the check for whether the repository is empty will never be executed in this case.        
+        # Assumption 1 (R9): Input validation for "repo_name" will occur before any other checks are performed, to check if the specified repository name is valid (i.e. exists).                    
+        # Assumption 2: Input validation for "user" names will only occur GIVEN that the function has already verified that the specified "repo_name" matches to an existing PRIVATE organization. 
+        #               Thus it is assumed that the only "user" input validation that occurs is verifying whether the provided user is a member of a given PRIVATE organization; and the choice of "user" input is more trivial for public organizations.
+        #               i.e. No "user" input validation will occur if the "repo_name" matches to an existing public organization, since they are accessible to anyone (e.g. "" is valid user input)     
+        # Assumption 3 (R4, R5): "private_org_non_member" refers to any string input value for "user" that is verified to not be a member of the specified private organization, causing the function to raise an exception; 
+        #              thus this can refer to both existing and non-existing developer names  
 
-        are_stats_available("public_org/nonempty_repo1", "public_org_developer") # True R1
-        are_stats_available("public_org/empty_repo1", "public_org_developer") # False R6
+        are_stats_available("public_org/nonempty_repo1", "public_org_member") # True R1
+        are_stats_available("public_org/empty_repo1", "public_org_member") # False R6
 
-        are_stats_available("public_org/nonempty_repo1", "private_org_developer")   #True R2
-        are_stats_available("public_org/empty_repo1", "private_org_developer") #False R7
+        # Note: per assumption 2, a specific case for empty string "user" inputs was not created as this is subsumed by R2, 
+        # which covers the case where user is not a member of the organization.
+        are_stats_available("public_org/nonempty_repo1", "public_org_non_member")   #True R2
+        are_stats_available("public_org/empty_repo1", "public_org_non_member") #False R7
 
         are_stats_available("private_org/nonempty_repo1", "private_org_non_member")   #Exception R4
         are_stats_available("private_org/empty_repo1", "private_org_non_member") #Exception R5
 
         are_stats_available("private_org/nonempty_repo1", "private_org_member") #True R3
         are_stats_available("private_org/empty_repo1", "private_org_member") #False R8
+
+        are_stats_available("invalid_repo", "some_string_input") #Exception R9
+
 
 # for this assignment, you do not have to execute the test cases in this file
 # as such, you will not be penalized for test cases that do not compile, as long as the intent of each test case is clear.
