@@ -262,48 +262,45 @@ class TestScoreContributors(unittest.TestCase):
     def test_stats_available(self):
         # Question 4: For the function `are_stats_available`, write a decision table. 
         # Question 4a. Write out the table in markdown
-        # | Conditions                     | R1 | R2 | R3 | R4 | R5 | R6 | R7 | R8 | R9 |
-        # |--------------------------------|----|----|----|----|----|----|----|----|----|
-        # | c1: repository exists          | T  | T  | T  |  T |  T | T  | T  | T  | F  |
-        # | c1: organization is public     | T  | T  | F  |  F |  F | T  | T  | F  | -  |
-        # | c2: user is member of org      | T  | F  | T  |  F |  F | F  | T  | T  | -  |
-        # | c3: repository is not empty    | T  | T  | T  |  T |  F | F  | F  | F  | -  |
-        # |--------------------------------|----|----|----|----|----|----|----|----|----|
-        # | Outcomes                       |    |    |    |    |    |    |    |    |    |
-        # |--------------------------------|----|----|----|----|----|----|----|----|----|
-        # | o1: return True                | T  | T  | T  |    |    |    |    |    |    | 
-        # | o2: NotAccessibleException     |    |    |    | T  | T  |    |    |    | T  |
-        # | o3: return False               |    |    |    |    |    | T  | T  | T  |    |
-     
+        # Answer:
+        # Note: the "-" in the table indicates collapsed values where the decision for that condition does not affect the outcome.
+
+        # | Conditions                     | R1 | R2 | R3 | R4 | R5 | R6 |
+        # |--------------------------------|----|----|----|----|----|----|
+        # | c1: repository exists          | T  | T  |  T | T  | T  | F  |
+        # | c1: organization is public     | T  | F  |  F | T  | F  | -  |
+        # | c2: user is member of org      | -  | T  |  F | -  | T  | -  |
+        # | c3: repository is not empty    | T  | T  |  - | F  | F  | -  |
+        # |--------------------------------|----|----|----|----|----|----|
+        # | Outcomes                       |    |    |    |    |    |    |
+        # |--------------------------------|----|----|----|----|----|----|
+        # | o1: return True                | T  | T  |    |    |    |    | 
+        # | o2: NotAccessibleException     |    |    | T  |    |    | T  |
+        # | o3: return False               |    |    |    | T  | T  |    |
+
 	    # Question 4b. Then, write the test cases 
         # Note: in the test cases, give names to the repos/users to indicate if they are private, public, empty, etc.
         # If you notice any ambiguity, add a comment documenting your assumptions. 
         # After each test case, add a comment to indicate which column of the decision table
         # 
-        # Assumption 1 (R9): Input validation for "repo_name" will occur before any other checks are performed, to check if the specified repository name is valid (i.e. exists).                    
-        # Assumption 2: Input validation for "user" names will only occur GIVEN that the function has already verified that the specified "repo_name" matches to an existing PRIVATE organization. 
+        # Assumption 1 (R6): Input validation for "repo_name" will occur before any other checks are performed, to check if the specified repository name is valid (i.e. exists).                    
+        # Assumption 2 : Input validation for "user" names will only occur GIVEN that the function has already verified that the specified "repo_name" matches to an existing PRIVATE organization. 
         #               Thus it is assumed that the only "user" input validation that occurs is verifying whether the provided user is a member of a given PRIVATE organization; and the choice of "user" input is more trivial for public organizations.
         #               i.e. No "user" input validation will occur if the "repo_name" matches to an existing public organization, since they are accessible to anyone (e.g. "" is valid user input)     
-        # Assumption 3 (R4, R5): "private_org_non_member" refers to any string input value for "user" that is verified to not be a member of the specified private organization, causing the function to raise an exception; 
+        # Assumption 3 (R3): "private_org_non_member" refers to any string input value for "user" that is verified to not be a member of the specified private organization, causing the function to raise an exception; 
         #              thus this can refer to both existing and non-existing developer names  
 
-        are_stats_available("public_org/nonempty_repo1", "public_org_member") # True R1
-        are_stats_available("public_org/empty_repo1", "public_org_member") # False R6
+        are_stats_available("public_org/nonempty_repo1", "public_org_member") # True R1 (value of user is arbirtrary)
+        are_stats_available("private_org/nonempty_repo1", "private_org_member") #True R2
+        
+        are_stats_available("private_org/nonempty_repo1", "private_org_non_member")   #Exception R3
 
-        # Note: per assumption 2, a specific case for empty string "user" inputs was not created as this is subsumed by R2, 
-        # which covers the case where user is not a member of the organization.
-        are_stats_available("public_org/nonempty_repo1", "public_org_non_member")   #True R2
-        are_stats_available("public_org/empty_repo1", "public_org_non_member") #False R7
+        are_stats_available("public_org/empty_repo1", "public_org_member") # False R4 (value of user is arbirtrary)
+        are_stats_available("private_org/empty_repo1", "private_org_member") #False R5
 
-        are_stats_available("private_org/nonempty_repo1", "private_org_non_member")   #Exception R4
-        are_stats_available("private_org/empty_repo1", "private_org_non_member") #Exception R5
+        are_stats_available("invalid_repo", "some_string_input") #Exception R6   (value of user is arbirtrary) 
 
-        are_stats_available("private_org/nonempty_repo1", "private_org_member") #True R3
-        are_stats_available("private_org/empty_repo1", "private_org_member") #False R8
-
-        are_stats_available("invalid_repo", "some_string_input") #Exception R9
-
-
+        
 # for this assignment, you do not have to execute the test cases in this file
 # as such, you will not be penalized for test cases that do not compile, as long as the intent of each test case is clear.
 # You can also assume that all test cases written will be executed, regardless of whether a test case results in an exception to be thrown

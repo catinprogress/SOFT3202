@@ -200,7 +200,6 @@ def count_active_contributors(org, minimum_value_for_metrics):
 
         if dev_contributions['commits'] > minimum_value_for_metrics['commits']:
             is_developer_active = True
-           # print(f"{developer} commits: {dev_contributions['commits']}")
         elif dev_contributions['pull_requests'] > minimum_value_for_metrics['pull_requests']:
             is_developer_active = True
         elif dev_contributions['issues'] > minimum_value_for_metrics['issues']:

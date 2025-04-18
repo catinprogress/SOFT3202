@@ -12,5 +12,20 @@
 | o3: return False               |    |    |    |    |    | T  | T  | T  |    |
 
 
+- Collapse: 
+- R1/R2 -> R1
+- R4/R5 -> R3
+- R6/R7 -> R5
 
-
+| Conditions                     | R1 | R2 | R3 | R4 | R5 | R6 |
+|--------------------------------|----|----|----|----|----|----|
+| c1: repository exists          | T  | T  |  T | T  | T  | F  |
+| c1: organization is public     | T  | F  |  F | T  | F  | -  |
+| c2: user is member of org      | -  | T  |  F | -  | T  | -  |
+| c3: repository is not empty    | T  | T  |  - | F  | F  | -  |
+|--------------------------------|----|----|----|----|----|----|
+| Outcomes                       |    |    |    |    |    |    |
+|--------------------------------|----|----|----|----|----|----|
+| o1: return True                | T  | T  |    |    |    |    | 
+| o2: NotAccessibleException     |    |    | T  |    |    | T  |
+| o3: return False               |    |    |    | T  | T  |    |
