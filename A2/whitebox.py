@@ -2,7 +2,6 @@ import datetime
 import unittest
 from typing import Tuple, List, Dict, Union
 from collections import defaultdict
-import statistics
 
 from enum import Enum
 
@@ -100,7 +99,7 @@ def get_all_developers(org):
     if org == "ourorg":
       return ["Alice", "Bobby", "Charlie", "Doug", "Eliza"]
     elif org == "anotherorg":
-      return ["Fabrice"]
+      return ["Fabrice"]  # 
     else:
       return []
 
@@ -160,20 +159,20 @@ def count_contributions_by_repo(org, metrics, developer):
         if Metric.ISSUES in metrics:
             issues = fetch_issues(repo, developer)
             contributions_count[repo] = {'issues' : issues} # weird: does this look like a bug?
-         
+        
     return contributions_count
 
 
 def count_active_contributors(org, minimum_value_for_metrics):
     """
-    Counts the number of contributors who have either more commits more than the specified number of repositories
+    Counts the number of contributors who has more activity in at least one metric in minimum_value_for_metrics
     
     Args:
-        metric : 
+        org: the organization name
         minimum_value_for_metrics: python dictionary mapping from a string key to an integer
     
     Returns:
-        int: The count of active contributors who either exceeds the specified number of issues OR exceeds the specified number of commits.
+        int: The count of active contributors who exceeds at least one of the minimum value in minimum_value_for_metrics
 
     """
     ### ??? TODO: As part of Question 3b, fix the bug in this function after writing a test case for Question 3a
@@ -200,12 +199,11 @@ def count_active_contributors(org, minimum_value_for_metrics):
 
         if dev_contributions['commits'] > minimum_value_for_metrics['commits']:
             is_developer_active = True
-        elif dev_contributions['pull_requests'] > minimum_value_for_metrics['pull_requests']:
+        if dev_contributions['pull_requests'] > minimum_value_for_metrics['pull_requests']:
             is_developer_active = True
-        elif dev_contributions['issues'] > minimum_value_for_metrics['issues']:
-            is_developer_active = True          
+        if dev_contributions['issues'] > minimum_value_for_metrics['issues']:
+            is_developer_active = True            
         else:
-            # developer is not active
             is_developer_active = False
 
         if is_developer_active:
@@ -238,131 +236,59 @@ class TestScoreContributors(unittest.TestCase):
         result = compute_composite_score(dev_metrics1, "sum")
         self.assertEqual(result, expected)
         # Please write your answer to the following question as code comments prefixed with Answer:.
-        # Question 1a: What is the statement coverage achieved by `test_composite_score` in testing `compute_composite_score`?  
-        #       
+        # Question 1a: What is the statement and branch coverage achieved by `test_composite_score` in testing `compute_composite_score`? 
+        # 
         # Are these tests adequate (is there a bug that results in a TypeError missed by the test suite)? 
-        # Which coverage criteria would be useful for writing a test case allowing a developer to observe the bug?
+        #   Which coverage criteria would be useful for writing a test case allowing a developer to observe the bug?
         #
-        # Answer: 
-        # Statement coverage 9/20 = 45%, branch coverage = 5/14 = 35.7% (result only includes achievable branches; the "if metrics in weights" branch was not included as it always evaluates to True)
-        # The tests are not adequate, as they do not cover all branches (conditions) in the function.
-        # The test suite misses the bug in the else block: score = sum(metrics.keys()), where the .keys() method should be replaced with .values() in order to correctly extract the numeric metric values that need to be summed.
-        # A more useful coverage criteria to reveal this bug would be 100% branch coverage, in order to test all possible decision outcomes of the function.
-        # Note that because all branches are leaf level Boolean expressions (predicates), branch coverage implies predicate coverage and is thus sufficient to reveal the bug that occurs in the else branch.
+        # Answer: ??? TODO
 
         # Question 1b: Complete the test test suite to achieve 100% coverage
         # For this assignment, you do not have to fix the bug in `compute_composite_score`
         # When you write a test case that reveals the buggy behavior, ignore the exception
         # by using a try-except, or using self.assertRaises
-
-        #Answer
-        result1 = compute_composite_score(dev_metrics1, "sum")
-        self.assertEqual(result1, expected)
-        
-        result2 = compute_composite_score(dev_metrics1, "average")
-        expected2 = {
-            "dev1": statistics.mean([10, 5]),
-            "dev2": statistics.mean([7, 12]),
-            "dev3": statistics.mean([15, 3]),
-            "dev4": 0.0  # empty list, should return 0.0
-        }
-        self.assertEqual(result2, expected2)
-
-        result3 = compute_composite_score(dev_metrics1, "weighted")
-        expected3 = {
-            "dev1": 10*0.5 + 5*0.3,
-            "dev2": 7*0.5 + 12*0.3,
-            "dev3": 15*0.5 + 3*0.3,
-            "dev4": 0.0  
-        }
-        self.assertEqual(result3, expected3)    
-
-        ### Reveal bug in else branch
-        with self.assertRaises(TypeError):
-            compute_composite_score(dev_metrics1, "unknown")
-
-        with self.assertRaises(ValueError):
-            compute_composite_score({}, "sum")
+       ### ??? TODO
+    
 
 
     def test_count_contributions_by_repos(self):
         # Question 2:
         # Look at the following test suite for count_contributions_by_repos
         count_contributions_by_repo("ourorg", [], "Alice")
-        with self.assertRaises(ValueError): #developer not in org
+        with self.assertRaises(ValueError):
             count_contributions_by_repo("emptyorg", [Metric.COMMITS, Metric.ISSUES], "Alice")
-   
-        with self.assertRaises(ValueError): 
+        with self.assertRaises(ValueError):
             count_contributions_by_repo("emptyorg", [Metric.COMMITS, Metric.ISSUES], None)
-            
 
-        actual = count_contributions_by_repo("ourorg", [Metric.COMMITS], "Alice") #commits in metrics true, issues in metrics false
+        actual = count_contributions_by_repo("ourorg", [Metric.COMMITS], "Alice")
         self.assertEqual(actual['ourorg/repo1']['commits'], 3)
         self.assertEqual(actual['ourorg/repo2']['commits'], 3)
         self.assertEqual(actual['ourorg/repo3']['commits'], 3)
 
-        actual = count_contributions_by_repo("ourorg", [Metric.ISSUES], "Alice") #commits in metrics false, issues in metrics true
+        actual = count_contributions_by_repo("ourorg", [Metric.ISSUES], "Alice")
         self.assertEqual(actual['ourorg/repo1']['issues'], 2)
         self.assertEqual(actual['ourorg/repo2']['issues'], 2)
         self.assertEqual(actual['ourorg/repo3']['issues'], 2)
 
         # Please write your answer to the following question as code comments prefixed with Answer:.
 	    # Question 2a: What is the statement and branch coverage achieved by `test_count_contributions_by_repos` on `count_contributions_by_repos`?
-        #  Note: ignore the coverage of the functions called by `count_contributions_by_repos`. We care only about the coverage of `count_contributions_by_repos`
+        #   Note: ignore the coverage of the functions called by `count_contributions_by_repos`. We care only about the coverage of `count_contributions_by_repos`
         # 
-        # Are these tests adequate (Is there a bug that results in incorrect return values)? 
-        # Which additional coverage criteria would be useful for writing a test case allowing a developer to observe the bug?
-
-        # Answer: 
-        # Statement coverage = 100% , branch coverage = 100%
-        # This test case is not adequate as it does not reveal the bug in contributions_count[repo] = {'issues' : issues}, which would overwrite any existing commit counts that are calculated in the previous decision block.
-        # Thus, these tests do not cover the case where the user has both COMMITS and ISSUES in metrics, as each distinct branch has been tested independently from another. 
-        # A more useful coverage criteria to reveal this bug would be 100% Intraprocedural Acyclic Path coverage, as this would ensure the interactions between different branches are tested.
-
+        #   Are these tests adequate (Is there a bug that results in incorrect return values)? 
+        #   Which additional coverage criteria would be useful for writing a test case allowing a developer to observe the bug?
+        # Answer: ??? TODO
+        # 
         # Question 2b:
         # Your task is to complete the test suite
         # For this assignment, you do not have to fix the bug in `count_contributions_by_repos`
         # When you write a test case that reveals the buggy behavior, ignore the exception
         # by using a try-except, or using self.assertRaises
+   
 
-        #Answer: Paths to cover = 5
-        #Path 1: raise ValueError (developer not in org)
-        with self.assertRaises(ValueError):
-            count_contributions_by_repo("emptyorg", [Metric.COMMITS, Metric.ISSUES], "Alice")
+        ##??? TODO
 
-        #Path 2: COMMITS false, ISSUES false
-        path2 = count_contributions_by_repo("ourorg", [], "Alice") 
-        self.assertEqual(path2['ourorg/repo1'], {})
-        self.assertEqual(path2['ourorg/repo2'], {})
-        self.assertEqual(path2['ourorg/repo3'], {})
 
-        #Path 3: COMMITS true, ISSUES false
-        path3 = count_contributions_by_repo("ourorg", [Metric.COMMITS], "Alice")
-        self.assertEqual(path3['ourorg/repo1']['commits'], 3)
-        self.assertEqual(path3['ourorg/repo2']['commits'], 3)
-        self.assertEqual(path3['ourorg/repo3']['commits'], 3)
 
-        #Path 4: COMMITS false, ISSUES true
-        path4 = count_contributions_by_repo("ourorg", [Metric.ISSUES], "Alice") 
-        self.assertEqual(path4['ourorg/repo1']['issues'], 2)
-        self.assertEqual(path4['ourorg/repo2']['issues'], 2)
-        self.assertEqual(path4['ourorg/repo3']['issues'], 2)
-
-        #Path 5: COMMITS true, ISSUES true -> reveal bug (KeyError)
-        path5 = count_contributions_by_repo("ourorg", [Metric.COMMITS, Metric.ISSUES], "Alice")
-        self.assertEqual(path5['ourorg/repo1']['issues'], 2)
-        self.assertEqual(path5['ourorg/repo2']['issues'], 2)
-        self.assertEqual(path5['ourorg/repo3']['issues'], 2)
-
-        with self.assertRaises(KeyError):
-            self.assertNotEqual(path5['ourorg/repo1']['commits'], 3)
-
-        with self.assertRaises(KeyError):
-            self.assertNotEqual(path5['ourorg/repo2']['commits'], 3)
-
-        with self.assertRaises(KeyError):
-            self.assertNotEqual(path5['ourorg/repo2']['commits'], 3)
-          
     def test_bug1_in_count_active_contributors(self):
         # Question 3:
         # You have received the following bug report:
@@ -380,33 +306,18 @@ class TestScoreContributors(unittest.TestCase):
         #
         # In this assignment, your task is write a test case that reveals the bug:
         # here are the existing test cases
-        # self.assertEqual(count_active_contributors("ourorg", {"commits": 1, "pull_requests": 1, "issues":1}), 5)
-        # self.assertEqual(count_active_contributors("ourorg", {"commits": 50, "pull_requests": 50, "issues":50}), 0)
+        self.assertEqual(count_active_contributors("ourorg", {"commits": 1, "pull_requests": 1, "issues":1}), 5)
+        self.assertEqual(count_active_contributors("ourorg", {"commits": 50, "pull_requests": 50, "issues":50}), 0)
 
         # Question 3a
-        # Answer:
-        # Case 1: All developers have at least 10 commits and 1 issue, so they are all active contributors
-        self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":1}), 5)
-
-        # Case 2 (Reveal the bug): All developers have at least 10 commits, so they are all active contributers, and the results should be equal to the previous testcase.
-        self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":50}), count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":1}), "Expected 5, but got a different number of active contributors")
-
+       ### ???: TODO write a test case that reproduces the bug 
         # Question 3b: fix the bug in count_active_contributors
-        # Answer: by changing the separate if statements for each branch into one if/elif/else block, this ensures that the method returns the correct count value,
-        # as it removes the hidden dependency/logic error between the first and last condition branches in the original code, which could lead to some contributors being missed in the final calculation.
-        # This change means that a developer only needs to fulfil one of conditions (as specified in the documented requirements) in order to be considered as an active contributor.
 
         # After the test cases, please write the answer to the following question as code comments prefixed with "Answer:"
         # Question 3c: What is one coverage criteria that would have guaranteed that the buggy behavior was observed during testing
-        # Answer: 
-        # 100% Intraprocedural Acyclic Path coverage would have guaranteed that the buggy behaviour was observed during testing as it 
-        # requires the tester to test every single path that the function can take from start to end. 
-        # This involves evaluating the interactions between different decision branches in the functions, which is important in this situation
-        # as the bug is an error in the code's control flow that depends on the specific combination of 2 different branch decisions for it to be revealed.
-
-        # Thus in order to reveal the bug, the tester must test the path where the developer has a high number of commits but no issues,
-        # which would require the first branch in the for loop to be True, and the if/else branch to be False.
+        # Answer: ??? TODO answer this question
         
+
 
 if __name__ == '__main__':
     unittest.main()
