@@ -113,11 +113,11 @@ class TestScoreContributors(unittest.TestCase):
         # Weak normal criteria: test all valid inputs at the boundary values of the input domains.
 
         # Test values: number_of_repos = x, number_of_commits = y
-        #Nominal: 50, 500
-        #Min: 1, 1
-        #Min+ : 2, 2 
-        #Max- : 99, 998
-        #Max: 100, 999
+        # Nominal: 50, 500
+        # Min: 1, 1
+        # Min+ : 2, 2 
+        # Max- : 99, 998
+        # Max: 100, 999
 
         #vary x, keep y nominal:
         count_active_contributors(1, 500)
@@ -145,44 +145,75 @@ class TestScoreContributors(unittest.TestCase):
         #Answer:
         #Strong robust criteria: test every combination of valid and invalid inputs at the boundary values of the input domains.
         #Test values: number_of_months = x, num_contributors = y
-        #Nominal: 12, 51
-        #Min: 1, 2
-        #Max: 24, 100
-        #invalid min (min-): 0, 1
-        #invalid max (max+): 25, 100
+        # Nominal: 12, 51
+        # Min: 1, 2
+        # Min+ : 2, 3
+        # Max- : 23, 99
+        # Max: 24, 100
+
+        # invalid min (min-): 0, 1
+        # invalid max (max+): 25, 101
 
         #invalid x (min-), vary y
         compute_ranking(0, 1) 
         compute_ranking(0, 2)
+        compute_ranking(0, 3)
         compute_ranking(0, 51)
+        compute_ranking(0, 99)
         compute_ranking(0, 100)
         compute_ranking(0, 101)
 
         #x = 1, vary y
         compute_ranking(1, 1) #invalid (y = min-)
         compute_ranking(1, 2) 
+        compute_ranking(1, 3)
         compute_ranking(1, 51)
+        compute_ranking(1, 99) 
         compute_ranking(1, 100)
         compute_ranking(1, 101) #invalid (y = max+)
         
+        #x = 2, vary y
+        compute_ranking(2, 1)   #invalid (y = min-)
+        compute_ranking(2, 2) 
+        compute_ranking(2, 3)
+        compute_ranking(2, 51)
+        compute_ranking(2, 99)
+        compute_ranking(2, 100)
+        compute_ranking(2, 101) #invalid (y = max+)
+
         #x = nominal
         compute_ranking(12, 1) #invalid (y = min-)
         compute_ranking(12, 2)
+        compute_ranking(12, 3)
         compute_ranking(12, 51) #nominal
+        compute_ranking(12, 99)   
         compute_ranking(12, 100)
         compute_ranking(12, 101) #invalid (y = max+)
+
+        #x = 23, vary y
+        compute_ranking(23, 1) #invalid (y = min-)
+        compute_ranking(23, 2)
+        compute_ranking(23, 3)
+        compute_ranking(23, 51)
+        compute_ranking(23, 99)
+        compute_ranking(23, 100)
+        compute_ranking(23, 101) #invalid (y = max+)
 
         #x = 24, vary y
         compute_ranking(24, 1) #invalid (y = min-)
         compute_ranking(24, 2)
+        compute_ranking(24, 3)
         compute_ranking(24, 51)
+        compute_ranking(24, 99)
         compute_ranking(24, 100)
         compute_ranking(24, 101) #invalid (y = max+)
 
         #invalid x (max+), vary y
         compute_ranking(25, 1) 
         compute_ranking(25, 2)
+        compute_ranking(25, 3)
         compute_ranking(25, 51)
+        compute_ranking(25, 99)
         compute_ranking(25, 100)
         compute_ranking(25, 101)
 
@@ -193,6 +224,8 @@ class TestScoreContributors(unittest.TestCase):
         # In this assignment, we are less interested in the assertions, and more interested in the selection of input values.
 
         # Answer:
+        # (allpairs module was used to calculate 2-way combinations --> each test case contains at most 3 distinct pairs)
+
         # Test 1: Scope=repository, Metric =commits, TimeGranularity=day          
         # Test 2: Scope=organization, Metric =pull_requests, TimeGranularity=day  
 
@@ -223,10 +256,10 @@ class TestScoreContributors(unittest.TestCase):
         # Test 19: Scope=organization, Metric =composite, TimeGranularity=day
         # Test 20: Scope=organization, Metric =issues, TimeGranularity=day
 
-        #scope - metric : T1 - T8
-        #scope - time : T1 - T10
-        #metric - time : T1 - T20
-        # Total needed: 20 -> allpairs module was used to calculate 2-way combinations; each test case contains at most 3 distinct pairs
+        # scope x metric : T1 - T8
+        # scope x time : T1 - T10
+        # metric x time : T1 - T20
+        # Total tests needed: 20 
 
         score_contributors(TimeGranularity.DAY, Scope.REPOSITORY, Metric.COMMITS) #1
         score_contributors(TimeGranularity.DAY, Scope.ORGANIZATION, Metric.PULL_REQUESTS) #2
@@ -249,9 +282,9 @@ class TestScoreContributors(unittest.TestCase):
         score_contributors(TimeGranularity.QUARTER, Scope.ORGANIZATION, Metric.ISSUES) #13
         score_contributors(TimeGranularity.QUARTER, Scope.ORGANIZATION, Metric.COMPOSITE) #14
 
-        score_contributors(TimeGranularity.MONTH, Scope.ORGANIZATION, Metric.PULL_REQUESTS) #15
-        score_contributors(TimeGranularity.MONTH, Scope.ORGANIZATION, Metric.COMMITS) #16
-
+        score_contributors(TimeGranularity.MONTH, Scope.ORGANIZATION, Metric.COMMITS) #15
+        score_contributors(TimeGranularity.MONTH, Scope.ORGANIZATION, Metric.PULL_REQUESTS) #16
+        
         score_contributors(TimeGranularity.WEEK, Scope.ORGANIZATION, Metric.PULL_REQUESTS) #17
         score_contributors(TimeGranularity.WEEK, Scope.ORGANIZATION, Metric.COMMITS) #18
 
@@ -283,23 +316,28 @@ class TestScoreContributors(unittest.TestCase):
         # If you notice any ambiguity, add a comment documenting your assumptions. 
         # After each test case, add a comment to indicate which column of the decision table
         # 
-        # Assumption 1 (R6): Input validation for "repo_name" will occur before any other checks are performed, to check if the specified repository name is valid (i.e. exists).                    
+        # Assumption 1 (R6): Input validation for "repo_name" will occur before any other checks are performed, to check if the specified repository name is valid (i.e. exists). 
+        #                    If a repository doesn't exist, the function will raise a NotAccessibleException.                   
         # Assumption 2 : Input validation for "user" names will only occur GIVEN that the function has already verified that the specified "repo_name" matches to an existing PRIVATE organization. 
         #               Thus it is assumed that the only "user" input validation that occurs is verifying whether the provided user is a member of a given PRIVATE organization; and the choice of "user" input is more trivial for public organizations.
         #               i.e. No "user" input validation will occur if the "repo_name" matches to an existing public organization, since they are accessible to anyone (e.g. "" is valid user input)     
         # Assumption 3 (R3): "private_org_non_member" refers to any string input value for "user" that is verified to not be a member of the specified private organization, causing the function to raise an exception; 
         #              thus this can refer to both existing and non-existing developer names  
 
+        # Test cases:
+        ### repo is accessible AND not empty ###
         are_stats_available("public_org/nonempty_repo1", "public_org_member") # True R1 (value of user is arbirtrary)
         are_stats_available("private_org/nonempty_repo1", "private_org_member") #True R2
         
+        ### repo is NOT accessible ###
         are_stats_available("private_org/nonempty_repo1", "private_org_non_member")   #Exception R3
 
+        ### repo is accessible AND empty ###
         are_stats_available("public_org/empty_repo1", "public_org_member") # False R4 (value of user is arbirtrary)
         are_stats_available("private_org/empty_repo1", "private_org_member") #False R5
 
+        ### repo doesn't exist ###
         are_stats_available("invalid_repo", "some_string_input") #Exception R6   (value of user is arbirtrary) 
-
         
 # for this assignment, you do not have to execute the test cases in this file
 # as such, you will not be penalized for test cases that do not compile, as long as the intent of each test case is clear.
