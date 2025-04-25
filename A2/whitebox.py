@@ -308,6 +308,7 @@ class TestScoreContributors(unittest.TestCase):
         # here are the existing test cases
         self.assertEqual(count_active_contributors("ourorg", {"commits": 1, "pull_requests": 1, "issues":1}), 5)
         self.assertEqual(count_active_contributors("ourorg", {"commits": 50, "pull_requests": 50, "issues":50}), 0)
+        self.assertEqual(count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":50}), count_active_contributors("ourorg", {"commits": 10, "pull_requests": 1, "issues":1}), "Expected 5, but got a different number of active contributors")
 
         # Question 3a
        ### ???: TODO write a test case that reproduces the bug 

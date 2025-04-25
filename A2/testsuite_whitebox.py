@@ -176,7 +176,7 @@ def count_active_contributors(org, minimum_value_for_metrics):
         int: The count of active contributors who either exceeds the specified number of issues OR exceeds the specified number of commits.
 
     """
-    ### ??? TODO: As part of Question 3b, fix the bug in this function after writing a test case for Question 3a
+    ###  As part of Question 3b, fix the bug in this function after writing a test case for Question 3a
 
     # validate input parameters
     if any(metric not in ["commits", "pull_requests", "issues"] for metric in minimum_value_for_metrics.keys()):
@@ -247,8 +247,7 @@ class TestScoreContributors(unittest.TestCase):
         # Statement coverage 9/20 = 45%, branch coverage = 5/14 = 35.7% (result only includes achievable branches; the "if metrics in weights" branch was not included as it always evaluates to True)
         # The tests are not adequate, as they do not cover all branches (conditions) in the function.
         # The test suite misses the bug in the else block: score = sum(metrics.keys()), where the .keys() method should be replaced with .values() in order to correctly extract the numeric metric values that need to be summed.
-        # A more useful coverage criteria to reveal this bug would be 100% branch coverage, in order to test all possible decision outcomes of the function.
-        # Note that because all branches are leaf level Boolean expressions (predicates), branch coverage implies predicate coverage and is thus sufficient to reveal the bug that occurs in the else branch.
+        # A more useful coverage criteria to reveal this bug would be 100% branch coverage, in order to test all possible decision outcomes of the function, which would thus ensure that the bug in the else branch is revealed.
 
         # Question 1b: Complete the test test suite to achieve 100% coverage
         # For this assignment, you do not have to fix the bug in `compute_composite_score`
