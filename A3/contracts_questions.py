@@ -67,7 +67,7 @@ contributors = [
     Contributor("Bob", commits=50, pull_requests=0, issues=1),
     Contributor("Charlie", commits=2, pull_requests=8, issues=6),
     Contributor("Dana", commits=0, pull_requests=1, issues=33),
-   # Contributor("Eliza", commits=0, pull_requests=-1, issues=33),
+    #Contributor("Eliza", commits=0, pull_requests=-1, issues=33),
 ]
 
 def correct_impact(c):

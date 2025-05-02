@@ -13,9 +13,6 @@ from typing import List, Dict, Tuple
 
 #     return sorted(counts.items(), key=lambda item: -item[1])  # b: removed minus sign
 
-
-
-
 class TestRankContributors(unittest.TestCase):
     def test_rank_contributors(self):
         repos = []
@@ -26,16 +23,12 @@ class TestRankContributors(unittest.TestCase):
         expected = []
         assert rank_contributors(repos) == expected
 
-        repos = [{"contributors": ["alice", "bob"]}]
+        repos = [{"contributors": ["alice", "bob"]}] #
         expected = [('alice', 1), ('bob', 1)]
         assert rank_contributors(repos) == expected
         
-		# Kill Mutant C
-        repos = [{"contributors": ["alice", "bob"]}, {"contributors": ["carol"]}]
-        expected = [('alice', 1), ('bob', 1), ('carol', 1)]
-        assert rank_contributors(repos) == expected
-        
-		# Kill Mutant E
+		## Kill Mutant B, C and E
+        ## Note -> this test case is sufficient to kill mutants A and D as well
         repos = [{"contributors": ["alice", "bob"]}, {"contributors": ["alice"]}]
         expected = [('alice', 2), ('bob', 1)]
         assert rank_contributors(repos) == expected
@@ -44,10 +37,13 @@ class TestRankContributors(unittest.TestCase):
 # Question 2a: which of the following mutants would be killed by the above test suite
 # list your answer as a comma-separated string, e.g. "A, B, C" to indicate that Mutants A, B, C are killed.
 # You may find it helpful to comment the original function, and uncomment each mutant, then run the test suite
-# Answer: A, B, D
+# Answer: A, D
 
 		# Question 2b: complete the test suite `test_rank_contributors` to kill the remaining mutants. 
-		##??? TODO 
+		# Answer: 
+        # Mutant B killing condition: unequal number of contributions from contributors
+        # Mutant C killing condition: more than 1 repo to rank contributors from
+        # Mutant E killing condition: a contributor has a count not equal to 1
 
 # --- Mutants Definition ---
 # Comment out the original function above and uncomment ONE mutant at a time to test
