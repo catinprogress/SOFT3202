@@ -2,16 +2,14 @@ import unittest
 from typing import List, Dict, Tuple
 
 
-# def rank_contributors(repos: List[Dict[str, List[str]]]) -> List[Tuple[str, int]]:
-#     counts: Dict[str, int] = {} # change =
+def rank_contributors(repos: List[Dict[str, List[str]]]) -> List[Tuple[str, int]]:
+    counts: Dict[str, int] = {} # change =
 
-#     for repo in repos:
-#         for contributor in repo.get("contributors", []): # d: replaced constant "contributors" with "alice"
-#             counts[contributor] = counts.get(contributor, 0) + 1  # a: changed "+ 1" to "+ 2"
-																	#  c: made the loop a one iteration loop: added a "break"
-                                                                    # e: deleted counts.get(contributor, 0)
+    for repo in repos:
+        for contributor in repo.get("contributors", []): 
+            counts[contributor] = counts.get(contributor, 0) + 1 
 
-#     return sorted(counts.items(), key=lambda item: -item[1])  # b: removed minus sign
+    return sorted(counts.items(), key=lambda item: -item[1]) 
 
 class TestRankContributors(unittest.TestCase):
     def test_rank_contributors(self):
