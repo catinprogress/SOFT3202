@@ -225,7 +225,7 @@ class TestScoreContributors(unittest.TestCase):
         dev_metrics1 = {
             "dev1": {Metric.COMMITS: 10, Metric.ISSUES: 5},
             "dev2": {Metric.COMMITS: 7, Metric.ISSUES: 12},
-            "dev3": {Metric.COMMITS: 15, Metric.ISSUES: 3},
+            "dev3": { Metric.COMMITS: 15, Metric.ISSUES: 3},
             "dev4": {} 
         }
 
