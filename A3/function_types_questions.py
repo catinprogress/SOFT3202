@@ -33,7 +33,7 @@ def summarize_repos(repos: List[GitHubRepo]) -> Dict[str, int]:
 # 1b. Fill in the two ???s
 def top_contributors_by_avg_stars(
     repos: List[GitHubRepo],
-    include_only: Optional[List[str]] = None
+    include_only: Optional[set[str]] = None
 ) -> List[Tuple[str, int, float]]:
     """
     Returns contributors and their average stars per repo,

@@ -8,7 +8,6 @@ from typing import Optional, List, Callable, Tuple
 @require(lambda issues: issues >= 0, "Issues must be non-negative")
 ## Answer
 @require(lambda pull_requests: pull_requests >= 0, "Pull requests must be non-negative")
-#@require(lambda email: email is None or isinstance(email, str), "Email must be a string or None")
 @require(
     lambda commits, pull_requests, issues: (commits + pull_requests + issues) > 0,
     "Contributor must have at least one activity (commits, PRs, or issues)"
@@ -67,7 +66,7 @@ contributors = [
     Contributor("Bob", commits=50, pull_requests=0, issues=1),
     Contributor("Charlie", commits=2, pull_requests=8, issues=6),
     Contributor("Dana", commits=0, pull_requests=1, issues=33),
-    #Contributor("Eliza", commits=0, pull_requests=-1, issues=33),
+  #  Contributor("Eliza", commits=0, pull_requests=-1, issues=33),
 ]
 
 def correct_impact(c):

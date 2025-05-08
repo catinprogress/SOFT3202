@@ -11,6 +11,7 @@ def rank_contributors(repos: List[Dict[str, List[str]]]) -> List[Tuple[str, int]
 
     return sorted(counts.items(), key=lambda item: -item[1]) 
 
+
 class TestRankContributors(unittest.TestCase):
     def test_rank_contributors(self):
         repos = []
@@ -25,8 +26,8 @@ class TestRankContributors(unittest.TestCase):
         expected = [('alice', 1), ('bob', 1)]
         assert rank_contributors(repos) == expected
         
-		## Kill Mutant B, C and E
-        ## Note -> this test case is sufficient to kill mutants A and D as well
+		# ## Kill Mutant B, C and E
+        # ## Note -> this test case is sufficient to kill mutants A and D as well
         repos = [{"contributors": ["alice", "bob"]}, {"contributors": ["alice"]}]
         expected = [('alice', 2), ('bob', 1)]
         assert rank_contributors(repos) == expected
@@ -39,9 +40,9 @@ class TestRankContributors(unittest.TestCase):
 
 		# Question 2b: complete the test suite `test_rank_contributors` to kill the remaining mutants. 
 		# Answer: 
-        # Mutant B killing condition: unequal number of contributions from contributors
-        # Mutant C killing condition: more than 1 repo to rank contributors from
-        # Mutant E killing condition: a contributor has a count not equal to 1
+        # Mutant B killing condition: contributors with unequal number of contributions
+        # Mutant C killing condition: list containing more than 1 repo to iterate through
+        # Mutant E killing condition: at least 1 contributor has a count not equal to 1
 
 # --- Mutants Definition ---
 # Comment out the original function above and uncomment ONE mutant at a time to test
