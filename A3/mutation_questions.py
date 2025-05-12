@@ -2,14 +2,13 @@ import unittest
 from typing import List, Dict, Tuple
 
 
-def rank_contributors(repos: List[Dict[str, List[str]]]) -> List[Tuple[str, int]]:
-    counts: Dict[str, int] = {} # change =
+# def rank_contributors(repos: List[Dict[str, List[str]]]) -> List[Tuple[str, int]]:
+#     counts: Dict[str, int] = {} 
+#     for repo in repos:
+#         for contributor in repo.get("contributors", []): 
+#             counts[contributor] = counts.get(contributor, 0) + 1 
 
-    for repo in repos:
-        for contributor in repo.get("contributors", []): 
-            counts[contributor] = counts.get(contributor, 0) + 1 
-
-    return sorted(counts.items(), key=lambda item: -item[1]) 
+#     return sorted(counts.items(), key=lambda item: -item[1]) 
 
 
 class TestRankContributors(unittest.TestCase):
