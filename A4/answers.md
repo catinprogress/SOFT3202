@@ -35,13 +35,12 @@ Answer: Interpeter
     context variable: Context
     expr variable: Client
 
-- Advantage: Acts as a parser to evaluate textual inputs (e.g. config files) and expressions with a defined grammar
-- Disadvantage: Inefficient for complex grammars or complicated and deeply nested/recursive expression
-
+- Advantage: Gives user the ability to represent textual inputs (e.g. config files) and evaluate expressions with a defined grammar.
+- Disadvantage: Inefficient for complex grammars or complicated and deeply nested/recursive expressions
 
 ### b. Adding addition operation (5 marks)
 Answer: 
-To support an addition operation, a new Non-Terminal Expression class called Addition would be created to represent expressions that contain a "+" symbol. This class would have the same implementation as Multiply but it would replace the "*" symbol in the return value with "+". No other changes would be required to the already existing classes and methods.
+To support an addition operation, a new Non-Terminal Expression class called Addition would be created to represent expressions that contain a "+" symbol. This class would have similar implementation as the Multiply class, but it would return the sum of its child expression nodes by replacing the "*" symbol in the return value with "+". No other changes would be required to the already existing classes and methods.
 
 
 ## Question 22. Decision tables (5 marks)
@@ -84,8 +83,9 @@ Lines: 1,2,3,4,5,6,11,12,13,14,15
 
 
 ### d. Bug detection limitation. Which criterion would be more effective. (6 marks)
-Branch coverage would not be sufficient to reveal the bug in the code as the order of the predicates in the 'or' condition would mean that the branch always results to True unless the 'scores' input is an empty list as there are no scores to iterate over in the line 4 for loop, in which case a ZeroDivision would occur.
-To detect this bug, a more effective coverage criteria would be predicate coverage, as this would ensure that the 'passed/total >= 0.6' Boolean condition is False at least once, and thus show that the function returns an incorrect result. An example test case that would reveal this logical error is 'assert analyze_scores[0, 0, 90] == "Majority failed"', as the function would still return 'Majority passed' due to the fact that the 'score' list is not empty and the 'or' logical operator is used instead of 'and'. 
+Branch coverage would not be sufficient to reveal the bug in the code as it is a logical/dependency error between the predicates within the branch. Since the second predicate outcome is logically subsumed by the first predicate but an "or" relation is used instead of "and", this means that the branch condition is always True unless the 'scores' input is an empty list, in which case a ZeroDivisionError would occur.
+
+To detect this bug, a more effective coverage criteria would be Predicate coverage, as this tests the logical combinations between conditions, thus ensuring that the 'passed/total >= 0' decision results in False at least once, which is required to show that the function returns an incorrect result. An example test case that would reveal this logical error is 'assert analyze_scores[0, 0, 90] == "Majority failed"', as the function would still return 'Majority passed' due to the incorrect relational operator used. 
 
 ## Question 24. Fault-based testing (18 marks)
 
@@ -105,7 +105,7 @@ Answer: Constant replacement
 | A      |  A list with at least two elements that is in either a strictly increasing   | No
 |        |  or decreasing order                                                         |
 | B      |  A list with at least two elements that is in strictly increasing order      | No                                 |
-| C      |  A list with two elements                                                    | Yes                                |
+| C      |  A list with exactly two elements                                            | Yes                                |
 
 
 ### e. Test case to kill Mutant A (2 marks)
@@ -137,7 +137,7 @@ assert is_increasing([1, 2]) is True
 
 ### a. Postcondition as @ensure contract (2 marks)
 ```python
-@ensure(lambda xs, result: len(result) <= len(xs)  )
+@ensure(lambda xs, result: len(result) <= len(xs) , "Return value length must be less than or equal to input length")
 ```
 
 ### b. Precondition violations (5 marks)
