@@ -83,9 +83,9 @@ Lines: 1,2,3,4,5,6,11,12,13,14,15
 
 
 ### d. Bug detection limitation. Which criterion would be more effective. (6 marks)
-Branch coverage would not be sufficient to reveal the bug in the code as it only guarantees that each branch outcome is executed, however the bug is a logical/dependency error between the predicates within the line 14 branch. Since the second predicate outcome is logically subsumed by the first predicate but an "or" relation is used instead of "and", this means that the branch is always True unless the 'scores' input is an empty list, in which case a ZeroDivisionError would occur.
+Branch coverage would not be sufficient to reveal the bug in the code as it only guarantees that each decision is executed, however the bug is a logical/dependency error caused by the predicates within the line 14 branch. Since the second predicate outcome is logically subsumed by the first predicate but an "or" relation is used instead of "and", this means that the branch always evaluates to True unless the 'scores' input is an empty list, in which case a ZeroDivisionError would occur.
 
-To detect this bug, a more effective coverage criteria would be Predicate coverage, as this tests the logical combinations between conditions, thus ensuring that the 'passed/total >= 0' decision results in False at least once, which is required to show that the function returns an incorrect result. An example test case that would reveal this logical error is 'assert analyze_scores[0, 0, 90] == "Majority failed"', as the function would still return 'Majority passed' due to the incorrect relational operator used. 
+To detect this bug, a more effective coverage criteria would be Predicate coverage, as this tests logical relations within a branch by evaluating each condition, thus ensuring that 'passed/total >= 0' is False at least once, which is required to show that the function returns an incorrect result. An example test case that would reveal this logical error is 'assert analyze_scores[0, 0, 90] == "Majority failed"', as the function would still return 'Majority passed' due to the incorrect relational operator used. 
 
 ## Question 24. Fault-based testing (18 marks)
 
